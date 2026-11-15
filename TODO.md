@@ -56,3 +56,5 @@
 - [x] Provide a short handover explaining how to change the brand, services, locations, policies and demo listings.
 
 > Real account operation, review submission, durable moderation and custom search/profile/quote event measurement remain intentionally unimplemented pending separate authorization. Basic platform page-visit analytics is enabled and disclosed in the privacy/cookie pages. The launch item remains open until publication and custom-domain connection are each confirmed.
+
+> Publication is confirmed and public at `https://sotraders-tr9hvk4y.manus.space`. The requested custom domain still resolves to Hostinger (`2.57.91.91`, `hcdn`). The Hostinger website-list API returned HTTP 401, so no DNS zone was read, validated or changed; the combined launch outcome remains open until `southamptontraders.co.uk` is connected and verified.
