@@ -55,4 +55,4 @@
 - [x] Check mobile layouts, accessibility basics, form validation, SEO metadata and sitemap behavior.
 - [x] Provide a short handover explaining how to change the brand, services, locations, policies and demo listings.
 
-> Real account operation, review submission, durable moderation and privacy-preserving analytics remain intentionally unimplemented pending separate authorization. The launch item remains open until publication and custom-domain connection are each confirmed.
+> Real account operation, review submission, durable moderation and custom search/profile/quote event measurement remain intentionally unimplemented pending separate authorization. Basic platform page-visit analytics is enabled and disclosed in the privacy/cookie pages. The launch item remains open until publication and custom-domain connection are each confirmed.
