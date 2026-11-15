@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /builder-area/
+
+Sitemap: https://southamptontraders.co.uk/sitemap.xml

@@ -1,7 +1,7 @@
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { AlertCircle, Home } from "lucide-react";
+import { ArrowLeft, Search } from "lucide-react";
 import { useEffect } from "react";
+import { Breadcrumbs } from "@/components/SiteFrame";
+import { usePageMeta } from "@/lib/seo";
 import { useLocation } from "wouter";
 
 // Hosting answers this path with HTTP 404 while still serving the app.
@@ -11,6 +11,7 @@ const NOT_FOUND_PATH = "/404";
 // The redirect is irreversible: never render while loading, on other errors, or before auth resolves.
 export default function NotFound() {
   const [, setLocation] = useLocation();
+  usePageMeta({ title: "Page not found | Southampton Traders", description: "That Southampton Traders page could not be found. Browse the demonstration directory instead.", path: "/404", noindex: true });
 
   useEffect(() => {
     const robots = document.createElement("meta");
@@ -30,43 +31,5 @@ export default function NotFound() {
     setLocation("/");
   };
 
-  return (
-    <div className="min-h-screen w-full flex items-center justify-center bg-gradient-to-br from-slate-50 to-slate-100">
-      <Card className="w-full max-w-lg mx-4 shadow-lg border-0 bg-white/80 backdrop-blur-sm">
-        <CardContent className="pt-8 pb-8 text-center">
-          <div className="flex justify-center mb-6">
-            <div className="relative">
-              <div className="absolute inset-0 bg-red-100 rounded-full animate-pulse" />
-              <AlertCircle className="relative h-16 w-16 text-red-500" />
-            </div>
-          </div>
-
-          <h1 className="text-4xl font-bold text-slate-900 mb-2">404</h1>
-
-          <h2 className="text-xl font-semibold text-slate-700 mb-4">
-            Page Not Found
-          </h2>
-
-          <p className="text-slate-600 mb-8 leading-relaxed">
-            Sorry, the page you are looking for doesn't exist.
-            <br />
-            It may have been moved or deleted.
-          </p>
-
-          <div
-            id="not-found-button-group"
-            className="flex flex-col sm:flex-row gap-3 justify-center"
-          >
-            <Button
-              onClick={handleGoHome}
-              className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2.5 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg"
-            >
-              <Home className="w-4 h-4 mr-2" />
-              Go Home
-            </Button>
-          </div>
-        </CardContent>
-      </Card>
-    </div>
-  );
+  return <div className="page wrap narrow-page not-found-page"><Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Page not found" }]} /><p className="eyebrow">404 · Not found</p><h1>We can’t find that page.</h1><p className="section-intro">The address may have changed, or the page may not exist in this demo directory.</p><div className="not-found-actions"><button className="button" onClick={handleGoHome}><ArrowLeft size={16} /> Return home</button><a className="text-link" href="/builders/southampton/"><Search size={16} /> Browse example builders</a></div></div>;
 }

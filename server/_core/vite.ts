@@ -59,15 +59,16 @@ export function serveStatic(app: Express) {
     );
   }
 
-  app.use(express.static(distPath));
-
-  // the app's not-found page keeps a real 404 status for crawlers
+  // Serve a crawlable not-found document with a genuine HTTP 404 status.
   app.get("/404", (_req, res) => {
-    res.status(404).sendFile(path.resolve(distPath, "index.html"));
+    res.status(404).sendFile(path.resolve(distPath, "404", "index.html"));
   });
 
-  // fall through to index.html if the file doesn't exist
+  app.use(express.static(distPath));
+
+  // Known pages are prerendered under dist/public and served by express.static above.
+  // Unknown paths must not become soft 404s with a success status.
   app.use("*", (_req, res) => {
-    res.sendFile(path.resolve(distPath, "index.html"));
+    res.status(404).sendFile(path.resolve(distPath, "404", "index.html"));
   });
 }

@@ -1,42 +1,38 @@
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import Admin from "@/pages/Admin";
+import BrowseLanding from "@/pages/BrowseLanding";
+import BuilderArea from "@/pages/BuilderArea";
+import BuilderProfile from "@/pages/BuilderProfile";
+import ContentPages from "@/pages/ContentPages";
+import Directory from "@/pages/Directory";
+import Home from "@/pages/Home";
 import NotFound from "@/pages/NotFound";
+import QuoteRequest from "@/pages/QuoteRequest";
 import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
+import SiteFrame from "./components/SiteFrame";
 import { ThemeProvider } from "./contexts/ThemeContext";
-import Home from "./pages/Home";
+
+function ServiceLanding() { return <BrowseLanding kind="service" />; }
+function LocationLanding() { return <BrowseLanding kind="location" />; }
 
 function Router() {
-  // make sure to consider if you need authentication for certain routes
-  return (
-    <Switch>
-      <Route path={"/"} component={Home} />
-      <Route path={"/404"} component={NotFound} />
-      {/* Final fallback route */}
-      <Route component={NotFound} />
-    </Switch>
-  );
+  return <Switch>
+    <Route path="/" component={Home} />
+    <Route path="/builders/:location/" component={Directory} />
+    <Route path="/builder/:slug/" component={BuilderProfile} />
+    <Route path="/services/:slug/" component={ServiceLanding} />
+    <Route path="/locations/:slug/" component={LocationLanding} />
+    <Route path="/request-quote/" component={QuoteRequest} />
+    <Route path="/builder-area/" component={BuilderArea} />
+    <Route path="/admin/" component={Admin} />
+    <Route path="/404" component={NotFound} />
+    <Route path="/:slug/" component={ContentPages} />
+    <Route component={NotFound} />
+  </Switch>;
 }
 
-// NOTE: About Theme
-// - First choose a default theme according to your design style (dark or light bg), than change color palette in index.css
-//   to keep consistent foreground/background color across components
-// - If you want to make theme switchable, pass `switchable` ThemeProvider and use `useTheme` hook
-
-function App() {
-  return (
-    <ErrorBoundary>
-      <ThemeProvider
-        defaultTheme="light"
-        // switchable
-      >
-        <TooltipProvider>
-          <Toaster />
-          <Router />
-        </TooltipProvider>
-      </ThemeProvider>
-    </ErrorBoundary>
-  );
+export default function App() {
+  return <ErrorBoundary><ThemeProvider defaultTheme="light"><TooltipProvider><Toaster /><SiteFrame><Router /></SiteFrame></TooltipProvider></ThemeProvider></ErrorBoundary>;
 }
-
-export default App;
