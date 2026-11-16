@@ -2,7 +2,7 @@ import { trpc } from "@/lib/trpc";
 import { COOKIE_NAME, UNAUTHED_ERR_MSG } from '@shared/const';
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { httpBatchLink, TRPCClientError } from "@trpc/client";
-import { hydrateRoot } from "react-dom/client";
+import { createRoot, hydrateRoot } from "react-dom/client";
 import superjson from "superjson";
 import App from "./App";
 import { startLogin } from "./const";
@@ -72,10 +72,23 @@ const trpcClient = trpc.createClient({
   ],
 });
 
-hydrateRoot(document.getElementById("root")!,
+const app = (
   <trpc.Provider client={trpcClient} queryClient={queryClient}>
     <QueryClientProvider client={queryClient}>
       <App />
     </QueryClientProvider>
   </trpc.Provider>
 );
+
+const rootElement = document.getElementById("root");
+if (!rootElement) {
+  throw new Error("The application root element was not found.");
+}
+
+// Vite Preview serves an empty shell; production pages contain prerendered HTML.
+// Mount an empty shell, and hydrate only when server-rendered markup is present.
+if (rootElement.hasChildNodes()) {
+  hydrateRoot(rootElement, app);
+} else {
+  createRoot(rootElement).render(app);
+}
