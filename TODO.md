@@ -58,3 +58,14 @@
 > Real account operation, review submission, durable moderation and custom search/profile/quote event measurement remain intentionally unimplemented pending separate authorization. Basic platform page-visit analytics is enabled and disclosed in the privacy/cookie pages. The launch item remains open until publication and custom-domain connection are each confirmed.
 
 > Publication is confirmed and public at `https://sotraders-tr9hvk4y.manus.space`. The requested custom domain still resolves to Hostinger (`2.57.91.91`, `hcdn`). The Hostinger website-list API returned HTTP 401, so no DNS zone was read, validated or changed; the combined launch outcome remains open until `southamptontraders.co.uk` is connected and verified.
+
+## User-requested REDS BUILDERS LIMITED listing
+- [x] Create an original MyBuilder-style directory profile for the first entry in the supplied extract categorized exactly “Builders”: REDS BUILDERS LIMITED (not any “Builders Equipment” entry).
+- [x] Use only the supplied facts: name REDS BUILDERS LIMITED; category Builders; address Office 6, Racecourse Corner, Southampton, Hampshire, SO32 3QX; phone 023 9269 3337, formatted as a clickable `tel:+442392693337` link.
+- [x] Add title `REDS BUILDERS LIMITED – Builder in Southampton` (46 characters), a 147-character meta description with a call-to-action, and a matching H1.
+- [x] Show name, category, source address, phone, unspecified service area and unspecified official website in the contact/quick-facts area.
+- [x] Provide a two-paragraph factual overview of 179 words; disclose that the supplied details are not independently verified and do not invent specific services, coverage, typical projects, accreditations, insurance, years trading, reviews or ratings.
+- [x] List only the source category “Builders”; state individual services and service coverage are unspecified and do not treat the source address postcode as an area served.
+- [x] Add `HomeAndConstructionBusiness` JSON-LD with the supplied name, phone and postal address; omit unsupported official URL, `sameAs`, `areaServed`, ratings, reviews and credentials.
+- [x] Use brief section/button animations and respect `prefers-reduced-motion`.
+- [x] Publish the user-requested factual page on the existing Southampton Traders website and include it in the sitemap; preserve the source/unverified disclosure and do not alter DNS or any unrelated website.

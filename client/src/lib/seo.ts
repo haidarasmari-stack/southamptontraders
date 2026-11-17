@@ -25,6 +25,13 @@ export function metaForPath(pathname: string): PageMeta {
 
   const profileMatch = path.match(/^\/builder\/([^/]+)$/);
   if (profileMatch) {
+    if (profileMatch[1] === "reds-builders-limited") {
+      return {
+        title: "REDS BUILDERS LIMITED – Builder in Southampton",
+        description: "REDS BUILDERS LIMITED is listed as a builder in Southampton (SO32 3QX). Service area and specific trades are not stated. Call 023 9269 3337 to ask.",
+        path: "/builder/reds-builders-limited/",
+      };
+    }
     const builder = getBuilder(profileMatch[1]);
     return { title: `${builder?.name ?? "Example builder"} | Southampton Traders`, description: builder ? `${builder.summary} Fictional demonstration profile only; no reviews, verified credentials or real contact details are shown.` : "This fictional builder profile does not exist in the Southampton Traders demonstration directory.", path, noindex: true };
   }

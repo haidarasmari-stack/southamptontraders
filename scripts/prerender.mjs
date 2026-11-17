@@ -12,7 +12,7 @@ const routes = [
   "/", "/builders/southampton/", "/builders/eastleigh/", "/builders/fareham/", "/builders/winchester/", "/builders/totton/", "/builders/hedge-end/", "/builders/romsey/", "/builders/nearby-hampshire/",
   "/services/extensions/", "/services/renovations/", "/services/loft-conversions/", "/services/new-builds/", "/services/brickwork/", "/services/roofing/", "/services/plastering/", "/services/groundworks/", "/services/kitchens-and-bathrooms/",
   "/locations/southampton/", "/locations/eastleigh/", "/locations/fareham/", "/locations/winchester/", "/locations/totton/", "/locations/hedge-end/", "/locations/romsey/", "/locations/nearby-hampshire/",
-  "/builder/shoreline-build-example/", "/builder/brick-and-beam-example/", "/builder/hearthside-projects-example/", "/builder/loftline-example/",
+  "/builder/shoreline-build-example/", "/builder/brick-and-beam-example/", "/builder/hearthside-projects-example/", "/builder/loftline-example/", "/builder/reds-builders-limited/",
   "/request-quote/", "/builder-area/", "/admin/", "/how-it-works/", "/reviews/", "/privacy/", "/cookies/", "/contact/", "/404",
 ];
 

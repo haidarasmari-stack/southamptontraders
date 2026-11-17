@@ -4,6 +4,7 @@ import Admin from "@/pages/Admin";
 import BrowseLanding from "@/pages/BrowseLanding";
 import BuilderArea from "@/pages/BuilderArea";
 import BuilderProfile from "@/pages/BuilderProfile";
+import BusinessListing from "@/pages/BusinessListing";
 import ContentPages from "@/pages/ContentPages";
 import Directory from "@/pages/Directory";
 import Home from "@/pages/Home";
@@ -21,6 +22,7 @@ function Router() {
   return <Switch>
     <Route path="/" component={Home} />
     <Route path="/builders/:location/" component={Directory} />
+    <Route path="/builder/reds-builders-limited/" component={BusinessListing} />
     <Route path="/builder/:slug/" component={BuilderProfile} />
     <Route path="/services/:slug/" component={ServiceLanding} />
     <Route path="/locations/:slug/" component={LocationLanding} />
