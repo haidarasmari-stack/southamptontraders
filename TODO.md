@@ -77,7 +77,7 @@
 - [x] Use the imported profile metadata and add a `HomeAndConstructionBusiness` JSON-LD record to each real business profile using only facts visible in that profile; do not add ratings, reviews, accreditation or credentials.
 - [x] Remove demo/example claims associated with the public directory and remove the misleading global banner. Keep the separate REDS BUILDERS LIMITED user-supplied page, and keep quote, builder-area and admin demo flows clearly labelled and non-persistent; no database or DNS changes.
 - [x] Update the public route manifest, sitemap, SEO metadata and prerendered profile pages for the real businesses; remove fictional demo-profile URLs from the public route inventory and sitemap.
-- [ ] Commit the completed code update to `origin/main` and explicitly publish it because auto-publish is off; keep `southamptontraders.co.uk` and other existing DNS records unchanged.
+- [x] Commit the completed code update to `origin/main` and explicitly publish it because auto-publish is off; keep `southamptontraders.co.uk` and other existing DNS records unchanged.
 
 ## Current directory release verification
 - All 71 profiles have route metadata and JSON-LD; sitemap and route manifest contain the researched profiles and retain the separate REDS page.
