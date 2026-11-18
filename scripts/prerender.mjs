@@ -8,12 +8,9 @@ import { createServer } from "vite";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const output = path.join(root, "dist", "public");
-const routes = [
-  "/", "/builders/southampton/", "/builders/eastleigh/", "/builders/fareham/", "/builders/winchester/", "/builders/totton/", "/builders/hedge-end/", "/builders/romsey/", "/builders/nearby-hampshire/",
-  "/services/extensions/", "/services/renovations/", "/services/loft-conversions/", "/services/new-builds/", "/services/brickwork/", "/services/roofing/", "/services/plastering/", "/services/groundworks/", "/services/kitchens-and-bathrooms/",
-  "/locations/southampton/", "/locations/eastleigh/", "/locations/fareham/", "/locations/winchester/", "/locations/totton/", "/locations/hedge-end/", "/locations/romsey/", "/locations/nearby-hampshire/",
-  "/builder/shoreline-build-example/", "/builder/brick-and-beam-example/", "/builder/hearthside-projects-example/", "/builder/loftline-example/", "/builder/reds-builders-limited/",
-  "/request-quote/", "/builder-area/", "/admin/", "/how-it-works/", "/reviews/", "/privacy/", "/cookies/", "/contact/", "/404",
+const fixedRoutes = [
+  "/", "/builder/reds-builders-limited/", "/request-quote/", "/builder-area/", "/admin/",
+  "/how-it-works/", "/reviews/", "/privacy/", "/cookies/", "/contact/", "/404",
 ];
 
 const escapeHtml = (value) => value.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;").replaceAll("'", "&#39;");
@@ -32,10 +29,17 @@ const vite = await createServer({
 });
 
 try {
-  const [{ default: App }, { metaForPath, SITE_ORIGIN, SHARE_IMAGE }] = await Promise.all([
+  const [{ default: App }, { metaForPath, SITE_ORIGIN, SHARE_IMAGE }, { builders, locations, services }] = await Promise.all([
     vite.ssrLoadModule("/src/App.tsx"),
     vite.ssrLoadModule("/src/lib/seo.ts"),
+    vite.ssrLoadModule("/src/data/catalog.ts"),
   ]);
+  const routes = [
+    ...fixedRoutes,
+    ...locations.flatMap((location) => [`/builders/${location.slug}/`, `/locations/${location.slug}/`]),
+    ...services.map((service) => `/services/${service.slug}/`),
+    ...builders.map((builder) => `/builder/${builder.slug}/`),
+  ];
   const template = await fs.readFile(path.join(output, "index.html"), "utf8");
   for (const rawRoute of routes) {
     const route = normalize(rawRoute);

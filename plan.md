@@ -2,39 +2,51 @@
 
 ## Product and implementation approach
 
-Build a practical, mobile-first builder directory using the already initialized Manus Webdev starter (React 19, TypeScript, Vite, Wouter, Tailwind CSS, Express/tRPC and Drizzle). Use the React client for all public and demo interactions. Keep all example listings explicitly marked as demonstrations, never create review text or ratings, and never send or persist submitted form values. The customer quote, builder profile setup and admin moderation journeys will operate only in browser memory and show a clear demo-only notice; reloads clear those changes. Do not write to the project database or implement public account/email collection before separate authorization. The server/database capabilities were enabled at project initialization; the application must not use them for directory/customer records in this release. Do not activate paid plans or payment processing.
+Continue the existing Manus WebDev project (React 19, TypeScript, Vite, Wouter, Tailwind CSS, Express/tRPC and Drizzle). Populate the public directory from the user's supplied CSV of 71 unique researched businesses. Keep exactly the nine requested service categories and seven launch areas; do not imply the current results are exhaustive. Use the CSV's factual profile summaries, addresses/postcodes, services and contact details without inventing facts. Where a verified phone or direct website is blank, omit that contact link. The supporting source ledger is retained with the imported CSV.
 
-Implement the page routing in `client/src/App.tsx`, with reusable UI under `client/src/components/`, location/service/demo-profile data in `client/src/data/`, and independently understandable page modules under `client/src/pages/`. Use the existing Vite/Express starter to serve the application. Add a small build-time prerender step that emits useful initial HTML, unique title/description/social/canonical metadata and a real not-found response for known public routes and demo detail paths; keep the route manifest in `client/public/manus-routes.json`, the sitemap and robots file aligned with indexable content. Only the homepage and useful, genuinely distinct informational pages are indexable while business listings remain examples; no demo profile or invented review enters structured review data or the sitemap. The confirmed public origin is `https://southamptontraders.co.uk` for canonical/social metadata once the custom domain is connected.
+Directory records are static, code-owned public data; do not use the already-enabled database for them. Implement service/location search filters, searchable cards and individual profile pages with direct `tel:` and company-site links only where present. Generate `HomeAndConstructionBusiness` JSON-LD from the imported row for each real profile, without adding ratings, reviews, accreditations, credentials, availability or unsupported contact facts. If an imported SEO title uses a shortened name that does not match `Business_Name`, generate a truthful title from the full record name and category/location while staying within the 60-character limit where possible; keep the full business name visible on-page and in structured data.
 
-After the implementation and checks are complete, publish the site using the Manus Webdev deployment and connect the exact custom domain `southamptontraders.co.uk`. Preserve existing unrelated Hostinger records; change only the records required for that domain connection. Do not touch `solentvoidsolutions.co.uk`. This publication authorization does not authorize collecting real customer data, purchasing credits, activating paid plans, or enabling payment processing.
+Keep the customer quote form, builder registration/dashboard and admin moderation journeys as explicitly labelled, browser-only demonstrations. They must not transmit or persist form values. Keep these demo flows separate from the real directory, do not use the database for directory/customer records, and do not activate paid plans or payment processing. Preserve the separate user-requested REDS BUILDERS LIMITED page and its source/unverified disclosure.
+
+Use the existing build-time prerender step to provide crawlable HTML, route-specific title/description/social/canonical metadata, JSON-LD and genuine 404 handling. Generate profile routes from the dataset and synchronize `client/public/manus-routes.json` and `client/public/sitemap.xml`. Index the real, useful profile, service, location, homepage and how-it-works pages; exclude demo-only pages and faceted `/builders/:location/` results from the sitemap. The configured public origin is `https://southamptontraders.co.uk`.
+
+The live site and custom domain already exist. Checkpoint and explicitly publish this authorized code update when it is ready. Do not change DNS or modify unrelated websites.
+
+## Dataset inventory and limits
+
+The source CSV has the exact ten requested columns and 71 unique records: Southampton 10, Eastleigh 12, Fareham 17, Winchester 7, Totton 9, Hedge End 5 and Romsey 11. These counts are all below the requested 20–50 per area research aim; present the directory as a non-exhaustive current set. The records use all nine specified services. Three records have no verified phone and three have no verified direct website; keep the corresponding values blank and hide their contact links. Do not fabricate ratings, reviews, accreditation, credentials, availability or other claims.
 
 ## Page map
 
-- `/` — homepage with a prominent “What building work do you need?” and “Where?” search, Southampton-focused introduction, service shortcuts, nearby places, how it works, and an unmistakable demo-only notice.
-- `/builders/southampton/` — searchable and filterable demo directory, including service, location, availability and verified-profile filters; explain that there are no verified profiles or ratings in this demonstration.
-- `/services/:slug/` and `/locations/:slug/` — useful service/location browsing pages for the initial categories and places, with distinct content and clear demo-listing labels.
-- `/builder/:slug/` — demo business details, service area, service list, project photos with source credit and a quote-request CTA; no fabricated reviews, customer ratings, credentials or verification marks.
-- `/request-quote/` — accessible multi-field demonstration quote form with project type, location, description, timing, optional budget and customer contact fields; warn not to submit real personal details and state that no data is transmitted or stored.
-- `/builder-area/` — demo-only builder setup/dashboard for profile editing and viewing/responding to sample enquiries; no real account, email verification or persisted profile creation.
-- `/admin/` — clearly labeled admin demonstration with search/status filters and in-memory profile moderation controls; do not create fake reviews or ratings.
-- `/reviews/`, `/privacy/`, `/cookies/`, `/contact/` — review/moderation rules, privacy and cookie information, reporting/help. Explain the current demo-only data boundary.
-- `/404` — accessible not-found page with real 404 semantics.
+- `/` — homepage with service and launch-area search, real listing totals, transparent non-exhaustive coverage copy and no fictional directory listings.
+- `/builders/:location/` — searchable results for one of exactly seven launch areas, with service and location filters; no invented availability/verification filters. Keep faceted results `noindex` to avoid duplicates.
+- `/services/:slug/` and `/locations/:slug/` — distinct, indexable listings drawn from the supplied real dataset and linked to matching profiles and related categories/areas.
+- `/builder/:slug/` — a real profile page for each CSV business, preserving the unique factual summary and supported service/location data; conditionally show verified phone/website links; include matching JSON-LD; do not add sample photos, ratings, reviews, credentials, accreditations or unsupported claims.
+- `/builder/reds-builders-limited/` — retain the previously requested separate user-supplied listing, clearly marked unverified and distinct from the researched CSV directory.
+- `/request-quote/` — accessible quote-form demonstration; warn users not to enter real data and make clear nothing is sent or saved.
+- `/builder-area/` and `/admin/` — conspicuously labelled demonstration flows with only synthetic demo data and temporary browser state; never edit real public directory records.
+- `/reviews/`, `/privacy/`, `/cookies/`, `/contact/` — preserve review/privacy/help content and clearly explain current demo-only submission boundaries.
+- `/404` — accessible not-found page with a genuine HTTP 404 response.
 
 ## Data model
 
-Use typed, code-owned sample data only: `Service` and `Location` records with stable slugs; `BuilderProfile` records with a demo status, business description, offered services, served locations, availability, photo references, and optional business-supplied credentials (none will be presented as verified); `EnquiryDraft` values held only in the current browser page state; `ProfileReportDraft` and `ReviewReportDraft` as non-persistent demo interactions; and moderation status/audit preview records held in page state only. Reviews remain empty until real eligible submissions are authorized; no sample star score or review text is created. Do not store free-text entries in localStorage, sessionStorage, cookies, analytics, server logs, tRPC, or MySQL.
+Keep stable `Service` and `Location` catalogs for the exact nine categories and seven areas. Import `BuilderProfile` records from a checked-in JSON representation of the supplied CSV, adding a deterministic URL slug and service/location slugs without changing the source facts. Preserve the raw CSV and per-business verification-source ledger in the repository. Build schema.org `HomeAndConstructionBusiness` plus `WebPage` JSON-LD only from fields visible on the corresponding profile. Quote drafts, profile/report demos and moderation/audit previews remain in page memory only; never store free-text entries in localStorage, sessionStorage, cookies, analytics, server logs, tRPC or MySQL.
 
 ## Project structure
 
-- `client/src/App.tsx`: application route map and global providers.
-- `client/src/data/catalog.ts`: expandable service/location catalog and conspicuously synthetic demo profiles.
-- `client/src/components/`: accessible header/footer, search, filters, demo banners, profile/list cards, breadcrumbs, form controls and moderation UI.
-- `client/src/pages/`: homepage, directory, service/location listings, builder profile, quote form, builder demo, admin demo and policy/help views.
-- `client/src/index.css`: the site design tokens, typography and responsive layout.
-- `client/public/images/`: licensed sample project illustrations used only for demo presentation; no photo will be represented as proof of a real profile's work.
+- `client/src/App.tsx`: application route map, including the separate REDS page.
+- `client/src/data/catalog.ts`: exact service/location catalogs and typed business mappings.
+- `client/src/data/builders.json`: generated static data imported from the supplied CSV.
+- `client/src/data/jsonld.ts`: JSON-LD mapping for each factual business profile.
+- `client/src/data/adminDemoProfiles.ts`: synthetic records used only within the clearly labelled admin demo.
+- `client/src/components/`: accessible header/footer, directory search, cards and shared navigation.
+- `client/src/pages/`: homepage, directory, service/location listings, real profile pages and separate demo/policy views.
+- `client/src/lib/seo.ts`: page metadata and canonical/social metadata.
+- `client/src/index.css`: site design tokens, typography and responsive layouts.
+- `data/southampton-traders-builders.csv` and `data/southampton-traders-builders-verification-sources.md`: imported source data and its evidence ledger.
+- `scripts/prerender.mjs`: static generation of crawlable HTML and profile routes.
 - `client/public/manus-routes.json`, `client/public/robots.txt`, `client/public/sitemap.xml`: route inventory and crawler documents.
-- `scripts/prerender.mjs`: build-time generation of crawlable HTML for the finite public route set.
-- `plan.md` and `TODO.md`: approved implementation decisions and full acceptance criteria.
+- `plan.md` and `TODO.md`: approved decisions and acceptance outcomes.
 
 ## Design direction
 
@@ -46,11 +58,11 @@ Three possible styles (tail-tail probabilities):
 Choose **Coastal trades editorial**.
 
 - **Design Movement:** Contemporary British coastal editorial, with the practicality of a local trade directory and the restraint of a homeowner magazine.
-- **Core Principles:** Make trust status explicit; help compare before contacting; prioritize quick mobile search; keep demo/real status unmistakable.
+- **Core Principles:** Make the distinction between directory facts and demo tools clear; help homeowners compare before contacting; prioritize quick mobile search; make limits and missing data explicit.
 - **Color Philosophy:** Warm paper reduces the coldness of generic lead marketplaces; deep Solent green signals steadiness and gives controls strong contrast; muted clay references brick and workmanship without looking like an alert.
-- **Layout Paradigm:** An asymmetrical split hero with search on the left and one strong renovation photo on the right, followed by an editorial horizontal service rail and vertically readable result cards; avoid a dense symmetric dashboard grid on the customer side.
+- **Layout Paradigm:** An asymmetrical split hero with service/location search on the left and a clearly illustrative renovation photo on the right, followed by editorial service navigation and vertically readable business cards.
 - **Signature Elements:** Slim roofline/ST monogram; small copper service-number markers; paper-like cream panels separated by ink-green rules.
-- **Interaction Philosophy:** Search and filters remain visible and reversible; forms use clear labels, concise helper text and explicit demo/privacy feedback; no silent success states.
+- **Interaction Philosophy:** Search and filters remain visible and reversible; direct contact links are conditional on source data; forms use explicit demo/privacy feedback and no silent success states.
 - **Animation:** Restrained 140–220 ms transitions for menus, filter chips and status changes; no continuous motion; respect `prefers-reduced-motion` and keep content usable without animation.
 - **Typography System:** Georgia for large editorial headings; native system sans stack for controls, navigation and body text. Strong type scale and generous line-height; no external font requests.
 - **Brand Essence:** A clear local starting point for Southampton homeowners comparing builders without the noise; **grounded, helpful, candid**.
@@ -60,13 +72,14 @@ Choose **Coastal trades editorial**.
 
 ## Constraints and material choices
 
-- Keep the MVP unpublished during development, then publish and connect `southamptontraders.co.uk` after the owner’s latest explicit instruction. Do not overwrite any unrelated Hostinger website or DNS record.
-- Do not collect or store real customer/builder details; current public forms are demonstrations only and must plainly disclose this before a user types.
-- Use no fake reviews, ratings, accreditations, or verification badges. Do not call the sample companies real businesses. Do not publish personal contact information.
-- No subscription, payment, billing, live email sending, or paid AI asset generation. Reuse project images from Pexels search assets under its free-use licence, keep photo credits, and label them as illustrative rather than client work.
-- Use accessible contrast, keyboard navigation, responsive layouts, form validation, safe input handling, explicit empty/error states, and non-persistent privacy-respecting demo analytics hooks only.
+- Use only the user-supplied researched facts for public directory entries. Do not invent or imply ratings, reviews, accreditations, verification badges, credentials, business availability, contact details or endorsements. Do not show a contact link for a blank CSV field.
+- Do not collect or store real customer details. Quote, builder registration, report and admin flows remain demonstrations and must plainly disclose that values are not transmitted or retained.
+- Do not write to the managed database or build live accounts, enquiries, email sending, subscriptions, payments or paid AI assets in this release.
+- Keep public business details separate from synthetic admin/demo records; do not make demo controls operate on real business profiles.
+- Preserve the separate REDS BUILDERS LIMITED page, its supplied facts and unverified-source disclosure.
+- Do not change DNS, overwrite an unrelated website, or make unrelated account changes.
+- Reuse project imagery only where clearly identified as illustrative and not as evidence of a listed builder’s work. Keep accessible contrast, keyboard navigation, responsive layouts, input validation and non-persistent demo behavior.
 
+## Existing user-requested REDS BUILDERS LIMITED listing
 
-## Add-on: user-supplied builder directory profile
-
-For the current follow-up request, create one original profile page for **REDS BUILDERS LIMITED**, the first entry in the supplied extract explicitly categorized as “Builders” (excluding “Builders Equipment” entries). Use only the supplied facts: business name, category “Builders”, Office 6, Racecourse Corner, Southampton, Hampshire, SO32 3QX, and 023 9269 3337. Do not infer specific services, service area, company website, accreditations, insurance, years trading, project history, ratings, reviews, or endorsement. State unprovided fields plainly. The snippet is too limited to support an independent verification claim; mark its details as user-supplied and unverified. Omit `sameAs`, `areaServed` and business website URL in schema where no values were supplied; do not manufacture them. The user explicitly requested publication, so publish the page on the existing Southampton Traders site and include its truthful profile URL in the sitemap. Add brief entrance/hover transitions respecting `prefers-reduced-motion`. Do not alter DNS or overwrite any unrelated website.
+Preserve the original separate listing page for **REDS BUILDERS LIMITED**, the first entry in the supplied extract explicitly categorized as “Builders” (excluding “Builders Equipment” entries). Its only supported facts are the business name, category “Builders”, Office 6, Racecourse Corner, Southampton, Hampshire, SO32 3QX, and 023 9269 3337. Do not infer services, service area, company website, accreditations, insurance, years trading, project history, ratings, reviews or endorsement. Keep the user-supplied/unverified disclosure; omit unsupported `sameAs`, `areaServed` and website URL in its schema. Its existing public profile URL remains in the sitemap. Do not alter DNS or unrelated websites.

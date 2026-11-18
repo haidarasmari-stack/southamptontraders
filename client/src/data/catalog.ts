@@ -1,3 +1,5 @@
+import importedBuilders from "./builders.json";
+
 export type Service = {
   slug: string;
   name: string;
@@ -9,128 +11,83 @@ export type Location = {
   slug: string;
   name: string;
   description: string;
+  postcodeCoverage: string;
 };
 
-export type BuilderPhoto = {
-  src: string;
-  alt: string;
-  credit: "Pexels" | "Unsplash";
-};
-
-export type DemoBuilder = {
+export type BuilderCsvRow = {
   slug: string;
+  Business_Name: string;
+  Primary_Location: string;
+  Full_Address_Or_Postcode: string;
+  Phone_Number: string;
+  Website_URL: string;
+  Primary_Service: string;
+  Secondary_Services: string;
+  SEO_Meta_Title: string;
+  SEO_Meta_Description: string;
+  Unique_Profile_Summary: string;
+};
+
+export type BuilderProfile = BuilderCsvRow & {
   name: string;
   summary: string;
-  about: string;
   serviceSlugs: string[];
   locationSlugs: string[];
-  availability: "taking-work" | "limited" | "not-set";
-  photos: BuilderPhoto[];
-  credentials: string[];
-  reviews: never[];
-  isVerified: false;
+  primaryServiceSlug: string;
 };
 
 export const services: Service[] = [
-  { slug: "extensions", name: "Extensions", description: "Explore the demonstration journey for planning a home extension.", icon: "addition" },
-  { slug: "renovations", name: "Renovations", description: "Compare example profiles for whole-home and room-by-room renovation work.", icon: "refresh" },
-  { slug: "loft-conversions", name: "Loft conversions", description: "See how the directory organizes loft-conversion services.", icon: "roof" },
-  { slug: "new-builds", name: "New builds", description: "Browse the example path for new-build project enquiries.", icon: "home" },
-  { slug: "brickwork", name: "Brickwork", description: "Find example builders offering brickwork and masonry services.", icon: "brick" },
-  { slug: "roofing", name: "Roofing", description: "Explore the roofing category in this directory demonstration.", icon: "roof" },
-  { slug: "plastering", name: "Plastering", description: "Browse example plastering service profiles.", icon: "wall" },
-  { slug: "groundworks", name: "Groundworks", description: "Explore groundwork services in the directory demonstration.", icon: "ground" },
-  { slug: "kitchens-and-bathrooms", name: "Kitchens & bathrooms", description: "See how kitchen and bathroom project listings appear.", icon: "kitchen" },
+  { slug: "extensions", name: "Extensions", description: "Browse local builder profiles that list extensions among their services.", icon: "addition" },
+  { slug: "renovations", name: "Renovations", description: "Browse Hampshire businesses listing residential renovation services.", icon: "refresh" },
+  { slug: "loft-conversions", name: "Loft conversions", description: "Find directory profiles that list loft conversions as a service.", icon: "roof" },
+  { slug: "new-builds", name: "New builds", description: "Explore businesses listing new-build work among their services.", icon: "home" },
+  { slug: "brickwork", name: "Brickwork", description: "Browse local business profiles that list brickwork services.", icon: "brick" },
+  { slug: "roofing", name: "Roofing", description: "Find businesses listing roofing services across the launch areas.", icon: "roof" },
+  { slug: "plastering", name: "Plastering", description: "Browse directory profiles that list plastering among their services.", icon: "wall" },
+  { slug: "groundworks", name: "Groundworks", description: "Explore businesses listing groundworks services in Hampshire.", icon: "ground" },
+  { slug: "kitchens-and-bathrooms", name: "Kitchens & bathrooms", description: "Browse profiles listing kitchen and bathroom services.", icon: "kitchen" },
 ];
 
 export const locations: Location[] = [
-  { slug: "southampton", name: "Southampton", description: "Example directory listings for Southampton. All businesses shown are fictional demonstrations." },
-  { slug: "eastleigh", name: "Eastleigh", description: "Example directory listings for Eastleigh. All businesses shown are fictional demonstrations." },
-  { slug: "fareham", name: "Fareham", description: "Example directory listings for Fareham. All businesses shown are fictional demonstrations." },
-  { slug: "winchester", name: "Winchester", description: "Example directory listings for Winchester. All businesses shown are fictional demonstrations." },
-  { slug: "totton", name: "Totton", description: "Example directory listings for Totton. All businesses shown are fictional demonstrations." },
-  { slug: "hedge-end", name: "Hedge End", description: "Example directory listings for Hedge End. All businesses shown are fictional demonstrations." },
-  { slug: "romsey", name: "Romsey", description: "Example directory listings for Romsey. All businesses shown are fictional demonstrations." },
-  { slug: "nearby-hampshire", name: "Nearby Hampshire", description: "The directory can expand to nearby Hampshire towns as real profiles are approved." },
+  { slug: "southampton", name: "Southampton", description: "Builder profiles assigned to the Southampton launch area. Current directory coverage is not exhaustive.", postcodeCoverage: "SO14–SO19" },
+  { slug: "eastleigh", name: "Eastleigh", description: "Builder profiles assigned to the Eastleigh launch area. Current directory coverage is not exhaustive.", postcodeCoverage: "SO50, SO53" },
+  { slug: "fareham", name: "Fareham", description: "Builder profiles assigned to the Fareham launch area. Current directory coverage is not exhaustive.", postcodeCoverage: "PO14–PO17" },
+  { slug: "winchester", name: "Winchester", description: "Builder profiles assigned to the Winchester launch area. Current directory coverage is not exhaustive.", postcodeCoverage: "SO21–SO23" },
+  { slug: "totton", name: "Totton", description: "Builder profiles assigned to the Totton launch area. Current directory coverage is not exhaustive.", postcodeCoverage: "SO40" },
+  { slug: "hedge-end", name: "Hedge End", description: "Builder profiles assigned to the Hedge End launch area. Current directory coverage is not exhaustive.", postcodeCoverage: "SO30" },
+  { slug: "romsey", name: "Romsey", description: "Builder profiles assigned to the Romsey launch area. Current directory coverage is not exhaustive.", postcodeCoverage: "SO51" },
 ];
 
-const demoPhotos = {
-  renovation: {
-    src: "/manus-storage/hero-renovation_853be6f1.webp",
-    alt: "Illustrative interior during a home renovation; not work completed by a listed business.",
-    credit: "Pexels" as const,
-  },
-  extension: {
-    src: "/manus-storage/extension-underway_359cb60e.webp",
-    alt: "Illustrative house-extension construction scene; not work completed by a listed business.",
-    credit: "Pexels" as const,
-  },
-  masonry: {
-    src: "/manus-storage/masonry-demo_2fd80f57.webp",
-    alt: "Illustrative masonry work; not work completed by a listed business.",
-    credit: "Pexels" as const,
-  },
-  kitchen: {
-    src: "/manus-storage/kitchen-demo_856b1ec4.webp",
-    alt: "Illustrative renovated kitchen; not work completed by a listed business.",
-    credit: "Unsplash" as const,
-  },
+const serviceSlugByName: Record<string, string> = {
+  Extensions: "extensions",
+  Renovations: "renovations",
+  "Loft conversions": "loft-conversions",
+  "New builds": "new-builds",
+  Brickwork: "brickwork",
+  Roofing: "roofing",
+  Plastering: "plastering",
+  Groundworks: "groundworks",
+  "Kitchens & bathrooms": "kitchens-and-bathrooms",
 };
 
-export const demoBuilders: DemoBuilder[] = [
-  {
-    slug: "shoreline-build-example",
-    name: "Example: Shoreline Build Co.",
-    summary: "A fictional profile showing how a Southampton extension and renovation listing could look.",
-    about: "This made-up profile is here to demonstrate the directory layout only. It does not represent a real company, completed job, accreditation or customer recommendation.",
-    serviceSlugs: ["extensions", "renovations", "brickwork"],
-    locationSlugs: ["southampton", "eastleigh", "hedge-end"],
-    availability: "taking-work",
-    photos: [demoPhotos.extension, demoPhotos.renovation],
-    credentials: [],
-    reviews: [],
-    isVerified: false,
-  },
-  {
-    slug: "brick-and-beam-example",
-    name: "Example: Brick & Beam South",
-    summary: "A fictional example for a brickwork and small-build profile.",
-    about: "This sample company name and description are fictional. The accompanying stock photo is illustrative and is not evidence of this example business's work.",
-    serviceSlugs: ["brickwork", "new-builds", "groundworks"],
-    locationSlugs: ["southampton", "fareham", "totton"],
-    availability: "limited",
-    photos: [demoPhotos.masonry],
-    credentials: [],
-    reviews: [],
-    isVerified: false,
-  },
-  {
-    slug: "hearthside-projects-example",
-    name: "Example: Hearthside Projects",
-    summary: "A fictional demonstration profile for kitchen, bathroom and renovation work.",
-    about: "This made-up profile helps illustrate a kitchen-project listing. The photo is a stock image and is not connected to a real builder or client project.",
-    serviceSlugs: ["kitchens-and-bathrooms", "renovations"],
-    locationSlugs: ["southampton", "winchester", "romsey"],
-    availability: "not-set",
-    photos: [demoPhotos.kitchen],
-    credentials: [],
-    reviews: [],
-    isVerified: false,
-  },
-  {
-    slug: "loftline-example",
-    name: "Example: Loftline Hampshire",
-    summary: "A fictional sample profile for loft conversions and roofing.",
-    about: "This is a demonstration-only name. No real business, available dates, credentials, work history or reviews are being claimed.",
-    serviceSlugs: ["loft-conversions", "roofing", "extensions"],
-    locationSlugs: ["southampton", "eastleigh", "romsey", "nearby-hampshire"],
-    availability: "not-set",
-    photos: [demoPhotos.renovation],
-    credentials: [],
-    reviews: [],
-    isVerified: false,
-  },
-];
+const locationSlugByName: Record<string, string> = Object.fromEntries(
+  locations.map((location) => [location.name, location.slug]),
+);
+
+export const builders: BuilderProfile[] = (importedBuilders as BuilderCsvRow[]).map((row) => {
+  const serviceNames = [...new Set([row.Primary_Service, ...row.Secondary_Services.split(",")]
+    .map((service) => service.trim())
+    .filter(Boolean))];
+  const locationSlug = locationSlugByName[row.Primary_Location];
+  return {
+    ...row,
+    name: row.Business_Name,
+    summary: row.Unique_Profile_Summary,
+    primaryServiceSlug: serviceSlugByName[row.Primary_Service],
+    serviceSlugs: serviceNames.map((service) => serviceSlugByName[service]).filter(Boolean),
+    locationSlugs: locationSlug ? [locationSlug] : [],
+  };
+});
 
 export function getService(slug: string | undefined) {
   return services.find((service) => service.slug === slug);
@@ -141,7 +98,15 @@ export function getLocation(slug: string | undefined) {
 }
 
 export function getBuilder(slug: string | undefined) {
-  return demoBuilders.find((builder) => builder.slug === slug);
+  return builders.find((builder) => builder.slug === slug);
+}
+
+export function getBuildersForLocation(slug: string) {
+  return builders.filter((builder) => builder.locationSlugs.includes(slug));
+}
+
+export function getBuildersForService(slug: string) {
+  return builders.filter((builder) => builder.serviceSlugs.includes(slug));
 }
 
 export function serviceName(slug: string) {
@@ -150,4 +115,15 @@ export function serviceName(slug: string) {
 
 export function locationName(slug: string) {
   return getLocation(slug)?.name ?? slug.replaceAll("-", " ");
+}
+
+export function phoneHref(phone: string) {
+  const value = phone.trim();
+  if (!value) return "";
+  const compact = value.replace(/[()\s.-]/g, "");
+  if (compact.startsWith("+")) return `tel:${compact}`;
+  const digits = compact.replace(/\D/g, "");
+  if (digits.startsWith("0")) return `tel:+44${digits.slice(1)}`;
+  if (digits.startsWith("44")) return `tel:+${digits}`;
+  return `tel:${digits}`;
 }

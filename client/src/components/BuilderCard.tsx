@@ -1,27 +1,28 @@
-import { ArrowUpRight, MapPin } from "lucide-react";
+import { ArrowUpRight, Globe2, MapPin, Phone } from "lucide-react";
 import { Link } from "wouter";
-import { DemoBuilder, locationName, serviceName } from "@/data/catalog";
+import { locationName, phoneHref, serviceName, type BuilderProfile } from "@/data/catalog";
 
-export default function BuilderCard({ builder }: { builder: DemoBuilder }) {
-  const photo = builder.photos[0];
-  const availability = builder.availability === "taking-work"
-    ? "Taking work · demo only"
-    : builder.availability === "limited"
-      ? "Limited · demo only"
-      : "Availability not set";
+export default function BuilderCard({ builder }: { builder: BuilderProfile }) {
+  const profilePath = `/builder/${builder.slug}/`;
+  const telLink = phoneHref(builder.Phone_Number);
 
   return <article className="builder-card">
-    <Link href={`/builder/${builder.slug}/`} className="builder-card-image" aria-label={`View ${builder.name} demo profile`}>
-      {photo ? <img src={photo.src} alt={photo.alt} loading="lazy" /> : <span className="image-placeholder" aria-hidden="true" />}
-      <span className="demo-pill">Demo profile</span>
-    </Link>
     <div className="builder-card-content">
-      <div className="card-topline"><span className="eyebrow-small">Example business</span><span className="status-unverified">Not verified</span></div>
-      <h3><Link href={`/builder/${builder.slug}/`}>{builder.name}</Link></h3>
-      <p>{builder.summary}</p>
-      <div className="service-chip-list" aria-label="Example services">{builder.serviceSlugs.slice(0, 3).map((slug) => <span className="service-chip" key={slug}>{serviceName(slug)}</span>)}</div>
-      <div className="builder-card-meta"><span><MapPin size={14} aria-hidden="true" />{builder.locationSlugs.slice(0, 2).map(locationName).join(" · ")}</span><span>{availability}</span><span>No reviews</span></div>
-      <Link className="builder-card-action" href={`/builder/${builder.slug}/`}>View demo profile <ArrowUpRight size={15} aria-hidden="true" /></Link>
+      <div className="card-topline"><span className="eyebrow-small">{locationName(builder.locationSlugs[0] ?? "")}</span><span className="status-unverified">Directory listing</span></div>
+      <h3><Link href={profilePath}>{builder.Business_Name}</Link></h3>
+      <p>{builder.Unique_Profile_Summary}</p>
+      <div className="service-chip-list" aria-label={`Services listed for ${builder.Business_Name}`}>
+        {builder.serviceSlugs.map((slug) => <span className="service-chip" key={slug}>{serviceName(slug)}</span>)}
+      </div>
+      <div className="builder-card-meta">
+        <span><MapPin size={14} aria-hidden="true" />{builder.Full_Address_Or_Postcode || locationName(builder.locationSlugs[0] ?? "")}</span>
+        <span>Primary service: {serviceName(builder.primaryServiceSlug)}</span>
+      </div>
+      <div className="builder-card-actions">
+        <Link className="builder-card-action" href={profilePath}>View profile <ArrowUpRight size={15} aria-hidden="true" /></Link>
+        {builder.Phone_Number && <a className="builder-card-action" href={telLink}><Phone size={15} aria-hidden="true" />Call {builder.Phone_Number}</a>}
+        {builder.Website_URL && <a className="builder-card-action" href={builder.Website_URL} target="_blank" rel="noreferrer"><Globe2 size={15} aria-hidden="true" />Company website <ArrowUpRight size={14} aria-hidden="true" /></a>}
+      </div>
     </div>
   </article>;
 }

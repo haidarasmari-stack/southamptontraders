@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { getBuilder, getLocation, getService } from "@/data/catalog";
+import { builders, getBuilder, getBuildersForLocation, getBuildersForService, getLocation, getService } from "@/data/catalog";
 
 export const SITE_ORIGIN = "https://southamptontraders.co.uk";
 export const SHARE_IMAGE = `${SITE_ORIGIN}/manus-storage/hero-renovation_853be6f1.webp`;
@@ -7,21 +7,22 @@ export const SHARE_IMAGE = `${SITE_ORIGIN}/manus-storage/hero-renovation_853be6f
 export type PageMeta = { title: string; description: string; path: string; noindex?: boolean };
 
 const informationPages: Record<string, PageMeta> = {
-  "/how-it-works": { title: "How Southampton Traders works | Southampton Traders", description: "A simple guide to choosing a building service, browsing Hampshire locations, comparing builder information and understanding quote requests.", path: "/how-it-works" },
-  "/reviews": { title: "Review rules | Southampton Traders", description: "Learn how a future Southampton Traders service would handle genuine project reviews, business replies, reports and moderation. No reviews appear in this demo.", path: "/reviews", noindex: true },
-  "/privacy": { title: "Privacy information | Southampton Traders", description: "This public prototype does not send or store form entries. Learn what not to enter and what must be in place before real enquiries are enabled.", path: "/privacy", noindex: true },
-  "/cookies": { title: "Cookie information | Southampton Traders", description: "This directory demonstration does not use advertising cookies or third-party tracking pixels. Read about essential hosting and future privacy considerations.", path: "/cookies", noindex: true },
-  "/contact": { title: "Contact and feedback | Southampton Traders", description: "Preview a feedback form for Southampton Traders. Messages are not delivered or saved; do not include personal or sensitive details.", path: "/contact", noindex: true },
-  "/request-quote": { title: "Request a quote · demo | Southampton Traders", description: "Try the Southampton Traders project enquiry form in demonstration mode. No personal details are sent or stored.", path: "/request-quote", noindex: true },
-  "/builder-area": { title: "For builders · dashboard demo | Southampton Traders", description: "Explore the Southampton Traders builder onboarding, profile editor and enquiries dashboard demonstration. Nothing is sent or saved.", path: "/builder-area", noindex: true },
-  "/admin": { title: "Admin tools · demo | Southampton Traders", description: "A public demonstration of directory administration and moderation concepts. It is not a secure admin system and saves no actions.", path: "/admin", noindex: true },
-  "/404": { title: "Page not found | Southampton Traders", description: "That Southampton Traders page could not be found. Browse the demonstration directory instead.", path: "/404", noindex: true },
+  "/how-it-works": { title: "How Southampton Traders works | Southampton Traders", description: "A guide to choosing a building service, browsing Hampshire locations, comparing builder information and understanding non-persistent quote forms.", path: "/how-it-works/" },
+  "/reviews": { title: "Review rules | Southampton Traders", description: "Learn how a future Southampton Traders service would handle genuine project reviews, business replies, reports and moderation. No reviews appear in the directory.", path: "/reviews/", noindex: true },
+  "/privacy": { title: "Privacy information | Southampton Traders", description: "Directory contact links lead directly to companies; demo form entries are not sent or stored. Learn what not to enter and what must be in place before enquiries are enabled.", path: "/privacy/", noindex: true },
+  "/cookies": { title: "Cookie information | Southampton Traders", description: "Read about platform analytics, hosting and privacy considerations. Southampton Traders does not configure advertising pixels or send demo form values to analytics.", path: "/cookies/", noindex: true },
+  "/contact": { title: "Contact and feedback | Southampton Traders", description: "Preview a feedback form for Southampton Traders. Messages are not delivered or saved; do not include personal or sensitive details.", path: "/contact/", noindex: true },
+  "/request-quote": { title: "Request a quote · demo | Southampton Traders", description: "Try the Southampton Traders project enquiry form in demonstration mode. No personal details are sent or stored.", path: "/request-quote/", noindex: true },
+  "/builder-area": { title: "For builders · dashboard demo | Southampton Traders", description: "Explore the Southampton Traders builder onboarding, profile editor and enquiries dashboard demonstration. Nothing is sent or saved.", path: "/builder-area/", noindex: true },
+  "/admin": { title: "Admin tools · demo | Southampton Traders", description: "A public demonstration of directory administration and moderation concepts. It is not a secure admin system and saves no actions.", path: "/admin/", noindex: true },
+  "/404": { title: "Page not found | Southampton Traders", description: "That Southampton Traders page could not be found. Browse the local builder directory instead.", path: "/404", noindex: true },
 };
 
 export function metaForPath(pathname: string): PageMeta {
   const path = pathname.split("?")[0].replace(/\/$/, "") || "/";
-  if (path === "/") return { title: "Find local builders in Southampton | Southampton Traders", description: "Explore local building services around Southampton and nearby Hampshire. Search by project and place; every example listing is clearly marked.", path: "/" };
-  if (informationPages[path]) return informationPages[path];
+  const canonicalPath = path === "/" || path === "/404" ? path : `${path}/`;
+  if (path === "/") return { title: "Find local builders in Southampton | Southampton Traders", description: `Browse ${builders.length} builder profiles across seven Southampton and Hampshire launch areas. Filter by service and location, then contact companies directly. Coverage is not exhaustive.`, path: "/" };
+  if (informationPages[path]) return { ...informationPages[path], path: canonicalPath };
 
   const profileMatch = path.match(/^\/builder\/([^/]+)$/);
   if (profileMatch) {
@@ -33,20 +34,24 @@ export function metaForPath(pathname: string): PageMeta {
       };
     }
     const builder = getBuilder(profileMatch[1]);
-    return { title: `${builder?.name ?? "Example builder"} | Southampton Traders`, description: builder ? `${builder.summary} Fictional demonstration profile only; no reviews, verified credentials or real contact details are shown.` : "This fictional builder profile does not exist in the Southampton Traders demonstration directory.", path, noindex: true };
+    return builder
+      ? { title: builder.SEO_Meta_Title, description: builder.SEO_Meta_Description, path: canonicalPath }
+      : { title: "Builder profile not found | Southampton Traders", description: "This business profile could not be found in the Southampton Traders directory.", path: "/404", noindex: true };
   }
 
   const serviceMatch = path.match(/^\/services\/([^/]+)$/);
   if (serviceMatch) {
     const service = getService(serviceMatch[1]);
-    return { title: `${service?.name ?? "Building services"} builders | Southampton Traders`, description: service ? `${service.description} Explore clearly labelled fictional demo profiles; the example listings are not verified businesses.` : "Browse building services in the Southampton Traders demonstration directory.", path, noindex: true };
+    const count = getBuildersForService(serviceMatch[1]).length;
+    return { title: `${service?.name ?? "Building services"} builders | Southampton Traders`, description: service ? `Browse ${count} business profiles listing ${service.name.toLowerCase()} across Hampshire launch areas. Public-source details; coverage is not exhaustive.` : "Browse building services in the Southampton Traders directory.", path: canonicalPath, noindex: !service };
   }
 
   const locationMatch = path.match(/^\/(?:locations|builders)\/([^/]+)$/);
   if (locationMatch) {
     const place = getLocation(locationMatch[1]);
     const isResults = path.startsWith("/builders/");
-    return { title: `${isResults ? "Example builders" : "Builders"} in ${place?.name ?? "Hampshire"} | Southampton Traders`, description: place ? `${place.description} Browse fictional demonstration profiles only; no real businesses, reviews or verified listings are represented.` : "Browse the Southampton Traders demonstration directory for Hampshire locations.", path, noindex: true };
+    const count = getBuildersForLocation(locationMatch[1]).length;
+    return { title: `Builders in ${place?.name ?? "Hampshire"} | Southampton Traders`, description: place ? `Browse ${count} business profiles listed in ${place.name} (${place.postcodeCoverage}). Filter by service and contact companies directly; coverage is not exhaustive.` : "Browse the Southampton Traders directory across Hampshire launch areas.", path: canonicalPath, noindex: isResults || !place };
   }
   return { title: "Page not found | Southampton Traders", description: informationPages["/404"].description, path: "/404", noindex: true };
 }

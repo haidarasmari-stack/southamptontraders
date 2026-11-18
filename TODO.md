@@ -4,9 +4,9 @@
 - [x] Build a homepage with a prominent search: “What building work do you need?” and “Where?”
 - [x] Let customers browse builders by service and location.
 - [x] Provide initial service categories: extensions, renovations, loft conversions, new builds, brickwork, roofing, plastering, groundworks, kitchens and bathrooms.
-- [x] Provide initial locations: Southampton, Eastleigh, Fareham, Winchester, Totton, Hedge End, Romsey and nearby Hampshire towns.
-- [x] Show search results with filters for service, location, availability and verified-profile status.
-- [x] Provide builder profile pages with business description, services, service area, photos, contact/enquiry button and customer reviews. All sample builders must be visibly labelled as demo examples; do not invent reviews, ratings, accreditations, verification badges or business contact data.
+- [x] Provide the seven launch areas only: Southampton (SO14–SO19), Eastleigh (SO50, SO53), Fareham (PO14–PO17), Winchester (SO21–SO23), Totton (SO40), Hedge End (SO30) and Romsey (SO51).
+- [x] Show search results with filters for the exact services and launch areas; do not add availability or verified-profile filters unsupported by the dataset.
+- [x] Provide factual profile pages with business name, summary, services, launch area, and conditional phone/company-website links. Do not add photos, customer reviews, ratings, accreditations, verification badges or contact details unsupported by the source.
 - [x] Provide a quote-request form asking the type of work, project location, description, timing, optional budget range and customer contact details. Clearly explain what happens after an enquiry is sent. Until real-data collection is approved, the public demo form must warn users not to enter real personal information, must not transmit or persist submitted values, and must explain that no enquiry is sent to a builder.
 - [ ] Provide options to report a profile or review; current reports must be demonstrations only and must not be transmitted or persisted.
 
@@ -31,9 +31,9 @@
 - [x] Provide search, filters and clear status labels. Current admin demonstration actions must be in-memory only and visibly marked as demos.
 
 ## Search discoverability
-- [x] Use clean, crawlable URLs, including `/builders/southampton/`, `/services/extensions/`, `/services/loft-conversions/`, `/locations/eastleigh/` and `/builder/example-company/` patterns.
+- [x] Use clean, crawlable URLs, including `/builders/southampton/`, `/services/extensions/`, `/services/loft-conversions/`, `/locations/eastleigh/` and the `/builder/:slug/` profile route pattern.
 - [x] Add unique titles and meta descriptions, canonical URLs, breadcrumbs, social-sharing metadata and an XML sitemap.
-- [x] Avoid thin or duplicate pages for every service/location combination. Only index pages with genuinely useful, distinct listings or content; keep demo-builder pages out of the sitemap/search index until they contain real, approved listings.
+- [x] Avoid thin or duplicate pages for every service/location combination. Index useful service/location pages and researched business profiles; keep synthetic admin examples out of public routes and the sitemap.
 - [x] Use structured data only for facts visibly shown on the page. Do not mark up unverified ratings, reviews or credentials.
 - [x] Link relevant service, location and builder pages together.
 
@@ -47,17 +47,17 @@
 - [ ] Make the site ready to measure searches, profile views and quote requests without collecting unnecessary personal data.
 
 ## Public launch and owner handover
-- [x] Keep all example builder listings clearly labelled as demos and never present sample listings as real businesses.
+- [x] At the original demo launch, keep sample builder listings clearly labelled and never present them as real businesses; this outcome is superseded by the user-authorized real-directory integration below.
 - [x] Do not activate paid subscriptions, complex payments, paid AI asset generation or payment features unless requested later.
 - [x] The owner initially said not to publish or connect the domain until explicitly approved; the owner has now explicitly approved publishing and connecting `southamptontraders.co.uk`. Do not interpret that approval as consent to collect real customer data, buy credits, activate paid plans, or enable payment processing.
-- [ ] Publish the completed public demo and connect only `southamptontraders.co.uk`; preserve unrelated websites and DNS records.
+- [x] Publish the initial site and connect `southamptontraders.co.uk`; later code updates require their own publish, but no DNS changes or unrelated website changes.
 - [x] Test the journey search → builder profile → demo quote request → builder dashboard → admin moderation without transmitting or persisting real customer data.
 - [x] Check mobile layouts, accessibility basics, form validation, SEO metadata and sitemap behavior.
 - [x] Provide a short handover explaining how to change the brand, services, locations, policies and demo listings.
 
-> Real account operation, review submission, durable moderation and custom search/profile/quote event measurement remain intentionally unimplemented pending separate authorization. Basic platform page-visit analytics is enabled and disclosed in the privacy/cookie pages. The launch item remains open until publication and custom-domain connection are each confirmed.
+> Real account operation, review submission, durable moderation and custom search/profile/quote event measurement remain intentionally unimplemented pending separate authorization. Basic platform page-visit analytics is enabled and disclosed in the privacy/cookie pages. The initial public launch and custom-domain connection are confirmed; this directory update is tracked below.
 
-> Publication is confirmed and public at `https://sotraders-tr9hvk4y.manus.space`. The requested custom domain still resolves to Hostinger (`2.57.91.91`, `hcdn`). The Hostinger website-list API returned HTTP 401, so no DNS zone was read, validated or changed; the combined launch outcome remains open until `southamptontraders.co.uk` is connected and verified.
+> Historical deployment note: publication at `https://sotraders-tr9hvk4y.manus.space` and the custom-domain connection are now confirmed by the WebDev deployment status for `southamptontraders.co.uk` and `www.southamptontraders.co.uk`. No DNS change is part of the current directory update.
 
 ## User-requested REDS BUILDERS LIMITED listing
 - [x] Create an original MyBuilder-style directory profile for the first entry in the supplied extract categorized exactly “Builders”: REDS BUILDERS LIMITED (not any “Builders Equipment” entry).
@@ -69,3 +69,16 @@
 - [x] Add `HomeAndConstructionBusiness` JSON-LD with the supplied name, phone and postal address; omit unsupported official URL, `sameAs`, `areaServed`, ratings, reviews and credentials.
 - [x] Use brief section/button animations and respect `prefers-reduced-motion`.
 - [x] Publish the user-requested factual page on the existing Southampton Traders website and include it in the sitemap; preserve the source/unverified disclosure and do not alter DNS or any unrelated website.
+
+## User-authorized researched directory integration
+- [x] Replace the 4 fictional demo profiles on `https://southamptontraders.co.uk` with the businesses in the compiled dataset, remove the “Demo site. Every builder is an example” banner, and wire up the search filters so users can filter by Service and Location and click directly to call (`tel:`) or visit the builder's website.
+- [x] Keep to the nine exact service categories and seven launch areas from the research request. Use the 71 CSV records and retain the actual area counts (Southampton 10, Eastleigh 12, Fareham 17, Winchester 7, Totton 9, Hedge End 5, Romsey 11); disclose that each area remains below the 20–50 research aim and the directory is not exhaustive.
+- [x] Do not invent contact details, ratings, reviews, accreditations or other claims. Preserve each factual profile summary and its verification evidence. Omit phone or website links when the corresponding CSV value is blank.
+- [x] Use the imported profile metadata and add a `HomeAndConstructionBusiness` JSON-LD record to each real business profile using only facts visible in that profile; do not add ratings, reviews, accreditation or credentials.
+- [x] Remove demo/example claims associated with the public directory and remove the misleading global banner. Keep the separate REDS BUILDERS LIMITED user-supplied page, and keep quote, builder-area and admin demo flows clearly labelled and non-persistent; no database or DNS changes.
+- [x] Update the public route manifest, sitemap, SEO metadata and prerendered profile pages for the real businesses; remove fictional demo-profile URLs from the public route inventory and sitemap.
+- [ ] Commit the completed code update to `origin/main` and explicitly publish it because auto-publish is off; keep `southamptontraders.co.uk` and other existing DNS records unchanged.
+
+## Current directory release verification
+- All 71 profiles have route metadata and JSON-LD; sitemap and route manifest contain the researched profiles and retain the separate REDS page.
+- Production-build HTTP checks passed, including conditional contact links and genuine not-found responses. DNS records were not changed.

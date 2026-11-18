@@ -11,7 +11,7 @@ const NOT_FOUND_PATH = "/404";
 // The redirect is irreversible: never render while loading, on other errors, or before auth resolves.
 export default function NotFound() {
   const [, setLocation] = useLocation();
-  usePageMeta({ title: "Page not found | Southampton Traders", description: "That Southampton Traders page could not be found. Browse the demonstration directory instead.", path: "/404", noindex: true });
+  usePageMeta({ title: "Page not found | Southampton Traders", description: "That Southampton Traders page could not be found. Browse the local builder directory instead.", path: "/404", noindex: true });
 
   useEffect(() => {
     const robots = document.createElement("meta");
@@ -31,5 +31,5 @@ export default function NotFound() {
     setLocation("/");
   };
 
-  return <div className="page wrap narrow-page not-found-page"><Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Page not found" }]} /><p className="eyebrow">404 · Not found</p><h1>We can’t find that page.</h1><p className="section-intro">The address may have changed, or the page may not exist in this demo directory.</p><div className="not-found-actions"><button className="button" onClick={handleGoHome}><ArrowLeft size={16} /> Return home</button><a className="text-link" href="/builders/southampton/"><Search size={16} /> Browse example builders</a></div></div>;
+  return <div className="page wrap narrow-page not-found-page"><Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Page not found" }]} /><p className="eyebrow">404 · Not found</p><h1>We can’t find that page.</h1><p className="section-intro">The address may have changed, or the page may not exist in the directory.</p><div className="not-found-actions"><button className="button" onClick={handleGoHome}><ArrowLeft size={16} /> Return home</button><a className="text-link" href="/builders/southampton/"><Search size={16} /> Browse Southampton builders</a></div></div>;
 }

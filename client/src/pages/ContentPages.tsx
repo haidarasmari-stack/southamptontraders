@@ -10,14 +10,14 @@ const pages = {
     label: "How it works",
     eyebrow: "A clearer way to start",
     title: "Start with the work. Compare with care.",
-    description: "Find local building firms by the work you need and the places you need them. The current site is a demonstration, with no live businesses or enquiries.",
+    description: "Browse a current, non-exhaustive set of Southampton and Hampshire builder profiles. Filter by the exact service and launch area; demo enquiry forms are not sent or saved.",
     icon: "steps",
   },
   reviews: {
     label: "Review rules",
     eyebrow: "Trust, built carefully",
     title: "Honest feedback starts with real work.",
-    description: "Reviews should come from a declared or completed job, describe a genuine customer experience, and be moderated consistently. There are no reviews or ratings in this demonstration.",
+    description: "Reviews should come from a declared or completed job, describe a genuine customer experience, and be moderated consistently. Southampton Traders currently publishes no reviews or ratings.",
     icon: "reviews",
   },
   privacy: {
@@ -50,7 +50,7 @@ export default function ContentPages() {
   const { slug } = useParams<{ slug: string }>();
   const page = pages[slug as PageKey];
   const [submitted, setSubmitted] = useState(false);
-  usePageMeta({ title: `${page?.label ?? "Information"} | Southampton Traders`, description: page?.description ?? "Information about the Southampton Traders demonstration directory.", path: `/${slug ?? "information"}/`, noindex: slug !== "how-it-works" });
+  usePageMeta({ title: `${page?.label ?? "Information"} | Southampton Traders`, description: page?.description ?? "Information about Southampton Traders and its directory.", path: `/${slug ?? "information"}/`, noindex: slug !== "how-it-works" });
   if (!page) return <NotFound />;
 
   const Icon = icons[page.icon];
@@ -75,18 +75,18 @@ export default function ContentPages() {
     </div>
 
     {isHow && <div className="step-list">
-      <article><span>01</span><div><h2>Choose the work</h2><p>Start with a service such as an extension, renovation, loft conversion, new build, brickwork, roofing, plastering, groundworks, kitchen or bathroom.</p></div></article>
-      <article><span>02</span><div><h2>Choose an area</h2><p>Explore Southampton, Eastleigh, Fareham, Winchester, Totton, Hedge End, Romsey and nearby Hampshire towns.</p></div></article>
-      <article><span>03</span><div><h2>Compare the details</h2><p>Look for clear business information and know what is—and is not—verified. This demo has fictional profiles only, with no real credentials or customer reviews.</p></div></article>
-      <article><span>04</span><div><h2>Ask about your project</h2><p>In a future live service, you would see which builder(s) receive your enquiry. Here, quote forms are non-persistent previews; nothing is sent.</p></div></article>
-      <div className="content-page-cta"><Link className="button" href="/builders/southampton/">Browse demo profiles <ArrowRight size={16} /></Link><Link className="text-link" href="/request-quote/">Preview a quote request</Link></div>
+      <article><span>01</span><div><h2>Choose the work</h2><p>Filter across the nine listed categories: Extensions, Renovations, Loft conversions, New builds, Brickwork, Roofing, Plastering, Groundworks, and Kitchens &amp; bathrooms.</p></div></article>
+      <article><span>02</span><div><h2>Choose an area</h2><p>Explore the seven launch areas: Southampton, Eastleigh, Fareham, Winchester, Totton, Hedge End and Romsey. Each area has its own current listing count.</p></div></article>
+      <article><span>03</span><div><h2>Compare the details</h2><p>The current dataset contains 71 profiles and is not exhaustive. Profiles use public company or trade-source information; no ratings, reviews, accreditations or unsupported claims are added.</p></div></article>
+      <article><span>04</span><div><h2>Contact a business directly</h2><p>Call or visit a company website only where a direct detail is listed. Quote, builder-area and report forms are previews only: they are not sent or saved.</p></div></article>
+      <div className="content-page-cta"><Link className="button" href="/builders/southampton/">Browse current profiles <ArrowRight size={16} /></Link><Link className="text-link" href="/request-quote/">Preview a quote request</Link></div>
     </div>}
 
     {isReviews && <section className="policy-content">
       <h2>When reviews are eligible</h2><p>In a future live service, a customer could submit a review only after declaring a job with the builder or confirming that the work was completed. The site should explain the eligibility check and ask for relevant, first-hand feedback.</p>
       <h2>Moderation and replies</h2><p>Businesses should be able to respond professionally. Customers and businesses should be able to report content for review. Moderators should apply published rules consistently and keep a decision record.</p>
-      <h2>What we show today</h2><p>There are no customer reviews, star ratings, accreditations or verification badges in this demo. Example profiles are not recommendations. Sponsored placements are not part of this MVP; any future paid placement must be labelled clearly.</p>
-      <Link className="button" href="/builders/southampton/">See the demo directory <ArrowRight size={16} /></Link>
+      <h2>What we show today</h2><p>There are no customer reviews, star ratings, accreditations or verification badges in the directory. Profiles are factual listings, not recommendations. Sponsored placements are not part of this MVP; any future paid placement must be labelled clearly.</p>
+      <Link className="button" href="/builders/southampton/">Browse the directory <ArrowRight size={16} /></Link>
     </section>}
 
     {isPrivacy && <section className="policy-content">
