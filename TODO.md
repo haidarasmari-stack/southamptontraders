@@ -88,4 +88,5 @@
 - [x] Add 17 evidence-backed businesses to the preserved ten-column CSV and retain opened-source verification notes in `data/verification-updates/2026-11-19/`.
 - [x] Keep blank contact fields blank, use conditional links, preserve the non-exhaustive coverage disclosure and update the homepage's profile count.
 - [x] Regenerate the 88-profile static JSON, sitemap and route manifest; confirm area totals are Southampton 15, Eastleigh 12, Fareham 18, Winchester 10, Totton 10, Hedge End 8 and Romsey 15.
-- [ ] Run project checks, production build/prerender and live-route checks; commit and push the update. Explicit publication is pending owner approval; no database or DNS changes.
+- [x] Run project checks, production build/prerender and route/profile checks; commit and push the update as `d5128218d9e1bf3a11e8d84dbbcf40631f5bd1dc`.
+- [ ] Explicitly publish the expanded directory only after owner confirmation; no database or DNS changes.
