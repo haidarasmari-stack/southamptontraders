@@ -82,3 +82,10 @@
 ## Current directory release verification
 - All 71 profiles have route metadata and JSON-LD; sitemap and route manifest contain the researched profiles and retain the separate REDS page.
 - Production-build HTTP checks passed, including conditional contact links and genuine not-found responses. DNS records were not changed.
+
+## Continued business research — 19 November 2026
+- [x] Research additional builders in the seven existing launch areas; exclude duplicate businesses and candidates without verified local residential activity or a supported one of the nine exact services.
+- [x] Add 17 evidence-backed businesses to the preserved ten-column CSV and retain opened-source verification notes in `data/verification-updates/2026-11-19/`.
+- [x] Keep blank contact fields blank, use conditional links, preserve the non-exhaustive coverage disclosure and update the homepage's profile count.
+- [x] Regenerate the 88-profile static JSON, sitemap and route manifest; confirm area totals are Southampton 15, Eastleigh 12, Fareham 18, Winchester 10, Totton 10, Hedge End 8 and Romsey 15.
+- [ ] Run project checks, production build/prerender and live-route checks; commit and push the update. Explicit publication is pending owner approval; no database or DNS changes.

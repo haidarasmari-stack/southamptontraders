@@ -22,20 +22,20 @@ describe("researched builder catalog", () => {
     expect(locations.map((location) => location.name)).toEqual(expectedAreas);
   });
 
-  it("imports all 71 unique profiles with the recorded area counts", () => {
-    expect(builders).toHaveLength(71);
-    expect(new Set(builders.map((builder) => builder.slug)).size).toBe(71);
+  it("imports all 88 unique profiles with the recorded area counts", () => {
+    expect(builders).toHaveLength(88);
+    expect(new Set(builders.map((builder) => builder.slug)).size).toBe(88);
     expect(Object.fromEntries(locations.map((location) => [
       location.name,
       builders.filter((builder) => builder.Primary_Location === location.name).length,
     ]))).toEqual({
-      Southampton: 10,
+      Southampton: 15,
       Eastleigh: 12,
-      Fareham: 17,
-      Winchester: 7,
-      Totton: 9,
-      "Hedge End": 5,
-      Romsey: 11,
+      Fareham: 18,
+      Winchester: 10,
+      Totton: 10,
+      "Hedge End": 8,
+      Romsey: 15,
     });
   });
 

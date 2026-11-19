@@ -2,7 +2,7 @@
 
 ## Product and implementation approach
 
-Continue the existing Manus WebDev project (React 19, TypeScript, Vite, Wouter, Tailwind CSS, Express/tRPC and Drizzle). Populate the public directory from the user's supplied CSV of 71 unique researched businesses. Keep exactly the nine requested service categories and seven launch areas; do not imply the current results are exhaustive. Use the CSV's factual profile summaries, addresses/postcodes, services and contact details without inventing facts. Where a verified phone or direct website is blank, omit that contact link. The supporting source ledger is retained with the imported CSV.
+Continue the existing Manus WebDev project (React 19, TypeScript, Vite, Wouter, Tailwind CSS, Express/tRPC and Drizzle). Populate the public directory from the maintained CSV of 88 unique researched businesses, comprising the original 71 records and 17 additional candidates with preserved source notes. Keep exactly the nine requested service categories and seven launch areas; do not imply the current results are exhaustive. Use the CSV's factual profile summaries, addresses/postcodes, services and contact details without inventing facts. Where a verified phone or direct website is blank, omit that contact link. The supporting source ledger is retained with the imported CSV.
 
 Directory records are static, code-owned public data; do not use the already-enabled database for them. Implement service/location search filters, searchable cards and individual profile pages with direct `tel:` and company-site links only where present. Generate `HomeAndConstructionBusiness` JSON-LD from the imported row for each real profile, without adding ratings, reviews, accreditations, credentials, availability or unsupported contact facts. If an imported SEO title uses a shortened name that does not match `Business_Name`, generate a truthful title from the full record name and category/location while staying within the 60-character limit where possible; keep the full business name visible on-page and in structured data.
 
@@ -14,7 +14,7 @@ The live site and custom domain already exist. Checkpoint and explicitly publish
 
 ## Dataset inventory and limits
 
-The source CSV has the exact ten requested columns and 71 unique records: Southampton 10, Eastleigh 12, Fareham 17, Winchester 7, Totton 9, Hedge End 5 and Romsey 11. These counts are all below the requested 20–50 per area research aim; present the directory as a non-exhaustive current set. The records use all nine specified services. Three records have no verified phone and three have no verified direct website; keep the corresponding values blank and hide their contact links. Do not fabricate ratings, reviews, accreditation, credentials, availability or other claims.
+The maintained source CSV has the exact ten requested columns and 88 unique records: Southampton 15, Eastleigh 12, Fareham 18, Winchester 10, Totton 10, Hedge End 8 and Romsey 15. These counts remain below the requested 20–50 per area research aim; present the directory as a non-exhaustive current set. The records use all nine specified services. Four records have no verified phone and three have no verified direct website; keep the corresponding values blank and hide their contact links. Additional evidence notes are stored in `data/verification-updates/2026-11-19/`. Do not fabricate ratings, reviews, accreditation, credentials, availability or other claims.
 
 ## Page map
 

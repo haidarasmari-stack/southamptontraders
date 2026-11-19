@@ -21,7 +21,7 @@ export default function Home() {
           <h1>Find the right people to <em>build it right.</em></h1>
           <p className="hero-lede">Search {builders.length} researched business profiles in Southampton and nearby Hampshire launch areas. Filter by service and location, then call or visit a company when a verified direct contact detail is listed.</p>
           <SearchPanel />
-          <div className="hero-proof"><span><Check size={15} aria-hidden="true" /> 71 current profiles</span><span><Check size={15} aria-hidden="true" /> Seven launch areas</span><span><Check size={15} aria-hidden="true" /> No invented ratings</span></div>
+          <div className="hero-proof"><span><Check size={15} aria-hidden="true" /> {builders.length} current profiles</span><span><Check size={15} aria-hidden="true" /> Seven launch areas</span><span><Check size={15} aria-hidden="true" /> No invented ratings</span></div>
         </div>
         <div className="hero-visual">
           <img src={photo} alt="Illustrative home renovation in progress; not evidence of work by a directory listing." fetchPriority="high" />
