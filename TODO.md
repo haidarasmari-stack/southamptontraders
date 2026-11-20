@@ -89,4 +89,12 @@
 - [x] Keep blank contact fields blank, use conditional links, preserve the non-exhaustive coverage disclosure and update the homepage's profile count.
 - [x] Regenerate the 88-profile static JSON, sitemap and route manifest; confirm area totals are Southampton 15, Eastleigh 12, Fareham 18, Winchester 10, Totton 10, Hedge End 8 and Romsey 15.
 - [x] Run project checks, production build/prerender and route/profile checks; commit and push the update as `d5128218d9e1bf3a11e8d84dbbcf40631f5bd1dc`.
-- [ ] Explicitly publish the expanded directory only after owner confirmation; no database or DNS changes.
+- [x] Explicitly publish the expanded directory after owner confirmation; no database or DNS changes.
+
+## Southampton target expansion — 19–20 November 2026
+- [x] Add 41 independently verified Southampton businesses to the ten-column CSV; preserve opened-source notes under `data/verification-updates/2026-11-19/` and keep unverified/failed candidates out.
+- [x] Regenerate the code-owned builder data, route manifest and sitemap for 129 total profiles; update the homepage count through the existing data-driven rendering.
+- [x] Keep the exact nine service categories, only show contact links for populated source fields, and preserve the non-exhaustive coverage notice.
+- [ ] Complete the user's target of 100 verified Southampton profiles. The current source has 56 Southampton profiles, so 44 more remain; the last research workflow stopped with `creditNotEnough`, and unfinished candidates do not count as verified.
+- [x] Run typecheck, all 10 tests, production build/prerender and route checks; confirm all 129 profiles have manifest and sitemap entries, prerendered pages and `HomeAndConstructionBusiness` JSON-LD.
+- [ ] Fetch and integrate current `origin/main`, then checkpoint the validated update; do not publish unless the owner explicitly requests it. No database or DNS changes.
