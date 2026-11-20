@@ -97,4 +97,4 @@
 - [x] Keep the exact nine service categories, only show contact links for populated source fields, and preserve the non-exhaustive coverage notice.
 - [ ] Complete the user's target of 100 verified Southampton profiles. The current source has 56 Southampton profiles, so 44 more remain; the last research workflow stopped with `creditNotEnough`, and unfinished candidates do not count as verified.
 - [x] Run typecheck, all 10 tests, production build/prerender and route checks; confirm all 129 profiles have manifest and sitemap entries, prerendered pages and `HomeAndConstructionBusiness` JSON-LD.
-- [ ] Fetch and integrate current `origin/main`, then checkpoint the validated update; do not publish unless the owner explicitly requests it. No database or DNS changes.
+- [x] Fetch and integrate current `origin/main`, then save the validated update to canonical `main` as `358aa50ee92d71e15c3547935bba7acbfc286c2c`; publication remains disabled pending an explicit owner request. No database or DNS changes.
