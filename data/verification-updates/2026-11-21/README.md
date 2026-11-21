@@ -23,4 +23,8 @@ Each eligible record has an evidence note with CSV-ready JSON, source URLs and r
 - Southampton Roofers (identified on its site as FP Roofing) was not added because reviewed sources did not establish residential service activity in SO14–SO19; its stated business location is SO30.
 - Classic Home Improvements Ltd - Southampton and First Home Improvements were excluded because their reviewed offerings did not explicitly match an allowed directory service category.
 
-The directory now contains 134 profiles overall, including 61 Southampton profiles. The 100-profile Southampton target remains incomplete by 39; rejected or unverified candidates do not count. This research update does not authorize website publication or DNS changes.
+## Targeted follow-up batch
+
+Seven source paths produced ten candidate leads. One new profile passed all eligibility checks and was added: CPB Building Contractors Ltd (`southampton-target-100-batch3/001-cpb-building-contractors-ltd.md`). S E Barrett & Son Building Contractors and George Henry Builders had supporting evidence but already existed in the CSV, so neither was duplicated. The remaining candidates were excluded for insufficient Southampton-local evidence, dissolved or uncertain legal/trading identity, or missing explicit service support. The first attempt produced Beechen Building Contractors Ltd, which was not added because its SO32 office and generic Southampton coverage did not establish activity within SO14–SO19.
+
+The directory now contains 135 profiles overall, including 62 Southampton profiles. The 100-profile Southampton target remains incomplete by 38; rejected, unverified and duplicate candidates do not count. No DNS changes were made. The project auto-publish setting is enabled for canonical checkpoints; no separate manual publication was submitted.
