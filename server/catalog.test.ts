@@ -22,14 +22,14 @@ describe("researched builder catalog", () => {
     expect(locations.map((location) => location.name)).toEqual(expectedAreas);
   });
 
-  it("imports all 129 unique profiles with the recorded area counts", () => {
-    expect(builders).toHaveLength(129);
-    expect(new Set(builders.map((builder) => builder.slug)).size).toBe(129);
+  it("imports all 134 unique profiles with the recorded area counts", () => {
+    expect(builders).toHaveLength(134);
+    expect(new Set(builders.map((builder) => builder.slug)).size).toBe(134);
     expect(Object.fromEntries(locations.map((location) => [
       location.name,
       builders.filter((builder) => builder.Primary_Location === location.name).length,
     ]))).toEqual({
-      Southampton: 56,
+      Southampton: 61,
       Eastleigh: 12,
       Fareham: 18,
       Winchester: 10,

@@ -98,3 +98,11 @@
 - [ ] Complete the user's target of 100 verified Southampton profiles. The current source has 56 Southampton profiles, so 44 more remain; the last research workflow stopped with `creditNotEnough`, and unfinished candidates do not count as verified.
 - [x] Run typecheck, all 10 tests, production build/prerender and route checks; confirm all 129 profiles have manifest and sitemap entries, prerendered pages and `HomeAndConstructionBusiness` JSON-LD.
 - [x] Fetch and integrate current `origin/main`, then save the validated update to canonical `main` as `358aa50ee92d71e15c3547935bba7acbfc286c2c`; publication remains disabled pending an explicit owner request. No database or DNS changes.
+
+## Southampton research continuation — 21 November 2026
+- [x] Continue two small candidate-discovery/verification batches within the existing Lite-only research approach; do not purchase credits or treat incomplete/rejected leads as eligible.
+- [x] Add five eligible records: Affordable Landscaping & Construction, Pople Roofing Ltd, Sueno Building And Development, Exbury Homes Ltd, and Southampton Kitchen Renovations. Preserve the individual official-source notes under `data/verification-updates/2026-11-21/`.
+- [x] Exclude Southampton Roofing Ltd because Companies House shows it dissolved; do not include Southampton Roofers because residential service activity in SO14–SO19 was not adequately established; exclude Classic Home Improvements Ltd - Southampton and First Home Improvements because no allowed service category was evidenced.
+- [x] Regenerate the source-derived builder data, route manifest and sitemap. The directory now has 134 total profiles and 61 Southampton profiles; 39 more verified Southampton businesses are needed to reach 100.
+- [x] Run TypeScript check, all 10 tests, production build/prerender, and verify that all 134 profiles have route-manifest and sitemap entries, prerendered pages, and `HomeAndConstructionBusiness` JSON-LD.
+- [ ] Fetch current `origin/main`, integrate if needed, and checkpoint the validated files to canonical `main`. Do not publish without an explicit owner request and do not change DNS.
