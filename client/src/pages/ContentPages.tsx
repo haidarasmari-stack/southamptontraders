@@ -2,6 +2,7 @@ import { ArrowRight, CheckCircle2, ClipboardList, Flag, LockKeyhole, Mail, Shiel
 import { FormEvent, useState } from "react";
 import { Link, useParams } from "wouter";
 import { Breadcrumbs } from "@/components/SiteFrame";
+import { builders, locations, services } from "@/data/catalog";
 import { usePageMeta } from "@/lib/seo";
 import NotFound from "@/pages/NotFound";
 
@@ -75,9 +76,9 @@ export default function ContentPages() {
     </div>
 
     {isHow && <div className="step-list">
-      <article><span>01</span><div><h2>Choose the work</h2><p>Filter across the nine listed categories: Extensions, Renovations, Loft conversions, New builds, Brickwork, Roofing, Plastering, Groundworks, and Kitchens &amp; bathrooms.</p></div></article>
-      <article><span>02</span><div><h2>Choose an area</h2><p>Explore the seven launch areas: Southampton, Eastleigh, Fareham, Winchester, Totton, Hedge End and Romsey. Each area has its own current listing count.</p></div></article>
-      <article><span>03</span><div><h2>Compare the details</h2><p>The current dataset contains 71 profiles and is not exhaustive. Profiles use public company or trade-source information; no ratings, reviews, accreditations or unsupported claims are added.</p></div></article>
+      <article><span>01</span><div><h2>Choose the work</h2><p>Filter across {services.length} listed categories: {services.map((service, index) => <span key={service.slug}>{index > 0 ? (index === services.length - 1 ? ", and " : ", ") : ""}{service.name}</span>)}.</p></div></article>
+      <article><span>02</span><div><h2>Choose an area</h2><p>Explore {locations.length} launch areas: {locations.map((location, index) => <span key={location.slug}>{index > 0 ? (index === locations.length - 1 ? ", and " : ", ") : ""}{location.name}</span>)}. Each area has its own current listing count.</p></div></article>
+      <article><span>03</span><div><h2>Compare the details</h2><p>The current dataset contains {builders.length} profiles and is not exhaustive. Profiles use public company or trade-source information; no ratings, reviews, accreditations or unsupported claims are added.</p></div></article>
       <article><span>04</span><div><h2>Contact a business directly</h2><p>Call or visit a company website only where a direct detail is listed. Quote, builder-area and report forms are previews only: they are not sent or saved.</p></div></article>
       <div className="content-page-cta"><Link className="button" href="/builders/southampton/">Browse current profiles <ArrowRight size={16} /></Link><Link className="text-link" href="/request-quote/">Preview a quote request</Link></div>
     </div>}

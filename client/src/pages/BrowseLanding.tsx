@@ -3,7 +3,8 @@ import { Link, useParams } from "wouter";
 import BuilderCard from "@/components/BuilderCard";
 import { Breadcrumbs } from "@/components/SiteFrame";
 import { getBuildersForLocation, getBuildersForService, getLocation, getService, locations, serviceName, services } from "@/data/catalog";
-import { usePageMeta } from "@/lib/seo";
+import { buildBreadcrumbJsonLd, serializeJsonLd } from "@/data/jsonld";
+import { SITE_ORIGIN, usePageMeta } from "@/lib/seo";
 import NotFound from "@/pages/NotFound";
 
 export default function BrowseLanding({ kind }: { kind: "service" | "location" }) {
@@ -12,6 +13,7 @@ export default function BrowseLanding({ kind }: { kind: "service" | "location" }
   const name = item?.name ?? "Local building work";
   const path = kind === "service" ? `/services/${slug}/` : `/locations/${slug}/`;
   const relatedBuilders = kind === "service" ? getBuildersForService(slug) : getBuildersForLocation(slug);
+  const pageLabel = kind === "service" ? `${name} builders` : `Builders in ${name}`;
   usePageMeta({
     title: kind === "service" ? `${name} builders | Southampton Traders` : `Builders in ${name} | Southampton Traders`,
     description: item ? `Browse ${relatedBuilders.length} business profiles ${kind === "service" ? `listing ${name.toLowerCase()} across seven launch areas` : `listed in ${name}`}. Details come from public sources; directory coverage is not exhaustive.` : "Building services and locations on Southampton Traders.",
@@ -21,9 +23,14 @@ export default function BrowseLanding({ kind }: { kind: "service" | "location" }
   if (!item) return <NotFound />;
 
   const crossLinks = kind === "service" ? locations.filter((location) => relatedBuilders.some((builder) => builder.locationSlugs.includes(location.slug))) : services.filter((service) => relatedBuilders.some((builder) => builder.serviceSlugs.includes(service.slug)));
+  const breadcrumbData = buildBreadcrumbJsonLd([
+    { name: "Home", url: `${SITE_ORIGIN}/` },
+    { name: pageLabel, url: `${SITE_ORIGIN}${path}` },
+  ]);
   return (
     <div className="page wrap">
-      <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: kind === "service" ? "Services" : "Locations", href: kind === "service" ? "/services/extensions/" : "/locations/southampton/" }, { label: name }]} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(breadcrumbData) }} />
+      <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: pageLabel }]} />
       <div className="page-heading"><p className="eyebrow">{kind === "service" ? "Building service" : "Hampshire launch area"} · Southampton Traders</p><h1>{kind === "service" ? `${name} builders` : `Builders in ${name}`}</h1><p className="section-intro">{item.description} There are {relatedBuilders.length} matching business profiles currently listed. Coverage is not exhaustive; confirm current details directly with each company.</p></div>
       <div className="browse-intro-panel"><span className="browse-icon">{kind === "service" ? <Wrench size={21} aria-hidden="true" /> : <MapPin size={21} aria-hidden="true" />}</span><div><h2>Start with the project, compare with care.</h2><p>Profiles are based on public company or trade-source information. Contact details appear only where supplied and verified; no ratings, reviews or accreditations are added.</p></div></div>
       <section className="section-block"><div className="section-heading"><div><p className="eyebrow">Current directory listings</p><h2>{relatedBuilders.length} {relatedBuilders.length === 1 ? "business profile" : "business profiles"}</h2></div><Link className="text-link" href={kind === "service" ? `/builders/${relatedBuilders[0]?.locationSlugs[0] ?? "southampton"}/?service=${slug}` : `/builders/${slug}/`}>Open filtered results <ArrowRight size={16} aria-hidden="true" /></Link></div>

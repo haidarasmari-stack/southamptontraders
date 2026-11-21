@@ -1,0 +1,17 @@
+# Southampton Traders
+
+Southampton Traders is a public directory of builder profiles covering Southampton and nearby Hampshire launch areas. Profile details are compiled from public company or trade sources. The directory is not exhaustive and does not publish ratings or reviews. Users should confirm services and availability directly with each business.
+
+## Main pages
+- [Home](https://southamptontraders.co.uk/): Search builder profiles by service and location.
+- [Southampton builders](https://southamptontraders.co.uk/locations/southampton/): Directory listings for Southampton, covering SO14–SO19.
+- [Browse launch areas](https://southamptontraders.co.uk/): The home page links to the site's seven launch areas: Southampton, Eastleigh, Fareham, Winchester, Totton, Hedge End and Romsey.
+- [Building services](https://southamptontraders.co.uk/services/extensions/): Browse profiles by the site's exact service categories.
+- [How the directory works](https://southamptontraders.co.uk/how-it-works/): Scope and limitations of the listings.
+- [Sitemap](https://southamptontraders.co.uk/sitemap.xml): Public page URLs.
+
+## Services
+Extensions, Renovations, Loft conversions, New builds, Brickwork, Roofing, Plastering, Groundworks, Kitchens & bathrooms.
+
+## Site policies
+Listings are not endorsements or recommendations. Contact the relevant company to confirm current details. Quote-request, builder-area, report and admin interfaces are demonstrations; they do not persist submissions or create accounts.

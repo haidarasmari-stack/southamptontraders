@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Link, useParams } from "wouter";
 import { Breadcrumbs } from "@/components/SiteFrame";
 import { getBuilder, getLocation, phoneHref, serviceName } from "@/data/catalog";
-import { buildBuilderProfileJsonLd, serializeJsonLd } from "@/data/jsonld";
+import { buildBreadcrumbJsonLd, buildBuilderProfileJsonLd, serializeJsonLd } from "@/data/jsonld";
 import { usePageMeta, SITE_ORIGIN } from "@/lib/seo";
 import NotFound from "@/pages/NotFound";
 
@@ -26,10 +26,16 @@ export default function BuilderProfile() {
 
   const telLink = phoneHref(builder.Phone_Number);
   const structuredData = buildBuilderProfileJsonLd(builder, `${SITE_ORIGIN}${profilePath}`);
+  const breadcrumbData = buildBreadcrumbJsonLd([
+    { name: "Home", url: `${SITE_ORIGIN}/` },
+    { name: `Builders in ${builder.Primary_Location}`, url: `${SITE_ORIGIN}/locations/${builder.locationSlugs[0]}/` },
+    { name: builder.Business_Name, url: `${SITE_ORIGIN}${profilePath}` },
+  ]);
 
   return <div className="page wrap">
     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(structuredData) }} />
-    <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Builders", href: `/builders/${builder.locationSlugs[0]}/` }, { label: builder.Business_Name }]} />
+    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(breadcrumbData) }} />
+    <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: `Builders in ${builder.Primary_Location}`, href: `/locations/${builder.locationSlugs[0]}/` }, { label: builder.Business_Name }]} />
     <Link className="back-link" href={`/builders/${builder.locationSlugs[0]}/`}><ArrowLeft size={15} aria-hidden="true" /> Back to {builder.Primary_Location} builders</Link>
     <div className="profile-heading"><div>
       <p className="eyebrow">Builder profile · {builder.Primary_Location}</p>

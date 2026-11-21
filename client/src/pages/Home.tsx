@@ -2,7 +2,8 @@ import { ArrowRight, ArrowUpRight, Check, Compass, Hammer, MapPin, MessageSquare
 import { Link } from "wouter";
 import SearchPanel from "@/components/SearchPanel";
 import { builders, getBuildersForLocation, locations, services } from "@/data/catalog";
-import { usePageMeta } from "@/lib/seo";
+import { buildSiteJsonLd, serializeJsonLd } from "@/data/jsonld";
+import { SITE_ORIGIN, usePageMeta } from "@/lib/seo";
 
 const photo = "/manus-storage/hero-renovation_853be6f1.webp";
 
@@ -15,10 +16,11 @@ export default function Home() {
 
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(buildSiteJsonLd(SITE_ORIGIN)) }} />
       <section className="hero wrap">
         <div className="hero-copy">
           <p className="eyebrow"><span className="eyebrow-rule" />Southampton & nearby Hampshire</p>
-          <h1>Find the right people to <em>build it right.</em></h1>
+          <h1>Find builders in Southampton and nearby Hampshire.</h1>
           <p className="hero-lede">Search {builders.length} researched business profiles in Southampton and nearby Hampshire launch areas. Filter by service and location, then call or visit a company when a verified direct contact detail is listed.</p>
           <SearchPanel />
           <div className="hero-proof"><span><Check size={15} aria-hidden="true" /> {builders.length} current profiles</span><span><Check size={15} aria-hidden="true" /> Seven launch areas</span><span><Check size={15} aria-hidden="true" /> No invented ratings</span></div>

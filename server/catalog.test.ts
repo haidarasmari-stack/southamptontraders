@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { builders, locations, phoneHref, services } from "../client/src/data/catalog";
-import { buildBuilderProfileJsonLd } from "../client/src/data/jsonld";
+import { buildBreadcrumbJsonLd, buildBuilderProfileJsonLd, buildSiteJsonLd } from "../client/src/data/jsonld";
 
 const expectedServices = [
   "Extensions",
@@ -57,5 +57,28 @@ describe("researched builder catalog", () => {
     const websiteSchema = buildBuilderProfileJsonLd(withoutWebsite!, `https://southamptontraders.co.uk/builder/${withoutWebsite!.slug}/`);
     const websiteBusiness = websiteSchema["@graph"].find((node) => node["@type"] === "HomeAndConstructionBusiness");
     expect(websiteBusiness).not.toHaveProperty("url");
+  });
+
+  it("describes the directory organization and its crawlable breadcrumbs without inventing contact details", () => {
+    const siteSchema = buildSiteJsonLd("https://southamptontraders.co.uk");
+    expect(siteSchema["@graph"]).toHaveLength(2);
+    expect(siteSchema["@graph"][0]).toMatchObject({
+      "@type": "Organization",
+      name: "Southampton Traders",
+      url: "https://southamptontraders.co.uk/",
+    });
+    expect(siteSchema["@graph"][0]).not.toHaveProperty("telephone");
+
+    const breadcrumb = buildBreadcrumbJsonLd([
+      { name: "Home", url: "https://southamptontraders.co.uk/" },
+      { name: "Builders in Southampton", url: "https://southamptontraders.co.uk/locations/southampton/" },
+    ]);
+    expect(breadcrumb.itemListElement).toHaveLength(2);
+    expect(breadcrumb.itemListElement[1]).toMatchObject({
+      "@type": "ListItem",
+      position: 2,
+      name: "Builders in Southampton",
+      item: "https://southamptontraders.co.uk/locations/southampton/",
+    });
   });
 });

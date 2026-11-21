@@ -2,6 +2,44 @@ import type { BuilderProfile } from "@/data/catalog";
 
 const text = (value: string | undefined) => (typeof value === "string" ? value.trim() : "");
 
+export function buildSiteJsonLd(siteOrigin: string) {
+  const origin = siteOrigin.replace(/\/$/, "");
+  const organizationId = `${origin}/#organization`;
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": organizationId,
+        name: "Southampton Traders",
+        url: `${origin}/`,
+        description: "A Southampton and Hampshire directory of builder profiles with public-source business information and direct company contact links.",
+      },
+      {
+        "@type": "WebSite",
+        "@id": `${origin}/#website`,
+        name: "Southampton Traders",
+        url: `${origin}/`,
+        inLanguage: "en-GB",
+        publisher: { "@id": organizationId },
+      },
+    ],
+  };
+}
+
+export function buildBreadcrumbJsonLd(items: Array<{ name: string; url: string }>) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: items.map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: item.name,
+      item: item.url,
+    })),
+  };
+}
+
 export function buildBuilderProfileJsonLd(row: BuilderProfile, profileUrl: string) {
   const publicProfileUrl = text(profileUrl);
   const businessId = publicProfileUrl ? `${publicProfileUrl}#business` : undefined;
