@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { builders, locations, phoneHref, services } from "../client/src/data/catalog";
 import { buildBreadcrumbJsonLd, buildBuilderProfileJsonLd, buildSiteJsonLd } from "../client/src/data/jsonld";
+import { metaForPath } from "../client/src/lib/seo";
 
 const expectedServices = [
   "Extensions",
@@ -80,5 +81,20 @@ describe("researched builder catalog", () => {
       name: "Builders in Southampton",
       item: "https://southamptontraders.co.uk/locations/southampton/",
     });
+  });
+
+  it("keeps homepage and Southampton landing metadata concise and leaves filtered results noindexed", () => {
+    const home = metaForPath("/");
+    const southampton = metaForPath("/locations/southampton/");
+    const filteredResults = metaForPath("/builders/southampton/");
+
+    expect(home.title).toContain("builders in Southampton");
+    expect(home.description).toContain("62 builder profiles in Southampton");
+    expect(home.description.length).toBeLessThanOrEqual(160);
+    expect(southampton.title).toBe("Builders in Southampton | Southampton Traders");
+    expect(southampton.description).toContain("SO14–SO19");
+    expect(southampton.description.length).toBeLessThanOrEqual(160);
+    expect(southampton.noindex).toBe(false);
+    expect(filteredResults.noindex).toBe(true);
   });
 });

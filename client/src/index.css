@@ -340,6 +340,15 @@ p { margin-bottom: 1rem; }
 .browse-intro-panel p { max-width: 780px; margin: 0; color: var(--muted); font-size: .9rem; }
 .section-block { margin-top: 40px; }
 .section-block .section-heading { margin-bottom: 18px; }
+.southampton-answer-section { padding: 22px; border: 1px solid var(--line); background: #f7f8f4; }
+.southampton-answer-section > h2 { margin: 0 0 10px; font-family: Georgia, serif; font-size: clamp(1.75rem, 3vw, 2.25rem); font-weight: 500; }
+.southampton-answer-section > p:not(.eyebrow) { max-width: 860px; color: var(--muted); font-size: .9rem; }
+.southampton-answer-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 22px; }
+.southampton-answer-grid article { padding-top: 14px; border-top: 2px solid #b9cabb; }
+.southampton-answer-grid h3 { margin-bottom: 8px; font-size: 1.05rem; }
+.southampton-answer-grid p, .southampton-answer-grid li { color: var(--muted); font-size: .83rem; line-height: 1.55; }
+.southampton-answer-grid ul { display: grid; gap: 5px; padding-left: 18px; margin: 8px 0 12px; }
+.southampton-answer-grid a { color: var(--green); font-weight: 700; text-underline-offset: 3px; }
 
 .dashboard-shell, .admin-shell { display: grid; grid-template-columns: 215px minmax(0, 1fr); border: 1px solid var(--line); background: var(--white); }
 .dashboard-tabs { display: grid; align-content: start; gap: 5px; padding: 14px; border-right: 1px solid var(--line); background: #f2f3ed; }
@@ -548,6 +557,8 @@ p { margin-bottom: 1rem; }
   .browse-intro-panel h2 { font-size: 1.25rem; }
   .browse-intro-panel p { font-size: .8rem; }
   .section-block { margin-top: 30px; }
+  .southampton-answer-section { padding: 16px; }
+  .southampton-answer-grid { grid-template-columns: 1fr; gap: 12px; margin-top: 15px; }
   .dashboard-shell, .admin-shell { grid-template-columns: 1fr; }
   .dashboard-tabs { grid-template-columns: repeat(3, 1fr); gap: 4px; padding: 8px; border-right: 0; border-bottom: 1px solid var(--line); }
   .dashboard-tabs button { flex-direction: column; justify-content: center; gap: 4px; padding: 8px 4px; font-size: .65rem; }

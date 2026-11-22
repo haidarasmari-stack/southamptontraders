@@ -10,7 +10,7 @@ const photo = "/manus-storage/hero-renovation_853be6f1.webp";
 export default function Home() {
   usePageMeta({
     title: "Find local builders in Southampton | Southampton Traders",
-    description: `Browse ${builders.length} builder profiles across seven Southampton and Hampshire launch areas. Filter by service and location, then contact companies directly. Coverage is not exhaustive.`,
+    description: `Browse ${getBuildersForLocation("southampton").length} builder profiles in Southampton. Filter by service, find contact details, and explore six nearby Hampshire areas. Coverage is not exhaustive.`,
     path: "/",
   });
 
@@ -37,7 +37,7 @@ export default function Home() {
       </section>
 
       <section className="section wrap" id="services">
-        <div className="section-heading"><div><p className="eyebrow">Start with the work</p><h2>What are you building?</h2></div><Link className="text-link" href="/builders/southampton/">Browse Southampton builders <ArrowRight size={17} aria-hidden="true" /></Link></div>
+        <div className="section-heading"><div><p className="eyebrow">Start with the work</p><h2>What are you building?</h2></div><Link className="text-link" href="/locations/southampton/">Browse Southampton builders <ArrowRight size={17} aria-hidden="true" /></Link></div>
         <div className="service-grid">
           {services.map((service, index) => (
             <Link className="service-tile" href={`/services/${service.slug}/`} key={service.slug}>
@@ -52,7 +52,7 @@ export default function Home() {
 
       <section className="feature-strip">
         <div className="wrap feature-strip-inner">
-          <div className="feature-strip-title"><p className="eyebrow eyebrow-light">A better starting point</p><h2>Clarity comes before the first call.</h2><p>Filter by exact service category and location. Phone and company website links appear only when those details are listed.</p><Link className="button button-light" href="/builders/southampton/">Browse current profiles <ArrowRight size={17} aria-hidden="true" /></Link></div>
+          <div className="feature-strip-title"><p className="eyebrow eyebrow-light">A better starting point</p><h2>Clarity comes before the first call.</h2><p>Filter by exact service category and location. Phone and company website links appear only when those details are listed.</p><Link className="button button-light" href="/locations/southampton/">Browse current profiles <ArrowRight size={17} aria-hidden="true" /></Link></div>
           <div className="feature-list">
             <div><span className="feature-icon"><Compass size={20} aria-hidden="true" /></span><p><strong>Search by project</strong><small>Choose a trade and a place before you compare.</small></p></div>
             <div><span className="feature-icon"><ShieldCheck size={20} aria-hidden="true" /></span><p><strong>Trust, clearly labelled</strong><small>No invented ratings, badges or credentials.</small></p></div>

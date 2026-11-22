@@ -21,7 +21,7 @@ const informationPages: Record<string, PageMeta> = {
 export function metaForPath(pathname: string): PageMeta {
   const path = pathname.split("?")[0].replace(/\/$/, "") || "/";
   const canonicalPath = path === "/" || path === "/404" ? path : `${path}/`;
-  if (path === "/") return { title: "Find local builders in Southampton | Southampton Traders", description: `Browse ${builders.length} builder profiles across seven Southampton and Hampshire launch areas. Filter by service and location, then contact companies directly. Coverage is not exhaustive.`, path: "/" };
+  if (path === "/") return { title: "Find local builders in Southampton | Southampton Traders", description: `Browse ${getBuildersForLocation("southampton").length} builder profiles in Southampton. Filter by service, find contact details, and explore six nearby Hampshire areas. Coverage is not exhaustive.`, path: "/" };
   if (informationPages[path]) return { ...informationPages[path], path: canonicalPath };
 
   const profileMatch = path.match(/^\/builder\/([^/]+)$/);
@@ -51,7 +51,10 @@ export function metaForPath(pathname: string): PageMeta {
     const place = getLocation(locationMatch[1]);
     const isResults = path.startsWith("/builders/");
     const count = getBuildersForLocation(locationMatch[1]).length;
-    return { title: `Builders in ${place?.name ?? "Hampshire"} | Southampton Traders`, description: place ? `Browse ${count} business profiles listed in ${place.name} (${place.postcodeCoverage}). Filter by service and contact companies directly; coverage is not exhaustive.` : "Browse the Southampton Traders directory across Hampshire launch areas.", path: canonicalPath, noindex: isResults || !place };
+    const description = place?.slug === "southampton"
+      ? `Browse ${count} builder profiles in Southampton (SO14–SO19). Filter by service and contact companies directly. Coverage is not exhaustive.`
+      : place ? `Browse ${count} business profiles listed in ${place.name} (${place.postcodeCoverage}). Filter by service and contact companies directly; coverage is not exhaustive.` : "Browse the Southampton Traders directory across Hampshire launch areas.";
+    return { title: `Builders in ${place?.name ?? "Hampshire"} | Southampton Traders`, description, path: canonicalPath, noindex: isResults || !place };
   }
   return { title: "Page not found | Southampton Traders", description: informationPages["/404"].description, path: "/404", noindex: true };
 }
