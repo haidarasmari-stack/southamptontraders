@@ -3,7 +3,7 @@ import { Link, useParams } from "wouter";
 import BuilderCard from "@/components/BuilderCard";
 import { Breadcrumbs } from "@/components/SiteFrame";
 import { getBuildersForLocation, getBuildersForService, getLocation, getService, locations, serviceName, services } from "@/data/catalog";
-import { buildBreadcrumbJsonLd, serializeJsonLd } from "@/data/jsonld";
+import { buildBreadcrumbJsonLd, buildSouthamptonLandingJsonLd, serializeJsonLd } from "@/data/jsonld";
 import { metaForPath, SITE_ORIGIN, usePageMeta } from "@/lib/seo";
 import NotFound from "@/pages/NotFound";
 
@@ -25,9 +25,13 @@ export default function BrowseLanding({ kind }: { kind: "service" | "location" }
     { name: "Home", url: `${SITE_ORIGIN}/` },
     { name: pageLabel, url: `${SITE_ORIGIN}${path}` },
   ]);
+  const southamptonStructuredData = kind === "location" && slug === "southampton"
+    ? buildSouthamptonLandingJsonLd(SITE_ORIGIN, `${SITE_ORIGIN}${path}`, relatedBuilders)
+    : undefined;
   return (
     <div className="page wrap">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(breadcrumbData) }} />
+      {southamptonStructuredData && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(southamptonStructuredData) }} />}
       <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: pageLabel }]} />
       <div className="page-heading"><p className="eyebrow">{kind === "service" ? "Building service" : "Hampshire launch area"} · Southampton Traders</p><h1>{kind === "service" ? `${name} builders` : `Builders in ${name}`}</h1><p className="section-intro">{item.description} There are {relatedBuilders.length} matching business profiles currently listed. Coverage is not exhaustive; confirm current details directly with each company.</p></div>
       <div className="browse-intro-panel"><span className="browse-icon">{kind === "service" ? <Wrench size={21} aria-hidden="true" /> : <MapPin size={21} aria-hidden="true" />}</span><div><h2>Start with the project, compare with care.</h2><p>Profiles are based on public company or trade-source information. Contact details appear only where supplied and verified; no ratings, reviews or accreditations are added.</p></div></div>

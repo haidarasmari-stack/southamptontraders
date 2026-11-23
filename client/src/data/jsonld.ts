@@ -40,6 +40,55 @@ export function buildBreadcrumbJsonLd(items: Array<{ name: string; url: string }
   };
 }
 
+export function buildSouthamptonLandingJsonLd(
+  siteOrigin: string,
+  pageUrl: string,
+  profiles: Array<Pick<BuilderProfile, "Business_Name" | "slug">>,
+) {
+  const origin = siteOrigin.replace(/\/$/, "");
+  const organizationId = `${origin}/#organization`;
+  const pageId = `${pageUrl}#webpage`;
+
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": organizationId,
+        name: "Southampton Traders",
+        url: `${origin}/`,
+        description: "A Southampton and Hampshire directory of builder profiles with public-source business information and direct company contact links.",
+      },
+      {
+        "@type": "CollectionPage",
+        "@id": pageId,
+        url: pageUrl,
+        name: "Builders in Southampton | Southampton Traders",
+        description: `A directory of ${profiles.length} builder profiles assigned to the Southampton launch area. Coverage is not exhaustive; confirm details directly with each company.`,
+        isPartOf: { "@id": `${origin}/#website` },
+        publisher: { "@id": organizationId },
+        mainEntity: {
+          "@type": "ItemList",
+          numberOfItems: profiles.length,
+          itemListElement: profiles.map((profile, index) => {
+            const profileUrl = `${origin}/builder/${encodeURIComponent(profile.slug)}/`;
+            return {
+              "@type": "ListItem",
+              position: index + 1,
+              item: {
+                "@type": "WebPage",
+                "@id": profileUrl,
+                url: profileUrl,
+                name: profile.Business_Name,
+              },
+            };
+          }),
+        },
+      },
+    ],
+  };
+}
+
 export function buildBuilderProfileJsonLd(row: BuilderProfile, profileUrl: string) {
   const publicProfileUrl = text(profileUrl);
   const businessId = publicProfileUrl ? `${publicProfileUrl}#business` : undefined;
