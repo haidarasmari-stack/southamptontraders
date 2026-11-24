@@ -56,7 +56,7 @@ export default function Home() {
           <div className="feature-list">
             <div><span className="feature-icon"><Compass size={20} aria-hidden="true" /></span><p><strong>Search by project</strong><small>Choose a trade and a place before you compare.</small></p></div>
             <div><span className="feature-icon"><ShieldCheck size={20} aria-hidden="true" /></span><p><strong>Trust, clearly labelled</strong><small>No invented ratings, badges or credentials.</small></p></div>
-            <div><span className="feature-icon"><MessageSquareText size={20} aria-hidden="true" /></span><p><strong>Know what happens next</strong><small>Quote forms are demonstrations only and send nothing.</small></p></div>
+            <div><span className="feature-icon"><MessageSquareText size={20} aria-hidden="true" /></span><p><strong>Save while you browse</strong><small>Keep a shortlist in this browser and compare profiles later. No account needed.</small></p></div>
           </div>
         </div>
       </section>

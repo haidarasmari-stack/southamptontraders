@@ -1,4 +1,5 @@
-import { ArrowRight, ArrowUpRight, Menu } from "lucide-react";
+import { ArrowRight, ArrowUpRight, BookmarkCheck, Menu } from "lucide-react";
+import { useShortlist } from "@/contexts/ShortlistContext";
 import type { ReactNode } from "react";
 import { Link } from "wouter";
 
@@ -27,6 +28,7 @@ export function Breadcrumbs({ items }: { items: Array<{ label: string; href?: st
 }
 
 function SiteHeader() {
+  const { savedBuilderSlugs } = useShortlist();
   return (
     <header className="site-header">
       <div className="header-inner wrap">
@@ -36,11 +38,12 @@ function SiteHeader() {
           <Link href="/how-it-works/">How it works</Link>
           <Link href="/builder-area/">For builders</Link>
         </nav>
-        <Link className="button button-small header-cta" href="/request-quote/">Quote form demo <ArrowUpRight size={16} aria-hidden="true" /></Link>
+        <Link className="button button-small header-cta" href="/shortlist/" aria-label={`Open shortlist with ${savedBuilderSlugs.length} saved ${savedBuilderSlugs.length === 1 ? "profile" : "profiles"}`}><BookmarkCheck size={16} aria-hidden="true" /> Shortlist <span className="shortlist-count">{savedBuilderSlugs.length}</span></Link>
         <details className="mobile-nav">
           <summary aria-label="Open navigation menu"><Menu size={22} aria-hidden="true" /><span className="sr-only">Menu</span></summary>
           <nav aria-label="Mobile navigation">
             <Link href="/builders/southampton/">Find a builder</Link>
+            <Link href="/shortlist/">Shortlist ({savedBuilderSlugs.length})</Link>
             <Link href="/how-it-works/">How it works</Link>
             <Link href="/builder-area/">For builders</Link>
             <Link href="/reviews/">Review rules</Link>
@@ -59,7 +62,7 @@ function SiteFooter() {
       <div className="wrap footer-main">
         <div className="footer-brand-block"><BrandMark /><p>Builder profiles across seven Hampshire launch areas. Current coverage is not exhaustive.</p></div>
         <div className="footer-links">
-          <div><strong>Explore</strong><Link href="/builders/southampton/">Find a builder</Link><Link href="/how-it-works/">How it works</Link><Link href="/reviews/">Review rules</Link></div>
+          <div><strong>Explore</strong><Link href="/builders/southampton/">Find a builder</Link><Link href="/shortlist/">Your shortlist</Link><Link href="/how-it-works/">How it works</Link><Link href="/reviews/">Review rules</Link></div>
           <div><strong>Information</strong><Link href="/privacy/">Privacy</Link><Link href="/cookies/">Cookies</Link><Link href="/contact/">Contact</Link></div>
           <div><strong>For builders</strong><Link href="/builder-area/">Builder demo</Link><Link href="/admin/">Admin demo</Link></div>
         </div>

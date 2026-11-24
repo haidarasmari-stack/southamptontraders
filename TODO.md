@@ -120,3 +120,10 @@
 - [x] Label Solent Pro Builders as “Sponsored” and rank it first for matching kitchen/bathroom and loft service browsing and free-text searches across all seven launch areas.
 - [x] Keep sponsored placements configurable per business and service so additional sponsors can be added without code changes to ranking logic.
 - [x] Explain that sponsored placements are promotional, not endorsements or verification; do not represent paid placement as purchasable and do not collect payments until a separate payment flow is built and authorized.
+
+## Competitor-inspired homeowner shortlist — 24 November 2026
+- [x] Let visitors save/unsave builder profiles from search cards and profiles, and show the saved count and a shortlist link in navigation.
+- [x] Provide a `/shortlist/` page with saved profile cards, direct supported company contact links, a clear-all control and an empty state.
+- [x] Store only known public builder slugs in local browser storage; explain that saved profiles stay in this browser and that no account, visitor contact data, quote submission, review, verification or payment is added.
+- [x] Mark `/shortlist/` noindex and include the route in the route manifest without adding personalized content to the sitemap.
+- [x] Preserve the existing responsive editorial style; typecheck, test and production-build the route and shortlist logic.
