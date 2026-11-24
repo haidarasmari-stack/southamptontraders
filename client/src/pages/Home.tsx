@@ -52,7 +52,7 @@ export default function Home() {
 
       <section className="feature-strip">
         <div className="wrap feature-strip-inner">
-          <div className="feature-strip-title"><p className="eyebrow eyebrow-light">A better starting point</p><h2>Clarity comes before the first call.</h2><p>Filter by exact service category and location. Phone and company website links appear only when those details are listed.</p><Link className="button button-light" href="/locations/southampton/">Browse current profiles <ArrowRight size={17} aria-hidden="true" /></Link></div>
+          <div className="feature-strip-title"><p className="eyebrow eyebrow-light">A better starting point</p><h2>Clarity comes before the first call.</h2><p>Filter by exact service category and location. Phone and company website links appear only when those details are listed.</p><Link className="button button-light" href="/locations/southampton/">Browse current profiles <ArrowRight size={17} aria-hidden="true" /></Link><Link className="button button-light project-brief-home-link" href="/project-brief/">Prepare a project brief <ArrowRight size={17} aria-hidden="true" /></Link></div>
           <div className="feature-list">
             <div><span className="feature-icon"><Compass size={20} aria-hidden="true" /></span><p><strong>Search by project</strong><small>Choose a trade and a place before you compare.</small></p></div>
             <div><span className="feature-icon"><ShieldCheck size={20} aria-hidden="true" /></span><p><strong>Trust, clearly labelled</strong><small>No invented ratings, badges or credentials.</small></p></div>

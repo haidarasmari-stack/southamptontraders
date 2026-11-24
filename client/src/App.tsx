@@ -8,6 +8,7 @@ import BusinessListing from "@/pages/BusinessListing";
 import ContentPages from "@/pages/ContentPages";
 import Directory from "@/pages/Directory";
 import Home from "@/pages/Home";
+import ProjectBrief from "@/pages/ProjectBrief";
 import Shortlist from "@/pages/Shortlist";
 import { ShortlistProvider } from "@/contexts/ShortlistContext";
 import NotFound from "@/pages/NotFound";
@@ -29,6 +30,7 @@ function Router() {
     <Route path="/services/:slug/" component={ServiceLanding} />
     <Route path="/locations/:slug/" component={LocationLanding} />
     <Route path="/request-quote/" component={QuoteRequest} />
+    <Route path="/project-brief/" component={ProjectBrief} />
     <Route path="/shortlist/" component={Shortlist} />
     <Route path="/builder-area/" component={BuilderArea} />
     <Route path="/admin/" component={Admin} />

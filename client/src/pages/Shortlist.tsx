@@ -23,6 +23,7 @@ export default function Shortlist() {
         <p className="eyebrow">Compare at your pace · Southampton Traders</p>
         <h1>Your builder shortlist</h1>
         <p className="section-intro">Save profiles while you browse, then compare their listed services and contact details. Your shortlist is stored in this browser only; it is not an enquiry or recommendation.</p>
+        <Link className="button button-outline project-brief-shortlist-link" href="/project-brief/">Prepare a brief to compare quotes <ArrowRight size={16} aria-hidden="true" /></Link>
         {ready && savedBuilders.length > 0 && (
           <button className="button button-outline shortlist-clear" type="button" onClick={clearShortlist}>
             <Trash2 size={16} aria-hidden="true" /> Clear shortlist

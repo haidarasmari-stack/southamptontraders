@@ -627,3 +627,49 @@ p { margin-bottom: 1rem; }
   .builder-card-content .service-chip { padding: 2px 4px; font-size: .57rem; }
   .builder-card-action { font-size: .7rem; }
 }
+
+
+.project-brief-home-link { margin-left: 8px; }
+.project-brief-shortlist-link { margin-top: 10px; }
+.project-brief-layout { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(250px, .75fr); align-items: start; gap: 20px; }
+.project-brief-form { min-width: 0; box-shadow: none; }
+.project-brief-privacy { align-items: flex-start; margin: 0 0 3px; }
+.project-brief-privacy p { line-height: 1.5; }
+.project-brief-privacy strong { display: inline; }
+.field-optional { color: var(--muted); font-weight: 400; }
+.project-brief-aside { padding: 24px; border: 1px solid #d8e1d9; background: #eef2eb; }
+.project-brief-aside h2 { margin: 0 0 14px; font-size: 1.65rem; }
+.project-brief-aside ol { display: grid; gap: 10px; padding-left: 21px; color: #4d5d53; font-size: .88rem; }
+.project-brief-aside p:last-child { margin: 18px 0 0; color: var(--muted); font-size: .82rem; }
+.project-brief-preview { margin-top: 26px; padding: 25px; border: 1px solid var(--line); background: var(--white); }
+.project-brief-preview-heading { display: flex; align-items: end; justify-content: space-between; gap: 17px; }
+.project-brief-preview-heading .eyebrow { margin-bottom: 7px; }
+.project-brief-preview-heading h2 { margin: 0; font-size: 1.8rem; }
+.project-brief-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.project-brief-actions .button { min-height: 40px; padding: 8px 12px; }
+.project-brief-status { margin: 13px 0 0; color: var(--green); font-size: .82rem; }
+.project-brief-output { overflow-wrap: anywhere; white-space: pre-wrap; margin: 12px 0 0; padding: 18px; border-left: 3px solid var(--green); background: #f4f5ef; color: var(--ink); font: .88rem/1.65 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+.project-brief-related { display: flex; flex-wrap: wrap; gap: 18px; margin-top: 24px; }
+
+@media (max-width: 900px) {
+  .project-brief-layout { grid-template-columns: minmax(0, 1fr); }
+  .project-brief-aside { padding: 19px; }
+}
+
+@media (max-width: 700px) {
+  .project-brief-home-link { margin-left: 0; }
+  .project-brief-preview { padding: 17px; }
+  .project-brief-preview-heading { align-items: flex-start; flex-direction: column; }
+  .project-brief-actions { width: 100%; }
+  .project-brief-actions .button { flex: 1; }
+  .project-brief-related { align-items: flex-start; flex-direction: column; gap: 8px; }
+}
+
+@media print {
+  .site-header, .site-footer, .skip-link, .breadcrumbs, .project-brief-page > .page-heading,
+  .project-brief-form, .project-brief-aside, .project-brief-related, .project-brief-actions,
+  .project-brief-status { display: none !important; }
+  .project-brief-page { width: 100%; max-width: none; padding: 0; }
+  .project-brief-preview { margin: 0; padding: 0; border: 0; background: #fff; }
+  .project-brief-output { padding: 0; border: 0; background: #fff; color: #000; font: 11pt/1.55 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+}

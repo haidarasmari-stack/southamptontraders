@@ -127,3 +127,9 @@
 - [x] Store only known public builder slugs in local browser storage; explain that saved profiles stay in this browser and that no account, visitor contact data, quote submission, review, verification or payment is added.
 - [x] Mark `/shortlist/` noindex and include the route in the route manifest without adding personalized content to the sitemap.
 - [x] Preserve the existing responsive editorial style; typecheck, test and production-build the route and shortlist logic.
+
+## Browser-only project brief — 24 November 2026
+- [x] Provide a `/project-brief/` page that lets a visitor select a listed service and launch area, describe the work, optionally add material preferences and timing, then produce a copy-ready project brief.
+- [x] Keep inputs in page memory only; do not ask for names, phone/email, exact addresses or other personal details; do not submit or persist entries. Copy and print must be user-initiated.
+- [x] Disclose these limits beside the form and in privacy information; do not represent the brief as a quote request or say it is sent to builders.
+- [x] Add useful links from the homepage, site navigation, How it works and shortlist; make the route `noindex`, prerender it and keep it out of the sitemap.
