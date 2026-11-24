@@ -22,7 +22,7 @@
 - [ ] Support business replies, review reporting, moderation and an audit trail in the authorized real-data version.
 - [x] Never create fake reviews, ratings, accreditations or verification badges; show an honest empty state until eligible real reviews exist.
 - [x] Explain review and moderation rules clearly.
-- [x] Clearly label sponsored placements if introduced later; do not introduce sponsored placements in this MVP.
+- [x] Clearly label sponsored placements as promotional and distinct from standard listings; no paid placement checkout or payment processing is available.
 
 ## Admin tools
 - [ ] Provide admin tools for managing customers, builder accounts, profiles, services, locations, enquiries, reviews and reports in the authorized real-data version.
@@ -114,4 +114,9 @@
 
 ## Search-wide Solent priority clarification — 24 November 2026
 - [x] When anyone searches for kitchen, bathroom or loft work, put Solent Pro Builders before other matching companies—not only on a city page after choosing a service filter, but also on the matching service browse pages and free-text directory searches.
-- [x] Show the “Owner-selected priority” label wherever this search priority applies; keep the profile factual and singular.
+- [x] Show the “Sponsored” label wherever this search placement applies; keep the profile factual and singular.
+
+## Sponsored search placements — 24 November 2026
+- [x] Label Solent Pro Builders as “Sponsored” and rank it first for matching kitchen/bathroom and loft service browsing and free-text searches across all seven launch areas.
+- [x] Keep sponsored placements configurable per business and service so additional sponsors can be added without code changes to ranking logic.
+- [x] Explain that sponsored placements are promotional, not endorsements or verification; do not represent paid placement as purchasable and do not collect payments until a separate payment flow is built and authorized.

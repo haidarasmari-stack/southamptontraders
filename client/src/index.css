@@ -188,7 +188,7 @@ p { margin-bottom: 1rem; }
 .card-topline { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
 .eyebrow-small { color: var(--muted); font-size: .66rem; font-weight: 750; letter-spacing: .07em; text-transform: uppercase; }
 .status-unverified { color: #705942; font-size: .68rem; font-weight: 750; }
-.priority-placement { border: 1px solid #b9c8bb; border-radius: 999px; padding: 3px 8px; color: #31584b; background: #eef4ed; font-size: .65rem; font-weight: 750; white-space: nowrap; }
+.sponsored-placement { border: 1px solid #b9c8bb; border-radius: 999px; padding: 3px 8px; color: #31584b; background: #eef4ed; font-size: .65rem; font-weight: 750; white-space: nowrap; }
 .builder-card-content h3 { margin: 9px 0 7px; font-size: 1.5rem; }
 .builder-card-content h3 a { color: var(--ink); text-decoration: none; }
 .builder-card-content h3 a:hover { color: var(--green); }

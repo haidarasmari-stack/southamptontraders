@@ -2,13 +2,13 @@ import { ArrowUpRight, Globe2, MapPin, Phone } from "lucide-react";
 import { Link } from "wouter";
 import { locationName, phoneHref, serviceName, type BuilderProfile } from "@/data/catalog";
 
-export default function BuilderCard({ builder, featured = false }: { builder: BuilderProfile; featured?: boolean }) {
+export default function BuilderCard({ builder, sponsored = false }: { builder: BuilderProfile; sponsored?: boolean }) {
   const profilePath = `/builder/${builder.slug}/`;
   const telLink = phoneHref(builder.Phone_Number);
 
   return <article className="builder-card">
     <div className="builder-card-content">
-      <div className="card-topline"><span className="eyebrow-small">{locationName(builder.locationSlugs[0] ?? "")}</span><span className="status-unverified">Directory listing</span>{featured && <span className="priority-placement">Owner-selected priority</span>}</div>
+      <div className="card-topline"><span className="eyebrow-small">{locationName(builder.locationSlugs[0] ?? "")}</span><span className="status-unverified">Directory listing</span>{sponsored && <span className="sponsored-placement">Sponsored</span>}</div>
       <h3><Link href={profilePath}>{builder.Business_Name}</Link></h3>
       <p>{builder.Unique_Profile_Summary}</p>
       <div className="service-chip-list" aria-label={`Services listed for ${builder.Business_Name}`}>

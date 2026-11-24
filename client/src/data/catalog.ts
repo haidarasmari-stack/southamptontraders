@@ -34,7 +34,7 @@ export type BuilderProfile = BuilderCsvRow & {
   summary: string;
   serviceSlugs: string[];
   locationSlugs: string[];
-  priorityServiceSlugs: string[];
+  sponsoredServiceSlugs: string[];
   primaryServiceSlug: string;
 };
 
@@ -76,7 +76,7 @@ const locationSlugByName: Record<string, string> = Object.fromEntries(
   locations.map((location) => [location.name, location.slug]),
 );
 
-type PlacementOverride = { additionalLocationSlugs?: string[]; priorityServiceSlugs?: string[] };
+type PlacementOverride = { additionalLocationSlugs?: string[]; sponsoredServiceSlugs?: string[] };
 const placementByBuilder = placementOverrides as Record<string, PlacementOverride>;
 
 export const builders: BuilderProfile[] = (importedBuilders as BuilderCsvRow[]).map((row) => {
@@ -92,7 +92,7 @@ export const builders: BuilderProfile[] = (importedBuilders as BuilderCsvRow[]).
     primaryServiceSlug: serviceSlugByName[row.Primary_Service],
     serviceSlugs: serviceNames.map((service) => serviceSlugByName[service]).filter(Boolean),
     locationSlugs: [...new Set([locationSlug, ...(placement?.additionalLocationSlugs ?? [])].filter((slug): slug is string => Boolean(slug)))],
-    priorityServiceSlugs: placement?.priorityServiceSlugs ?? [],
+    sponsoredServiceSlugs: placement?.sponsoredServiceSlugs ?? [],
   };
 });
 
@@ -115,10 +115,10 @@ export function getBuildersForLocation(slug: string) {
 export function getBuildersForService(slug: string) {
   return builders
     .filter((builder) => builder.serviceSlugs.includes(slug))
-    .sort((left, right) => Number(right.priorityServiceSlugs.includes(slug)) - Number(left.priorityServiceSlugs.includes(slug)));
+    .sort((left, right) => Number(right.sponsoredServiceSlugs.includes(slug)) - Number(left.sponsoredServiceSlugs.includes(slug)));
 }
 
-export function getPriorityServiceForSearch(query: string) {
+export function getSponsoredServiceForSearch(query: string) {
   const text = query.toLocaleLowerCase("en-GB");
   if (/\b(loft|lofts|attic|attics)\b/.test(text)) return "loft-conversions";
   if (/\b(kitchen|kitchens|bath|baths|bathroom|bathrooms)\b/.test(text)) return "kitchens-and-bathrooms";

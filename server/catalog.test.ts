@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { builders, getBuilder, getBuildersForLocation, getBuildersForService, getPriorityServiceForSearch, locations, phoneHref, services } from "../client/src/data/catalog";
+import { builders, getBuilder, getBuildersForLocation, getBuildersForService, getSponsoredServiceForSearch, locations, phoneHref, services } from "../client/src/data/catalog";
 import { buildBreadcrumbJsonLd, buildBuilderProfileJsonLd, buildSiteJsonLd, buildSouthamptonLandingJsonLd } from "../client/src/data/jsonld";
 import { metaForPath } from "../client/src/lib/seo";
 
@@ -117,16 +117,20 @@ describe("researched builder catalog", () => {
     expect(filteredResults.noindex).toBe(true);
   });
 
-  it("puts Solent Pro Builders first on the kitchen/bathroom and loft service pages", () => {
+  it("puts Solent Pro Builders first as a sponsored listing on the kitchen/bathroom and loft service pages", () => {
     expect(getBuildersForService("kitchens-and-bathrooms")[0]?.slug).toBe("solent-pro-builders");
     expect(getBuildersForService("loft-conversions")[0]?.slug).toBe("solent-pro-builders");
   });
 
+  it("marks Solent as sponsored for both target services", () => {
+    const solent = getBuilder("solent-pro-builders");
+    expect(solent?.sponsoredServiceSlugs).toEqual(["kitchens-and-bathrooms", "loft-conversions"]);
+  });
   it("detects kitchen, bathroom, and loft terms in free-text searches", () => {
-    expect(getPriorityServiceForSearch("kitchen fitter")).toBe("kitchens-and-bathrooms");
-    expect(getPriorityServiceForSearch("bathroom renovation")).toBe("kitchens-and-bathrooms");
-    expect(getPriorityServiceForSearch("loft conversion")).toBe("loft-conversions");
-    expect(getPriorityServiceForSearch("builders near me")).toBe("");
+    expect(getSponsoredServiceForSearch("kitchen fitter")).toBe("kitchens-and-bathrooms");
+    expect(getSponsoredServiceForSearch("bathroom renovation")).toBe("kitchens-and-bathrooms");
+    expect(getSponsoredServiceForSearch("loft conversion")).toBe("loft-conversions");
+    expect(getSponsoredServiceForSearch("builders near me")).toBe("");
   });
 
   it("keeps Solent Pro Builders available in each of the seven launch areas", () => {
