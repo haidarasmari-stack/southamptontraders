@@ -7,7 +7,7 @@ export const SHARE_IMAGE = `${SITE_ORIGIN}/manus-storage/hero-renovation_853be6f
 export type PageMeta = { title: string; description: string; path: string; noindex?: boolean };
 
 const informationPages: Record<string, PageMeta> = {
-  "/how-it-works": { title: "How Southampton Traders works | Southampton Traders", description: "A guide to choosing a building service, browsing Hampshire locations, saving a browser-local shortlist, and understanding non-persistent quote forms.", path: "/how-it-works/" },
+  "/how-it-works": { title: "How Southampton Traders works | Southampton Traders", description: "A guide to browsing Hampshire builder profiles, saving a browser-local shortlist, preparing a project brief, and understanding demo enquiries.", path: "/how-it-works/" },
   "/reviews": { title: "Review rules | Southampton Traders", description: "Learn how a future Southampton Traders service would handle genuine project reviews, business replies, reports and moderation. No reviews appear in the directory.", path: "/reviews/", noindex: true },
   "/privacy": { title: "Privacy information | Southampton Traders", description: "Directory contact links lead directly to companies; demo form entries are not sent or stored. Learn what not to enter and what must be in place before enquiries are enabled.", path: "/privacy/", noindex: true },
   "/cookies": { title: "Cookie information | Southampton Traders", description: "Read about platform analytics, hosting and privacy considerations. Southampton Traders does not configure advertising pixels or send demo form values to analytics.", path: "/cookies/", noindex: true },

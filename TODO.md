@@ -133,3 +133,8 @@
 - [x] Keep inputs in page memory only; do not ask for names, phone/email, exact addresses or other personal details; do not submit or persist entries. Copy and print must be user-initiated.
 - [x] Disclose these limits beside the form and in privacy information; do not represent the brief as a quote request or say it is sent to builders.
 - [x] Add useful links from the homepage, site navigation, How it works and shortlist; make the route `noindex`, prerender it and keep it out of the sitemap.
+
+## SEO crawl and snippet cleanup — 24 November 2026
+- [x] Keep public directory pages crawlable and preserve the sitemap declaration while adding `Disallow: /api/` for non-content API endpoints.
+- [x] Update the How it works meta description to reflect the actual browser-only project brief feature without calling it a live quote or enquiry service.
+- [x] Preserve the existing unique route metadata, noindex/private route behavior, sitemap parity and genuine 404 responses; do not add unsupported reviews, ratings, addresses or ranking claims.
