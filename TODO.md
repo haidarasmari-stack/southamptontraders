@@ -111,3 +111,7 @@
 - [x] Make Solent Pro Builders appear in each of the seven launch areas (Southampton, Eastleigh, Fareham, Winchester, Totton, Hedge End and Romsey) when visitors browse Kitchens & bathrooms or Loft conversions; place it before other matching profiles.
 - [x] Identify this owner-selected priority placement transparently in matching results; retain the existing profile, contact details and single profile route without creating duplicates.
 - [x] Record source/provenance for the added category and area placement; the user explicitly confirmed loft conversions after the official website was found not to mention that service.
+
+## Search-wide Solent priority clarification — 24 November 2026
+- [x] When anyone searches for kitchen, bathroom or loft work, put Solent Pro Builders before other matching companies—not only on a city page after choosing a service filter, but also on the matching service browse pages and free-text directory searches.
+- [x] Show the “Owner-selected priority” label wherever this search priority applies; keep the profile factual and singular.

@@ -113,7 +113,16 @@ export function getBuildersForLocation(slug: string) {
 }
 
 export function getBuildersForService(slug: string) {
-  return builders.filter((builder) => builder.serviceSlugs.includes(slug));
+  return builders
+    .filter((builder) => builder.serviceSlugs.includes(slug))
+    .sort((left, right) => Number(right.priorityServiceSlugs.includes(slug)) - Number(left.priorityServiceSlugs.includes(slug)));
+}
+
+export function getPriorityServiceForSearch(query: string) {
+  const text = query.toLocaleLowerCase("en-GB");
+  if (/\b(loft|lofts|attic|attics)\b/.test(text)) return "loft-conversions";
+  if (/\b(kitchen|kitchens|bath|baths|bathroom|bathrooms)\b/.test(text)) return "kitchens-and-bathrooms";
+  return "";
 }
 
 export function serviceName(slug: string) {
