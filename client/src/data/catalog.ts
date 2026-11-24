@@ -1,4 +1,5 @@
 import importedBuilders from "./builders.json";
+import placementOverrides from "./listing-placement-overrides.json";
 
 export type Service = {
   slug: string;
@@ -33,6 +34,7 @@ export type BuilderProfile = BuilderCsvRow & {
   summary: string;
   serviceSlugs: string[];
   locationSlugs: string[];
+  priorityServiceSlugs: string[];
   primaryServiceSlug: string;
 };
 
@@ -74,18 +76,23 @@ const locationSlugByName: Record<string, string> = Object.fromEntries(
   locations.map((location) => [location.name, location.slug]),
 );
 
+type PlacementOverride = { additionalLocationSlugs?: string[]; priorityServiceSlugs?: string[] };
+const placementByBuilder = placementOverrides as Record<string, PlacementOverride>;
+
 export const builders: BuilderProfile[] = (importedBuilders as BuilderCsvRow[]).map((row) => {
   const serviceNames = [...new Set([row.Primary_Service, ...row.Secondary_Services.split(",")]
     .map((service) => service.trim())
     .filter(Boolean))];
   const locationSlug = locationSlugByName[row.Primary_Location];
+  const placement = placementByBuilder[row.slug];
   return {
     ...row,
     name: row.Business_Name,
     summary: row.Unique_Profile_Summary,
     primaryServiceSlug: serviceSlugByName[row.Primary_Service],
     serviceSlugs: serviceNames.map((service) => serviceSlugByName[service]).filter(Boolean),
-    locationSlugs: locationSlug ? [locationSlug] : [],
+    locationSlugs: [...new Set([locationSlug, ...(placement?.additionalLocationSlugs ?? [])].filter((slug): slug is string => Boolean(slug)))],
+    priorityServiceSlugs: placement?.priorityServiceSlugs ?? [],
   };
 });
 

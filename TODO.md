@@ -106,3 +106,8 @@
 - [x] Regenerate the source-derived builder data, route manifest and sitemap. The directory now has 134 total profiles and 61 Southampton profiles; 39 more verified Southampton businesses are needed to reach 100.
 - [x] Run TypeScript check, all 10 tests, production build/prerender, and verify that all 134 profiles have route-manifest and sitemap entries, prerendered pages, and `HomeAndConstructionBusiness` JSON-LD.
 - [ ] Fetch current `origin/main`, integrate if needed, and checkpoint the validated files to canonical `main`. Do not publish without an explicit owner request and do not change DNS.
+
+## Solent Pro Builders directory placement — 24 November 2026
+- [x] Make Solent Pro Builders appear in each of the seven launch areas (Southampton, Eastleigh, Fareham, Winchester, Totton, Hedge End and Romsey) when visitors browse Kitchens & bathrooms or Loft conversions; place it before other matching profiles.
+- [x] Identify this owner-selected priority placement transparently in matching results; retain the existing profile, contact details and single profile route without creating duplicates.
+- [x] Record source/provenance for the added category and area placement; the user explicitly confirmed loft conversions after the official website was found not to mention that service.

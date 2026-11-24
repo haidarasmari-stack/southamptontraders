@@ -1,0 +1,16 @@
+{
+  "solent-pro-builders": {
+    "additionalLocationSlugs": [
+      "eastleigh",
+      "fareham",
+      "winchester",
+      "totton",
+      "hedge-end",
+      "romsey"
+    ],
+    "priorityServiceSlugs": [
+      "kitchens-and-bathrooms",
+      "loft-conversions"
+    ]
+  }
+}
