@@ -138,7 +138,7 @@
 - [x] Keep public directory pages crawlable and preserve the sitemap declaration while adding `Disallow: /api/` for non-content API endpoints.
 - [x] Update the How it works meta description to reflect the actual browser-only project brief feature without calling it a live quote or enquiry service.
 - [x] Preserve the existing unique route metadata, noindex/private route behavior, sitemap parity and genuine 404 responses; do not add unsupported reviews, ratings, addresses or ranking claims.
-- [x] Add useful homeowner content for the requested builder-selection, home-project and quote-comparison search questions; link to it from the homepage and make its public route available in the crawler route list, sitemap and prerendered HTML. Avoid keyword stuffing, unverified cost figures, and claims that directory listings are verified recommendations.
+- [x] Add useful homeowner content for the requested builder-selection, home-project and quote-comparison search questions; link to it from the homepage and make its public route available in the crawler route list, sitemap and prerendered HTML. Keep its title concise and its description specific to the page; avoid keyword stuffing, unverified cost figures, and claims that directory listings are verified recommendations.
 
 ## Owner-supplied project photos — 25 November 2026
 - [ ] Replace the homepage's stock-style illustrative hero with the owner-supplied roof-work photo and use an appropriate real project image for social previews.

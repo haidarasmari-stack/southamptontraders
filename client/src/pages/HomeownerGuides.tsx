@@ -5,8 +5,8 @@ import { usePageMeta } from "@/lib/seo";
 
 export default function HomeownerGuides() {
   usePageMeta({
-    title: "Builder, extension and renovation guides | Southampton Traders",
-    description: "Practical guides to finding a reliable builder, planning a house extension, choosing between a renovation and extension, and comparing quotes in Southampton.",
+    title: "Builder & Home Extension Guides | Southampton Traders",
+    description: "Southampton homeowner guides to finding a reliable builder, planning a house extension, comparing loft and renovation options, and reviewing builder quotes.",
     path: "/homeowner-guides/",
   });
 
