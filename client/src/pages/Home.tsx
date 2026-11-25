@@ -36,6 +36,10 @@ export default function Home() {
         <div className="wrap intro-band-inner"><p><span className="intro-mark">ST</span> Profiles are based on public company or trade-source information. This current set is not exhaustive; contact each company to confirm details.</p><Link className="text-link" href="/how-it-works/">How the directory works <ArrowUpRight size={16} aria-hidden="true" /></Link></div>
       </section>
 
+      <section className="section wrap homeowner-guides-promo">
+        <div className="section-heading"><div><p className="eyebrow">Plan before you call</p><h2>Choosing a builder and planning your project</h2><p className="section-intro">Read practical guidance on comparing quotes, deciding between a renovation, extension or loft conversion, and preparing questions for builders.</p></div><Link className="text-link" href="/homeowner-guides/">Read the homeowner guides <ArrowRight size={17} aria-hidden="true" /></Link></div>
+      </section>
+
       <section className="section wrap" id="services">
         <div className="section-heading"><div><p className="eyebrow">Start with the work</p><h2>What are you building?</h2></div><Link className="text-link" href="/locations/southampton/">Browse Southampton builders <ArrowRight size={17} aria-hidden="true" /></Link></div>
         <div className="service-grid">

@@ -10,7 +10,7 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const output = path.join(root, "dist", "public");
 const fixedRoutes = [
   "/", "/builder/reds-builders-limited/", "/request-quote/", "/project-brief/", "/builder-area/", "/admin/",
-  "/how-it-works/", "/reviews/", "/privacy/", "/cookies/", "/contact/", "/shortlist/", "/404",
+  "/how-it-works/", "/homeowner-guides/", "/reviews/", "/privacy/", "/cookies/", "/contact/", "/shortlist/", "/404",
 ];
 
 const escapeHtml = (value) => value.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;").replaceAll("'", "&#39;");

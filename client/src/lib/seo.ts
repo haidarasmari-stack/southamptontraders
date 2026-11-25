@@ -7,6 +7,7 @@ export const SHARE_IMAGE = `${SITE_ORIGIN}/manus-storage/IMG_6247_597a3dba.webp`
 export type PageMeta = { title: string; description: string; path: string; noindex?: boolean };
 
 const informationPages: Record<string, PageMeta> = {
+  "/homeowner-guides": { title: "Builder, extension and renovation guides | Southampton Traders", description: "Practical guides to finding a reliable builder, planning a house extension, choosing between a renovation and extension, and comparing quotes in Southampton.", path: "/homeowner-guides/" },
   "/how-it-works": { title: "How Southampton Traders works | Southampton Traders", description: "A guide to browsing Hampshire builder profiles, saving a browser-local shortlist, preparing a project brief, and understanding demo enquiries.", path: "/how-it-works/" },
   "/reviews": { title: "Review rules | Southampton Traders", description: "Learn how a future Southampton Traders service would handle genuine project reviews, business replies, reports and moderation. No reviews appear in the directory.", path: "/reviews/", noindex: true },
   "/privacy": { title: "Privacy information | Southampton Traders", description: "Directory contact links lead directly to companies; demo form entries are not sent or stored. Learn what not to enter and what must be in place before enquiries are enabled.", path: "/privacy/", noindex: true },
