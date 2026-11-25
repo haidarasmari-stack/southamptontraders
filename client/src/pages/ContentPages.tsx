@@ -22,10 +22,10 @@ const pages = {
     icon: "reviews",
   },
   privacy: {
-    label: "Privacy",
-    eyebrow: "Demo privacy notice",
-    title: "Nothing you type is sent or saved.",
-    description: "Demo enquiries are not sent or saved. The project brief stays in page memory only; avoid personal details, precise addresses or confidential information.",
+    label: "Privacy information",
+    eyebrow: "Privacy information",
+    title: "How directory requests are handled.",
+    description: "Builder listing requests are sent to the site owner for review; quote and feedback demonstrations do not submit their form details.",
     icon: "privacy",
   },
   cookies: {
@@ -80,7 +80,7 @@ export default function ContentPages() {
       <article><span>02</span><div><h2>Choose an area</h2><p>Explore {locations.length} launch areas: {locations.map((location, index) => <span key={location.slug}>{index > 0 ? (index === locations.length - 1 ? ", and " : ", ") : ""}{location.name}</span>)}. Each area has its own current listing count.</p></div></article>
       <article><span>03</span><div><h2>Compare the details</h2><p>The current dataset contains {builders.length} profiles and is not exhaustive. Profiles use public company or trade-source information; no ratings, reviews, accreditations or unsupported claims are added.</p></div></article>
       <article><span>04</span><div><h2>Save profiles to compare</h2><p>Use “Save to shortlist” on a profile to collect a few options in this browser. No account is needed, and only the saved public profile IDs are stored locally.</p></div></article>
-      <article><span>05</span><div><h2>Contact a business directly</h2><p>Call or visit a company website only where a direct detail is listed. Quote, builder-area and report forms are previews only: they are not sent or saved.</p></div></article>
+      <article><span>05</span><div><h2>Contact a business directly</h2><p>Call or visit a company website only where a direct detail is listed. Quote and profile-report forms are previews and are not sent. Builders may separately submit a directory listing request, which goes to the site owner for manual review and is not automatically published.</p></div></article>
       <article><span>06</span><div><h2>Spot sponsored placements</h2><p>Some service searches show a clearly labelled Sponsored listing. This is a promotional placement, not a recommendation or verification badge. Payment for sponsored placement is not currently processed by this website.</p></div></article>
       <article><span>07</span><div><h2>Prepare a project brief</h2><p>Use the project brief tool to create a draft for your own use. It stays in page memory and is not submitted, sent or stored. Copy or print it only if you choose, then contact businesses yourself.</p></div></article>
       <div className="content-page-cta"><Link className="button" href="/builders/southampton/">Browse current profiles <ArrowRight size={16} /></Link><Link className="button button-outline" href="/project-brief/">Prepare a project brief <ArrowRight size={16} /></Link><Link className="text-link" href="/request-quote/">Preview a quote request</Link></div>
@@ -94,12 +94,12 @@ export default function ContentPages() {
     </section>}
 
     {isPrivacy && <section className="policy-content">
-      <div className="privacy-callout"><ShieldCheck size={20} aria-hidden="true" /><p><strong>This prototype does not collect form submissions.</strong> Demo form entries are used only for a visible page response, then cleared. The project brief stays in page memory while this page is open. Nothing is sent to the server, analytics, email or a business.</p></div>
+      <div className="privacy-callout"><ShieldCheck size={20} aria-hidden="true" /><p><strong>Builder listing requests are sent to the site owner.</strong> The builder-area form transmits the business and contact details you enter to the website server and forwards them to the site owner through the platform's owner-notification service for manual review. They are not displayed publicly or sent to listed builders, and no account or listing is created automatically. The application does not maintain a separate submission database; notification-service handling and retention are governed by that service.</p></div>
+      <h2>Information included in a listing request</h2><p>The form asks for your business name, contact name and email, an optional phone number and website, services and launch areas, a short business description, and your confirmation that you are authorized to submit it and may be contacted about the request. Do not include passwords, identity documents, customer details or confidential information. The owner reviews submissions; a request is not verification, endorsement or guaranteed inclusion. There is no automated status page or confirmation email.</p>
       <h2>Saved shortlist</h2><p>If you save profiles for comparison, the site stores only their public business-profile IDs in local storage in your current browser. This shortlist is not sent to the server and is separate from information typed into demonstration forms.</p>
       <h2>Project brief builder</h2><p>The project brief is prepared in page memory only; it is not saved in local storage or sent anywhere. Copying places the draft on your device clipboard only when you choose that button. If you share it outside the site, you control where it goes.</p>
-      <h2>Please do not enter real details</h2><p>Do not enter real names, email addresses, phone numbers, home or project addresses, business contact details, access details, credentials, or confidential project information. Public forms are prototypes and are not an enquiry or support channel.</p>
-      <h2>Platform page analytics</h2><p>The hosting platform currently enables Umami and Plausible page analytics. These services may process page paths, referrals and device or browser categories; their network requests also carry IP addresses that providers describe how they process. This site does not send typed quote, contact, report or profile form values to analytics, and it does not configure custom interaction events. Standard hosting or CDN request logs may also process technical request data. See the <Link href="/cookies/">cookie information page</Link> for provider links.</p>
-      <h2>When real enquiries are introduced</h2><p>Before any live data collection begins, the site owner must approve it. The live service should identify which builders receive an enquiry, collect only necessary details, explain retention and sharing, use appropriate security and access controls, and provide a way to request access or deletion.</p>
+      <h2>Other forms, security and analytics</h2><p>Quote-request, profile-report and general feedback forms remain demonstrations: their entries are not submitted. The project brief remains in page memory and is not sent or saved by this site. To limit automated listing requests, the application temporarily uses the connecting IP address in an in-memory rate limit (up to three attempts per ten-minute window); it is not stored with business details. Form values are not sent to the configured Umami or Plausible analytics. Standard hosting or CDN request logs may also process technical request data, including network information. See the <Link href="/cookies/">cookie information page</Link> for analytics-provider details.</p>
+      <h2>Directory decisions</h2><p>Submitting a request does not guarantee that a business will be listed. The site owner reviews the information before making any directory change. The request form does not create an account or let businesses edit a profile, upload evidence, or manage enquiries.</p>
     </section>}
 
     {isCookies && <section className="policy-content">

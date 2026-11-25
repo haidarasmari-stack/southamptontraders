@@ -67,7 +67,7 @@ function SiteFooter() {
         <div className="footer-links">
           <div><strong>Explore</strong><Link href="/builders/southampton/">Find a builder</Link><Link href="/project-brief/">Prepare a project brief</Link><Link href="/shortlist/">Your shortlist</Link><Link href="/how-it-works/">How it works</Link><Link href="/homeowner-guides/">Homeowner guides</Link><Link href="/reviews/">Review rules</Link></div>
           <div><strong>Information</strong><Link href="/privacy/">Privacy</Link><Link href="/cookies/">Cookies</Link><Link href="/contact/">Contact</Link></div>
-          <div><strong>For builders</strong><Link href="/builder-area/">Builder demo</Link><Link href="/admin/">Admin demo</Link></div>
+          <div><strong>For builders</strong><Link href="/builder-area/">Request a listing</Link><Link href="/admin/">Admin demo</Link></div>
         </div>
       </div>
       <div className="wrap footer-bottom"><span>Southampton Traders · Current directory coverage is not exhaustive.</span><span>Illustrative images are not evidence of work by a listed business.</span></div>

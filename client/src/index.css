@@ -336,6 +336,22 @@ p { margin-bottom: 1rem; }
 .form-field textarea { min-height: 105px; resize: vertical; }
 .form-field select[multiple] { min-height: 105px; }
 .form-row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.listing-request-section { margin: 28px 0 50px; scroll-margin-top: 24px; }
+.listing-request-form { margin-top: 18px; }
+.listing-choice-group { min-width: 0; margin: 0; padding: 14px; border: 1px solid var(--line); }
+.listing-choice-group legend { padding: 0 6px; color: #3d4d44; font-size: .9rem; font-weight: 700; }
+.listing-choice-group legend b { color: #a64f34; }
+.listing-choice-group > p { margin: 0 0 10px; color: var(--muted); font-size: .78rem; }
+.listing-choice-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px 14px; }
+.listing-choice-grid .check-row { margin: 0; }
+.listing-choice-grid input, .listing-request-form .consent-row input { accent-color: var(--green); }
+.listing-request-form .consent-row { align-items: flex-start; line-height: 1.55; }
+.listing-request-form .consent-row input { flex: 0 0 auto; margin-top: 3px; }
+.listing-request-form .form-privacy-note { margin: 0; }
+.form-error { margin: 0; padding: 11px 13px; border: 1px solid #e4b7ac; background: #fff5f2; color: #873b2d; font-size: .86rem; }
+.builder-preview-shell { margin-top: 48px; }
+.builder-preview-note { display: flex; align-items: flex-start; gap: 8px; margin: 18px 0 0; color: var(--muted); font-size: .86rem; }
+.builder-preview-note svg { flex: 0 0 auto; color: var(--green); }
 .consent-field { display: flex; align-items: start; gap: 9px; font-weight: 500; }
 .consent-field input { margin-top: 2px; }
 .consent-row { padding: 11px; border: 1px solid var(--line); background: #f7f8f4; }
@@ -574,6 +590,10 @@ p { margin-bottom: 1rem; }
   .form-warning p { font-size: .78rem; }
   .form-card { gap: 14px; padding: 17px; }
   .form-row { grid-template-columns: 1fr; gap: 13px; }
+  .listing-choice-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 7px; }
+  .listing-choice-group { padding: 11px; }
+  .listing-request-section .section-heading { align-items: flex-start; flex-direction: column; }
+  .listing-request-form .form-submit { width: 100%; }
   .form-section-title h2 { font-size: 1.35rem; }
   .form-section-title p { font-size: .76rem; }
   .browse-intro-panel { gap: 11px; padding: 15px; }

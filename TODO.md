@@ -153,3 +153,10 @@
 - [ ] Ensure each JSON-LD block and meaningful guide body content are present in the initial statically prerendered HTML; add distinct route title/description/canonical metadata and synchronize Wouter routes, prerender allowlist, crawler route manifest and sitemap.
 - [ ] Avoid unsupported price estimates, universal permission/suitability claims, invented authorship or guarantees of Google rich results or ranking gains.
 - [ ] Run the project check, tests and production build; inspect both generated HTML documents and live routes, then save the changes to canonical `main` and confirm the auto-published version.
+
+## Builder listing requests — 25 November 2026
+- [ ] Let builders and companies request to be added by submitting their business and contact details; deliver the request to the site owner for manual review; do not automatically create an account or publish a business profile.
+- [ ] Explain before submission what information is sent and who receives it, require authorization/consent for review contact, validate selected services and service areas, and keep submitted contact information out of the public directory.
+- [ ] Keep the existing sample dashboard, profile preview and sample enquiries clearly identified as demonstrations, separate from real listing requests.
+- [ ] Update the privacy notice and builder entry links to distinguish actual listing requests from the site's other non-submitting demo forms; never claim a request is a verification or inclusion guarantee.
+- [ ] Run the typecheck, tests and production build; verify the request route and deployment without submitting a real builder application.

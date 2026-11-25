@@ -72,7 +72,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="closing-cta wrap"><div><p className="eyebrow">For local builders</p><h2>Make your business easier to find.</h2><p>See how a builder profile could work. This sign-up demo does not create an account or send an email.</p></div><Link className="button" href="/builder-area/">Open builder demo <ArrowRight size={17} aria-hidden="true" /></Link></section>
+      <section className="closing-cta wrap"><div><p className="eyebrow">For local builders</p><h2>Make your business easier to find.</h2><p>Send your business details to Southampton Traders for consideration in the directory. Each request is reviewed before any listing is added.</p></div><Link className="button" href="/builder-area/">Request a business listing <ArrowRight size={17} aria-hidden="true" /></Link></section>
 
       <section className="sr-only" aria-label="Directory coverage"><h2>Current directory coverage</h2><p>{builders.length} business profiles are listed across seven launch areas; coverage is not exhaustive.</p></section>
     </>
