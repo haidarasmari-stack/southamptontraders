@@ -122,6 +122,58 @@ export function buildBuilderProfileJsonLd(row: BuilderProfile, profileUrl: strin
   return { "@context": "https://schema.org", "@graph": [webPage, business] };
 }
 
+export function buildArticleJsonLd(
+  siteOrigin: string,
+  pageUrl: string,
+  article: { headline: string; description: string; section: string; datePublished: string; dateModified: string },
+) {
+  const origin = siteOrigin.replace(/\/$/, "");
+  const canonicalUrl = new URL(pageUrl, origin).toString();
+  const organizationId = `${origin}/#organization`;
+  const websiteId = `${origin}/#website`;
+  const headline = text(article.headline);
+
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": organizationId,
+        name: "Southampton Traders",
+        url: `${origin}/`,
+      },
+      {
+        "@type": "WebSite",
+        "@id": websiteId,
+        name: "Southampton Traders",
+        url: `${origin}/`,
+        inLanguage: "en-GB",
+        publisher: { "@id": organizationId },
+      },
+      {
+        "@type": "Article",
+        "@id": `${canonicalUrl}#article`,
+        url: canonicalUrl,
+        headline,
+        description: text(article.description),
+        articleSection: text(article.section),
+        datePublished: article.datePublished,
+        dateModified: article.dateModified,
+        inLanguage: "en-GB",
+        mainEntityOfPage: {
+          "@type": "WebPage",
+          "@id": canonicalUrl,
+          url: canonicalUrl,
+          name: headline,
+        },
+        author: { "@id": organizationId },
+        publisher: { "@id": organizationId },
+        isPartOf: { "@id": websiteId },
+      },
+    ],
+  };
+}
+
 export function serializeJsonLd(value: unknown) {
   return JSON.stringify(value)
     .replace(/</g, "\\u003c")

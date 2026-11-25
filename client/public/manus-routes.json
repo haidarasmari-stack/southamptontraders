@@ -50,7 +50,15 @@
     },
     {
       "path": "/homeowner-guides/",
-      "title": "Builder & Home Extension Guides | Southampton Traders"
+      "title": "Homeowner Guides: Extensions & Lofts | Southampton Traders"
+    },
+    {
+      "path": "/guides/home-extension-planning/",
+      "title": "Home Extension Planning Guide | Southampton Traders"
+    },
+    {
+      "path": "/guides/loft-conversion/",
+      "title": "Loft Conversion Guide | Southampton Traders"
     },
     {
       "path": "/reviews/",

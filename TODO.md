@@ -145,3 +145,11 @@
 - [ ] Add the supplied roof tile, roof-framing/rafter, and interior-progress photos to relevant Roofing, Loft conversions and Renovations pages; use all five photos across the homepage and matching service sections.
 - [ ] Add descriptive alt text and a visible note that photos were supplied by the site owner and are not attributed to a particular listed business; do not claim an unverified location, contractor or completed project.
 - [ ] Remove the old stock-style hero from page and social metadata; do not publish the unrelated Hostinger File Manager screenshots.
+
+
+## Targeted home-extension and loft-conversion guide schema — 25 November 2026
+- [ ] Provide distinct, indexable `/guides/home-extension-planning/` and `/guides/loft-conversion/` pages with substantive page-specific advice and links from `/homeowner-guides/`; keep the existing builder-selection and quote-comparison guidance available.
+- [ ] Add schema.org `Article` JSON-LD to each guide, and only describe information visible on that page, including the visible headline, Southampton Traders authorship, publication/update date and canonical page URL.
+- [ ] Ensure each JSON-LD block and meaningful guide body content are present in the initial statically prerendered HTML; add distinct route title/description/canonical metadata and synchronize Wouter routes, prerender allowlist, crawler route manifest and sitemap.
+- [ ] Avoid unsupported price estimates, universal permission/suitability claims, invented authorship or guarantees of Google rich results or ranking gains.
+- [ ] Run the project check, tests and production build; inspect both generated HTML documents and live routes, then save the changes to canonical `main` and confirm the auto-published version.

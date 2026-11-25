@@ -47,6 +47,7 @@ function SiteHeader() {
             <Link href="/project-brief/">Prepare a project brief</Link>
             <Link href="/shortlist/">Shortlist ({savedBuilderSlugs.length})</Link>
             <Link href="/how-it-works/">How it works</Link>
+            <Link href="/homeowner-guides/">Homeowner guides</Link>
             <Link href="/builder-area/">For builders</Link>
             <Link href="/reviews/">Review rules</Link>
             <Link href="/admin/">Admin demonstration</Link>
@@ -64,7 +65,7 @@ function SiteFooter() {
       <div className="wrap footer-main">
         <div className="footer-brand-block"><BrandMark /><p>Builder profiles across seven Hampshire launch areas. Current coverage is not exhaustive.</p></div>
         <div className="footer-links">
-          <div><strong>Explore</strong><Link href="/builders/southampton/">Find a builder</Link><Link href="/project-brief/">Prepare a project brief</Link><Link href="/shortlist/">Your shortlist</Link><Link href="/how-it-works/">How it works</Link><Link href="/reviews/">Review rules</Link></div>
+          <div><strong>Explore</strong><Link href="/builders/southampton/">Find a builder</Link><Link href="/project-brief/">Prepare a project brief</Link><Link href="/shortlist/">Your shortlist</Link><Link href="/how-it-works/">How it works</Link><Link href="/homeowner-guides/">Homeowner guides</Link><Link href="/reviews/">Review rules</Link></div>
           <div><strong>Information</strong><Link href="/privacy/">Privacy</Link><Link href="/cookies/">Cookies</Link><Link href="/contact/">Contact</Link></div>
           <div><strong>For builders</strong><Link href="/builder-area/">Builder demo</Link><Link href="/admin/">Admin demo</Link></div>
         </div>

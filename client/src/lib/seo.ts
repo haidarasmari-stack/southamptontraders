@@ -4,10 +4,12 @@ import { builders, getBuilder, getBuildersForLocation, getBuildersForService, ge
 export const SITE_ORIGIN = "https://southamptontraders.co.uk";
 export const SHARE_IMAGE = `${SITE_ORIGIN}/manus-storage/IMG_6247_597a3dba.webp`;
 
-export type PageMeta = { title: string; description: string; path: string; noindex?: boolean };
+export type PageMeta = { title: string; description: string; path: string; noindex?: boolean; ogType?: "website" | "article" };
 
 const informationPages: Record<string, PageMeta> = {
-  "/homeowner-guides": { title: "Builder & Home Extension Guides | Southampton Traders", description: "Southampton homeowner guides to finding a reliable builder, planning a house extension, comparing loft and renovation options, and reviewing builder quotes.", path: "/homeowner-guides/" },
+  "/homeowner-guides": { title: "Homeowner Guides: Extensions & Lofts | Southampton Traders", description: "Practical guides to planning home extensions and loft conversions, choosing builders and comparing quotes in Southampton. Coverage is not exhaustive.", path: "/homeowner-guides/" },
+  "/guides/home-extension-planning": { title: "Home Extension Planning Guide | Southampton Traders", description: "Plan a house extension with a clear brief, feasibility checks, approval questions and comparable builder quotes. Practical advice for Southampton homeowners.", path: "/guides/home-extension-planning/", ogType: "article" },
+  "/guides/loft-conversion": { title: "Loft Conversion Guide | Southampton Traders", description: "Learn what a loft conversion involves, what to check before work starts and which questions to ask about design, approvals and builder quotes.", path: "/guides/loft-conversion/", ogType: "article" },
   "/how-it-works": { title: "How Southampton Traders works | Southampton Traders", description: "A guide to browsing Hampshire builder profiles, saving a browser-local shortlist, preparing a project brief, and understanding demo enquiries.", path: "/how-it-works/" },
   "/reviews": { title: "Review rules | Southampton Traders", description: "Learn how a future Southampton Traders service would handle genuine project reviews, business replies, reports and moderation. No reviews appear in the directory.", path: "/reviews/", noindex: true },
   "/privacy": { title: "Privacy information | Southampton Traders", description: "Directory contact links lead directly to companies; demo form entries are not sent or stored. Learn what not to enter and what must be in place before enquiries are enabled.", path: "/privacy/", noindex: true },
@@ -68,7 +70,7 @@ function setMeta(selector: string, attribute: "name" | "property", key: string, 
   element.content = content;
 }
 
-export function applyPageMeta({ title, description, path, noindex = false }: PageMeta) {
+export function applyPageMeta({ title, description, path, noindex = false, ogType = "website" }: PageMeta) {
   document.title = title;
   setMeta('meta[name="description"]', "name", "description", description);
   setMeta('meta[name="robots"]', "name", "robots", noindex ? "noindex,follow" : "index,follow");
@@ -76,7 +78,7 @@ export function applyPageMeta({ title, description, path, noindex = false }: Pag
   let canonical = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]');
   if (!canonical) { canonical = document.createElement("link"); canonical.rel = "canonical"; document.head.appendChild(canonical); }
   canonical.href = url;
-  setMeta('meta[property="og:type"]', "property", "og:type", "website");
+  setMeta('meta[property="og:type"]', "property", "og:type", ogType);
   setMeta('meta[property="og:title"]', "property", "og:title", title);
   setMeta('meta[property="og:description"]', "property", "og:description", description);
   setMeta('meta[property="og:url"]', "property", "og:url", url);
@@ -89,5 +91,5 @@ export function applyPageMeta({ title, description, path, noindex = false }: Pag
 }
 
 export function usePageMeta(meta: PageMeta) {
-  useEffect(() => { applyPageMeta(meta); }, [meta.title, meta.description, meta.path, meta.noindex]);
+  useEffect(() => { applyPageMeta(meta); }, [meta.title, meta.description, meta.path, meta.noindex, meta.ogType]);
 }
