@@ -23,20 +23,20 @@ describe("researched builder catalog", () => {
     expect(locations.map((location) => location.name)).toEqual(expectedAreas);
   });
 
-  it("imports all 169 unique profiles with the recorded area counts", () => {
-    expect(builders).toHaveLength(169);
-    expect(new Set(builders.map((builder) => builder.slug)).size).toBe(169);
+  it("imports all 177 unique profiles with the recorded area counts", () => {
+    expect(builders).toHaveLength(177);
+    expect(new Set(builders.map((builder) => builder.slug)).size).toBe(177);
     expect(Object.fromEntries(locations.map((location) => [
       location.name,
       builders.filter((builder) => builder.Primary_Location === location.name).length,
     ]))).toEqual({
-      Southampton: 62,
-      Eastleigh: 20,
-      Fareham: 20,
-      Winchester: 19,
+      Southampton: 64,
+      Eastleigh: 21,
+      Fareham: 22,
+      Winchester: 20,
       Totton: 14,
-      "Hedge End": 14,
-      Romsey: 20,
+      "Hedge End": 15,
+      Romsey: 21,
     });
   });
 
@@ -108,7 +108,7 @@ describe("researched builder catalog", () => {
     const filteredResults = metaForPath("/builders/southampton/");
 
     expect(home.title).toContain("builders in Southampton");
-    expect(home.description).toContain("62 builder profiles in Southampton");
+    expect(home.description).toContain("64 builder profiles in Southampton");
     expect(home.description.length).toBeLessThanOrEqual(160);
     expect(southampton.title).toBe("Builders in Southampton | Southampton Traders");
     expect(southampton.description).toContain("SO14–SO19");

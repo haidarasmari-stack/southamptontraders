@@ -160,3 +160,6 @@
 - [ ] Keep the existing sample dashboard, profile preview and sample enquiries clearly identified as demonstrations, separate from real listing requests.
 - [ ] Update the privacy notice and builder entry links to distinguish actual listing requests from the site's other non-submitting demo forms; never claim a request is a verification or inclusion guarantee.
 - [ ] Run the typecheck, tests and production build; verify the request route and deployment without submitting a real builder application.
+
+## Local builder directory expansion — 25 November 2026
+- [x] Add non-duplicate builder and roofing company profiles with sourced business details for Southampton, Eastleigh, Fareham, Winchester, Hedge End and Romsey; keep the existing seven-area directory structure and accurately distinguish a company's base from the towns it serves.
