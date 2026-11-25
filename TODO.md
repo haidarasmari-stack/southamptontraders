@@ -138,3 +138,9 @@
 - [x] Keep public directory pages crawlable and preserve the sitemap declaration while adding `Disallow: /api/` for non-content API endpoints.
 - [x] Update the How it works meta description to reflect the actual browser-only project brief feature without calling it a live quote or enquiry service.
 - [x] Preserve the existing unique route metadata, noindex/private route behavior, sitemap parity and genuine 404 responses; do not add unsupported reviews, ratings, addresses or ranking claims.
+
+## Owner-supplied project photos — 25 November 2026
+- [ ] Replace the homepage's stock-style illustrative hero with the owner-supplied roof-work photo and use an appropriate real project image for social previews.
+- [ ] Add the supplied roof tile, roof-framing/rafter, and interior-progress photos to relevant Roofing, Loft conversions and Renovations pages; use all five photos across the homepage and matching service sections.
+- [ ] Add descriptive alt text and a visible note that photos were supplied by the site owner and are not attributed to a particular listed business; do not claim an unverified location, contractor or completed project.
+- [ ] Remove the old stock-style hero from page and social metadata; do not publish the unrelated Hostinger File Manager screenshots.

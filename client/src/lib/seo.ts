@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { builders, getBuilder, getBuildersForLocation, getBuildersForService, getLocation, getService } from "@/data/catalog";
 
 export const SITE_ORIGIN = "https://southamptontraders.co.uk";
-export const SHARE_IMAGE = `${SITE_ORIGIN}/manus-storage/hero-renovation_853be6f1.webp`;
+export const SHARE_IMAGE = `${SITE_ORIGIN}/manus-storage/IMG_6247_597a3dba.webp`;
 
 export type PageMeta = { title: string; description: string; path: string; noindex?: boolean };
 

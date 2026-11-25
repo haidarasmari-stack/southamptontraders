@@ -2,10 +2,18 @@ import { ArrowRight, MapPin, Wrench } from "lucide-react";
 import { Link, useParams } from "wouter";
 import BuilderCard from "@/components/BuilderCard";
 import { Breadcrumbs } from "@/components/SiteFrame";
+import OwnerProjectGallery from "@/components/OwnerProjectGallery";
 import { getBuildersForLocation, getBuildersForService, getLocation, getService, locations, serviceName, services } from "@/data/catalog";
 import { buildBreadcrumbJsonLd, buildSouthamptonLandingJsonLd, serializeJsonLd } from "@/data/jsonld";
+import { ownerProjectPhotos } from "@/data/projectPhotos";
 import { metaForPath, SITE_ORIGIN, usePageMeta } from "@/lib/seo";
 import NotFound from "@/pages/NotFound";
+
+const servicePhotos = {
+  "loft-conversions": [ownerProjectPhotos.roofFrame, ownerProjectPhotos.rafterDetail],
+  roofing: [ownerProjectPhotos.roofTiles],
+  renovations: [ownerProjectPhotos.roomInProgress, ownerProjectPhotos.interiorFinish],
+};
 
 export default function BrowseLanding({ kind }: { kind: "service" | "location" }) {
   const { slug } = useParams<{ slug: string }>();
@@ -28,6 +36,7 @@ export default function BrowseLanding({ kind }: { kind: "service" | "location" }
   const southamptonStructuredData = kind === "location" && slug === "southampton"
     ? buildSouthamptonLandingJsonLd(SITE_ORIGIN, `${SITE_ORIGIN}${path}`, relatedBuilders)
     : undefined;
+  const relevantPhotos = kind === "service" ? servicePhotos[slug as keyof typeof servicePhotos] ?? [] : [];
   return (
     <div className="page wrap">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(breadcrumbData) }} />
@@ -35,6 +44,7 @@ export default function BrowseLanding({ kind }: { kind: "service" | "location" }
       <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: pageLabel }]} />
       <div className="page-heading"><p className="eyebrow">{kind === "service" ? "Building service" : "Hampshire launch area"} · Southampton Traders</p><h1>{kind === "service" ? `${name} builders` : `Builders in ${name}`}</h1><p className="section-intro">{item.description} There are {relatedBuilders.length} matching business profiles currently listed. Coverage is not exhaustive; confirm current details directly with each company.</p></div>
       <div className="browse-intro-panel"><span className="browse-icon">{kind === "service" ? <Wrench size={21} aria-hidden="true" /> : <MapPin size={21} aria-hidden="true" />}</span><div><h2>Start with the project, compare with care.</h2><p>Profiles are based on public company or trade-source information. Contact details appear only where supplied and verified; no ratings, reviews or accreditations are added.</p></div></div>
+      {relevantPhotos.length > 0 && <OwnerProjectGallery title={`${name} work in progress`} photos={relevantPhotos} />}
       {kind === "location" && slug === "southampton" && <section className="section-block southampton-answer-section" aria-labelledby="southampton-answers-title">
         <p className="eyebrow">Southampton directory guide</p><h2 id="southampton-answers-title">Find builders in Southampton</h2>
         <p>Southampton Traders currently lists {relatedBuilders.length} business profiles assigned to the Southampton launch area, covering postcodes SO14–SO19. Browse the service categories represented below, open a profile, and contact the company directly using the details shown. This directory is not exhaustive and does not endorse listed businesses.</p>

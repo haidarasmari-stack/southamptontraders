@@ -355,6 +355,11 @@ p { margin-bottom: 1rem; }
 .browse-intro-panel p { max-width: 780px; margin: 0; color: var(--muted); font-size: .9rem; }
 .section-block { margin-top: 40px; }
 .section-block .section-heading { margin-bottom: 18px; }
+.owner-project-gallery-note { max-width: 780px; margin: -6px 0 18px; color: var(--muted); font-size: .86rem; }
+.owner-project-gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); align-items: start; gap: 16px; }
+.owner-project-photo { min-width: 0; margin: 0; border: 1px solid var(--line); background: var(--white); }
+.owner-project-photo img { display: block; width: 100%; height: auto; background: #f0f1eb; }
+.owner-project-photo figcaption { padding: 10px 13px; color: var(--ink); font-family: Georgia, serif; font-size: .94rem; }
 .southampton-answer-section { padding: 22px; border: 1px solid var(--line); background: #f7f8f4; }
 .southampton-answer-section > h2 { margin: 0 0 10px; font-family: Georgia, serif; font-size: clamp(1.75rem, 3vw, 2.25rem); font-weight: 500; }
 .southampton-answer-section > p:not(.eyebrow) { max-width: 860px; color: var(--muted); font-size: .9rem; }

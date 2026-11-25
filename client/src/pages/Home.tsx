@@ -5,7 +5,7 @@ import { builders, getBuildersForLocation, locations, services } from "@/data/ca
 import { buildSiteJsonLd, serializeJsonLd } from "@/data/jsonld";
 import { SITE_ORIGIN, usePageMeta } from "@/lib/seo";
 
-const photo = "/manus-storage/hero-renovation_853be6f1.webp";
+const photo = "/manus-storage/IMG_6247_597a3dba.webp";
 
 export default function Home() {
   usePageMeta({
@@ -26,8 +26,8 @@ export default function Home() {
           <div className="hero-proof"><span><Check size={15} aria-hidden="true" /> {builders.length} current profiles</span><span><Check size={15} aria-hidden="true" /> Seven launch areas</span><span><Check size={15} aria-hidden="true" /> No invented ratings</span></div>
         </div>
         <div className="hero-visual">
-          <img src={photo} alt="Illustrative home renovation in progress; not evidence of work by a directory listing." fetchPriority="high" />
-          <div className="hero-photo-caption"><span className="photo-mark" aria-hidden="true">ST</span><span><strong>Room to make it yours</strong><small>Illustrative photo · not a listed builder’s project</small></span></div>
+          <img src={photo} alt="Red roof tiles being fitted across a residential roof with scaffolding visible below" fetchPriority="high" />
+          <div className="hero-photo-caption"><span className="photo-mark" aria-hidden="true">ST</span><span><strong>Roof tiling in progress</strong><small>Owner-supplied photo · not attributed to a listed business</small></span></div>
           <div className="hero-index">01 <span> / LOCAL WORK</span></div>
         </div>
       </section>
