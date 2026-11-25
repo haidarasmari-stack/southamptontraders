@@ -15,24 +15,25 @@ const expectedServices = [
   "Kitchens & bathrooms",
 ];
 
-const expectedAreas = ["Southampton", "Eastleigh", "Fareham", "Winchester", "Totton", "Hedge End", "Romsey"];
+const expectedAreas = ["Southampton", "Eastleigh", "Fareham", "New Forest", "Winchester", "Totton", "Hedge End", "Romsey"];
 
 describe("researched builder catalog", () => {
-  it("contains the exact nine service categories and seven launch areas", () => {
+  it("contains the exact nine service categories and eight launch areas", () => {
     expect(services.map((service) => service.name)).toEqual(expectedServices);
     expect(locations.map((location) => location.name)).toEqual(expectedAreas);
   });
 
-  it("imports all 177 unique profiles with the recorded area counts", () => {
-    expect(builders).toHaveLength(177);
-    expect(new Set(builders.map((builder) => builder.slug)).size).toBe(177);
+  it("imports all 182 unique profiles with the recorded area counts", () => {
+    expect(builders).toHaveLength(182);
+    expect(new Set(builders.map((builder) => builder.slug)).size).toBe(182);
     expect(Object.fromEntries(locations.map((location) => [
       location.name,
       builders.filter((builder) => builder.Primary_Location === location.name).length,
     ]))).toEqual({
       Southampton: 64,
       Eastleigh: 21,
-      Fareham: 22,
+      Fareham: 25,
+      "New Forest": 2,
       Winchester: 20,
       Totton: 14,
       "Hedge End": 15,
@@ -115,6 +116,10 @@ describe("researched builder catalog", () => {
     expect(southampton.description.length).toBeLessThanOrEqual(160);
     expect(southampton.noindex).toBe(false);
     expect(filteredResults.noindex).toBe(true);
+    const newForest = metaForPath("/locations/new-forest/");
+    expect(newForest.title).toBe("Builders in New Forest | Southampton Traders");
+    expect(newForest.description).toContain("New Forest District");
+    expect(newForest.noindex).toBe(false);
   });
 
   it("puts Solent Pro Builders first as a sponsored listing on the kitchen/bathroom and loft service pages", () => {
@@ -133,7 +138,7 @@ describe("researched builder catalog", () => {
     expect(getSponsoredServiceForSearch("builders near me")).toBe("");
   });
 
-  it("keeps Solent Pro Builders available in each of the seven launch areas", () => {
+  it("keeps Solent Pro Builders available in each of the eight launch areas", () => {
     const solent = getBuilder("solent-pro-builders");
     expect(solent).toBeDefined();
     for (const location of locations) {

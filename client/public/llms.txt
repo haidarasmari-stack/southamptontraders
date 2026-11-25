@@ -5,7 +5,7 @@ Southampton Traders is a public directory of builder profiles covering Southampt
 ## Main pages
 - [Home](https://southamptontraders.co.uk/): Search builder profiles by service and location.
 - [Southampton builders](https://southamptontraders.co.uk/locations/southampton/): Directory listings for Southampton, covering SO14–SO19.
-- [Browse launch areas](https://southamptontraders.co.uk/): The home page links to the site's seven launch areas: Southampton, Eastleigh, Fareham, Winchester, Totton, Hedge End and Romsey.
+- [Browse launch areas](https://southamptontraders.co.uk/): The home page links to the site's eight launch areas: Southampton, Eastleigh, Fareham, New Forest, Winchester, Totton, Hedge End and Romsey.
 - [Building services](https://southamptontraders.co.uk/services/extensions/): Browse profiles by the site's exact service categories.
 - [How the directory works](https://southamptontraders.co.uk/how-it-works/): Scope and limitations of the listings.
 - [Sitemap](https://southamptontraders.co.uk/sitemap.xml): Public page URLs.

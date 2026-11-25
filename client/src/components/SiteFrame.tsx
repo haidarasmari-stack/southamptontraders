@@ -63,7 +63,7 @@ function SiteFooter() {
   return (
     <footer className="site-footer">
       <div className="wrap footer-main">
-        <div className="footer-brand-block"><BrandMark /><p>Builder profiles across seven Hampshire launch areas. Current coverage is not exhaustive.</p></div>
+        <div className="footer-brand-block"><BrandMark /><p>Builder profiles across eight nearby regional areas. Current coverage is not exhaustive.</p></div>
         <div className="footer-links">
           <div><strong>Explore</strong><Link href="/builders/southampton/">Find a builder</Link><Link href="/project-brief/">Prepare a project brief</Link><Link href="/shortlist/">Your shortlist</Link><Link href="/how-it-works/">How it works</Link><Link href="/homeowner-guides/">Homeowner guides</Link><Link href="/reviews/">Review rules</Link></div>
           <div><strong>Information</strong><Link href="/privacy/">Privacy</Link><Link href="/cookies/">Cookies</Link><Link href="/contact/">Contact</Link></div>

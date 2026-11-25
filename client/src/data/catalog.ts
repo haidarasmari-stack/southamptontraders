@@ -54,6 +54,7 @@ export const locations: Location[] = [
   { slug: "southampton", name: "Southampton", description: "Builder profiles assigned to the Southampton launch area. Current directory coverage is not exhaustive.", postcodeCoverage: "SO14–SO19" },
   { slug: "eastleigh", name: "Eastleigh", description: "Builder profiles assigned to the Eastleigh launch area. Current directory coverage is not exhaustive.", postcodeCoverage: "SO50, SO53" },
   { slug: "fareham", name: "Fareham", description: "Builder profiles assigned to the Fareham launch area. Current directory coverage is not exhaustive.", postcodeCoverage: "PO14–PO17" },
+  { slug: "new-forest", name: "New Forest", description: "Builder profiles based in or serving the New Forest and nearby Fordingbridge area. Current directory coverage is not exhaustive.", postcodeCoverage: "New Forest District & nearby SP6" },
   { slug: "winchester", name: "Winchester", description: "Builder profiles assigned to the Winchester launch area. Current directory coverage is not exhaustive.", postcodeCoverage: "SO21–SO23" },
   { slug: "totton", name: "Totton", description: "Builder profiles assigned to the Totton launch area. Current directory coverage is not exhaustive.", postcodeCoverage: "SO40" },
   { slug: "hedge-end", name: "Hedge End", description: "Builder profiles assigned to the Hedge End launch area. Current directory coverage is not exhaustive.", postcodeCoverage: "SO30" },

@@ -26,7 +26,7 @@ const informationPages: Record<string, PageMeta> = {
 export function metaForPath(pathname: string): PageMeta {
   const path = pathname.split("?")[0].replace(/\/$/, "") || "/";
   const canonicalPath = path === "/" || path === "/404" ? path : `${path}/`;
-  if (path === "/") return { title: "Find local builders in Southampton | Southampton Traders", description: `Browse ${getBuildersForLocation("southampton").length} builder profiles in Southampton. Filter by service, find contact details, and explore six nearby Hampshire areas. Coverage is not exhaustive.`, path: "/" };
+  if (path === "/") return { title: "Find local builders in Southampton | Southampton Traders", description: `Browse ${getBuildersForLocation("southampton").length} builder profiles in Southampton. Filter by service, find contact details, and explore seven nearby directory areas. Coverage is not exhaustive.`, path: "/" };
   if (informationPages[path]) return { ...informationPages[path], path: canonicalPath };
 
   const profileMatch = path.match(/^\/builder\/([^/]+)$/);

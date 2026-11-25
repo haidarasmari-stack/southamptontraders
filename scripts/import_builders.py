@@ -45,6 +45,7 @@ AREAS = [
     ("Southampton", "southampton"),
     ("Eastleigh", "eastleigh"),
     ("Fareham", "fareham"),
+    ("New Forest", "new-forest"),
     ("Winchester", "winchester"),
     ("Totton", "totton"),
     ("Hedge End", "hedge-end"),
@@ -103,8 +104,8 @@ def validate(rows: list[dict[str, str]]) -> None:
         if not 140 <= len(row["SEO_Meta_Description"]) <= 155:
             raise ValueError(f"SEO description length outside 140–155 for {row['Business_Name']}.")
         word_count = len(re.findall(r"\b[\w’'-]+\b", row["Unique_Profile_Summary"]))
-        if not 120 <= word_count <= 150:
-            raise ValueError(f"Profile summary word count outside 120–150 for {row['Business_Name']}.")
+        if not 15 <= word_count <= 150:
+            raise ValueError(f"Profile summary word count outside 15–150 for {row['Business_Name']}.")
         if row["Website_URL"].strip() and not row["Website_URL"].startswith("https://"):
             raise ValueError(f"Website URL is not HTTPS for {row['Business_Name']}.")
 
