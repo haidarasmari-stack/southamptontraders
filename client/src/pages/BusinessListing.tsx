@@ -27,7 +27,7 @@ export default function BusinessListing() {
   usePageMeta(listingMeta);
 
   return (
-    <main className="page wrap factual-listing">
+    <div className="page wrap factual-listing">
       <script type="application/ld+json">{JSON.stringify(businessSchema)}</script>
       <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "REDS BUILDERS LIMITED" }]} />
 
@@ -92,6 +92,6 @@ export default function BusinessListing() {
           <a className="text-link listing-back-link" href="/locations/southampton/">Browse builder directory <ArrowUpRight size={15} aria-hidden="true" /></a>
         </aside>
       </div>
-    </main>
+    </div>
   );
 }
