@@ -65,7 +65,7 @@ export function metaForPath(pathname: string): PageMeta {
     const count = getBuildersForLocation(locationMatch[1]).length;
     const description = place?.slug === "southampton"
       ? `Browse ${count} builder profiles in Southampton (SO14–SO19). Filter by service and contact companies directly. Coverage is not exhaustive.`
-      : place ? `Browse ${count} business profiles listed in ${place.name} (${place.postcodeCoverage}). Filter by service and contact companies directly; coverage is not exhaustive.` : "Browse the Southampton Traders directory across Hampshire launch areas.";
+      : place ? `Browse ${count} business profiles listed in ${place.name} (${place.postcodeCoverage}). Filter by service and contact firms directly; coverage is not exhaustive.` : "Browse the Southampton Traders directory across Hampshire launch areas.";
     return { title: `Builders in ${place?.name ?? "Hampshire"} | Southampton Traders`, description, path: canonicalPath, noindex: isResults || !place };
   }
   return { title: "Page not found | Southampton Traders", description: informationPages["/404"].description, path: "/404", noindex: true };

@@ -6,6 +6,7 @@ import { buildSiteJsonLd, serializeJsonLd } from "@/data/jsonld";
 import { SITE_ORIGIN, usePageMeta } from "@/lib/seo";
 
 const photo = "/manus-storage/IMG_6247_597a3dba.webp";
+const areaListingTotal = locations.reduce((total, location) => total + getBuildersForLocation(location.slug).length, 0);
 
 export default function Home() {
   usePageMeta({
@@ -66,7 +67,7 @@ export default function Home() {
       </section>
 
       <section className="section wrap nearby-section">
-        <div className="section-heading"><div><p className="eyebrow">{locations.length} launch areas</p><h2>Southampton, then outwards.</h2><p className="section-intro">The current list is not exhaustive. Each area shows the number of businesses presently included.</p></div><span className="location-count">{locations.length} places</span></div>
+        <div className="section-heading"><div><p className="eyebrow">{locations.length} launch areas</p><h2>Southampton, then outwards.</h2><p className="section-intro">The current list is not exhaustive. Each area shows the number of businesses presently included.{areaListingTotal > builders.length ? ` Some businesses cover more than one area, so the area counts add up to ${areaListingTotal} listings for ${builders.length} businesses.` : ""}</p></div><span className="location-count">{locations.length} places</span></div>
         <div className="location-list">
           {locations.map((location) => <Link href={`/locations/${location.slug}/`} key={location.slug}><MapPin size={16} aria-hidden="true" />{location.name}<span className="area-link-count">{getBuildersForLocation(location.slug).length} listed</span><ArrowUpRight size={15} aria-hidden="true" /></Link>)}
         </div>

@@ -34,7 +34,7 @@ function SiteHeader() {
       <div className="header-inner wrap">
         <BrandMark />
         <nav className="desktop-nav" aria-label="Main navigation">
-          <Link href="/builders/southampton/">Find a builder</Link>
+          <Link href="/locations/southampton/">Find a builder</Link>
           <Link href="/project-brief/">Plan a project</Link>
           <Link href="/how-it-works/">How it works</Link>
           <Link href="/builder-area/">For builders</Link>
@@ -43,14 +43,13 @@ function SiteHeader() {
         <details className="mobile-nav">
           <summary aria-label="Open navigation menu"><Menu size={22} aria-hidden="true" /><span className="sr-only">Menu</span></summary>
           <nav aria-label="Mobile navigation">
-            <Link href="/builders/southampton/">Find a builder</Link>
+            <Link href="/locations/southampton/">Find a builder</Link>
             <Link href="/project-brief/">Prepare a project brief</Link>
             <Link href="/shortlist/">Shortlist ({savedBuilderSlugs.length})</Link>
             <Link href="/how-it-works/">How it works</Link>
             <Link href="/homeowner-guides/">Homeowner guides</Link>
             <Link href="/builder-area/">For builders</Link>
             <Link href="/reviews/">Review rules</Link>
-            <Link href="/admin/">Admin demonstration</Link>
             <Link href="/request-quote/">Request a quote</Link>
           </nav>
         </details>
@@ -65,9 +64,9 @@ function SiteFooter() {
       <div className="wrap footer-main">
         <div className="footer-brand-block"><BrandMark /><p>Builder profiles across eight nearby regional areas. Current coverage is not exhaustive.</p></div>
         <div className="footer-links">
-          <div><strong>Explore</strong><Link href="/builders/southampton/">Find a builder</Link><Link href="/project-brief/">Prepare a project brief</Link><Link href="/shortlist/">Your shortlist</Link><Link href="/how-it-works/">How it works</Link><Link href="/homeowner-guides/">Homeowner guides</Link><Link href="/reviews/">Review rules</Link></div>
+          <div><strong>Explore</strong><Link href="/locations/southampton/">Find a builder</Link><Link href="/project-brief/">Prepare a project brief</Link><Link href="/shortlist/">Your shortlist</Link><Link href="/how-it-works/">How it works</Link><Link href="/homeowner-guides/">Homeowner guides</Link><Link href="/reviews/">Review rules</Link></div>
           <div><strong>Information</strong><Link href="/privacy/">Privacy</Link><Link href="/cookies/">Cookies</Link><Link href="/contact/">Contact</Link></div>
-          <div><strong>For builders</strong><Link href="/builder-area/">Request a listing</Link><Link href="/admin/">Admin demo</Link></div>
+          <div><strong>For builders</strong><Link href="/builder-area/">Request a listing</Link></div>
         </div>
       </div>
       <div className="wrap footer-bottom"><span>Southampton Traders · Current directory coverage is not exhaustive.</span><span>Illustrative images are not evidence of work by a listed business.</span></div>

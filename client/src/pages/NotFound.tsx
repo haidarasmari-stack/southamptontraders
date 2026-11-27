@@ -31,5 +31,5 @@ export default function NotFound() {
     setLocation("/");
   };
 
-  return <div className="page wrap narrow-page not-found-page"><Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Page not found" }]} /><p className="eyebrow">404 · Not found</p><h1>We can’t find that page.</h1><p className="section-intro">The address may have changed, or the page may not exist in the directory.</p><div className="not-found-actions"><button className="button" onClick={handleGoHome}><ArrowLeft size={16} /> Return home</button><a className="text-link" href="/builders/southampton/"><Search size={16} /> Browse Southampton builders</a></div></div>;
+  return <div className="page wrap narrow-page not-found-page"><Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Page not found" }]} /><p className="eyebrow">404 · Not found</p><h1>We can’t find that page.</h1><p className="section-intro">The address may have changed, or the page may not exist in the directory.</p><div className="not-found-actions"><button className="button" onClick={handleGoHome}><ArrowLeft size={16} /> Return home</button><a className="text-link" href="/locations/southampton/"><Search size={16} /> Browse Southampton builders</a></div></div>;
 }

@@ -89,7 +89,7 @@ export default function BusinessListing() {
             <MapPin size={19} aria-hidden="true" />
             <div><strong>Source details only</strong><p>This page repeats information from the supplied directory extract. It is not an endorsement, recommendation or confirmation that the details are current.</p></div>
           </div>
-          <a className="text-link listing-back-link" href="/builders/southampton/">Browse builder directory <ArrowUpRight size={15} aria-hidden="true" /></a>
+          <a className="text-link listing-back-link" href="/locations/southampton/">Browse builder directory <ArrowUpRight size={15} aria-hidden="true" /></a>
         </aside>
       </div>
     </main>

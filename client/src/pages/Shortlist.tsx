@@ -58,7 +58,7 @@ export default function Shortlist() {
           <span className="empty-icon"><BookmarkCheck size={21} aria-hidden="true" /></span>
           <h2>No saved profiles yet</h2>
           <p>Choose “Save to shortlist” on any builder card or profile to collect a few options here. Saved profile IDs stay in this browser.</p>
-          <Link className="button" href="/builders/southampton/">Find builders <ArrowRight size={16} aria-hidden="true" /></Link>
+          <Link className="button" href="/locations/southampton/">Find builders <ArrowRight size={16} aria-hidden="true" /></Link>
         </section>
       )}
     </div>

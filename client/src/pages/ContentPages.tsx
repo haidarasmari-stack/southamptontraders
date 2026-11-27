@@ -83,14 +83,14 @@ export default function ContentPages() {
       <article><span>05</span><div><h2>Contact a business directly</h2><p>Call or visit a company website only where a direct detail is listed. Quote and profile-report forms are previews and are not sent. Builders may separately submit a directory listing request, which goes to the site owner for manual review and is not automatically published.</p></div></article>
       <article><span>06</span><div><h2>Spot sponsored placements</h2><p>Some service searches show a clearly labelled Sponsored listing. This is a promotional placement, not a recommendation or verification badge. Payment for sponsored placement is not currently processed by this website.</p></div></article>
       <article><span>07</span><div><h2>Prepare a project brief</h2><p>Use the project brief tool to create a draft for your own use. It stays in page memory and is not submitted, sent or stored. Copy or print it only if you choose, then contact businesses yourself.</p></div></article>
-      <div className="content-page-cta"><Link className="button" href="/builders/southampton/">Browse current profiles <ArrowRight size={16} /></Link><Link className="button button-outline" href="/project-brief/">Prepare a project brief <ArrowRight size={16} /></Link><Link className="text-link" href="/request-quote/">Preview a quote request</Link></div>
+      <div className="content-page-cta"><Link className="button" href="/locations/southampton/">Browse current profiles <ArrowRight size={16} /></Link><Link className="button button-outline" href="/project-brief/">Prepare a project brief <ArrowRight size={16} /></Link><Link className="text-link" href="/request-quote/">Preview a quote request</Link></div>
     </div>}
 
     {isReviews && <section className="policy-content">
       <h2>When reviews are eligible</h2><p>In a future live service, a customer could submit a review only after declaring a job with the builder or confirming that the work was completed. The site should explain the eligibility check and ask for relevant, first-hand feedback.</p>
       <h2>Moderation and replies</h2><p>Businesses should be able to respond professionally. Customers and businesses should be able to report content for review. Moderators should apply published rules consistently and keep a decision record.</p>
       <h2>What we show today</h2><p>There are no customer reviews, star ratings, accreditations or verification badges in the directory. Profiles are factual listings, not recommendations. Sponsored listings are clearly labelled promotional placements and do not indicate verification or endorsement. Payment for sponsored placement is not currently processed by this website.</p>
-      <Link className="button" href="/builders/southampton/">Browse the directory <ArrowRight size={16} /></Link>
+      <Link className="button" href="/locations/southampton/">Browse the directory <ArrowRight size={16} /></Link>
     </section>}
 
     {isPrivacy && <section className="policy-content">
