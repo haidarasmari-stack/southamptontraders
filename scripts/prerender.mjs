@@ -69,6 +69,8 @@ try {
     await fs.mkdir(path.dirname(destination), { recursive: true });
     await fs.writeFile(destination, html, "utf8");
   }
+  // Static hosts (Cloudflare, Netlify) look for a top-level 404.html for unknown URLs.
+  await fs.copyFile(path.join(output, "404", "index.html"), path.join(output, "404.html"));
   const lastModFor = createLastModLookup(root);
   const sitemapPaths = [...new Set(routes.map((rawRoute) => metaForPath(normalize(rawRoute))).filter((meta) => !meta.noindex).map((meta) => meta.path))];
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${sitemapPaths.map((sitemapPath) => {

@@ -80,4 +80,31 @@ describe("builder listing requests", () => {
       message: "The request could not be delivered. Please try again later.",
     });
   });
+
+  it("emails the owner through Resend when it is configured, with the applicant as reply-to", async () => {
+    const send = vi.fn().mockResolvedValue(new Response("{}", { status: 200 }));
+    vi.stubGlobal("fetch", send);
+
+    await expect(submitBuilderApplication(baseInput, "198.51.100.27", {
+      RESEND_API_KEY: "re_test",
+      OWNER_EMAIL: "owner@example.test",
+    })).resolves.toEqual({ success: true });
+    const [url, init] = send.mock.calls[0];
+    expect(url).toBe("https://api.resend.com/emails");
+    expect(init.headers.authorization).toBe("Bearer re_test");
+    expect(JSON.parse(init.body)).toMatchObject({
+      to: ["owner@example.test"],
+      reply_to: "alex@example.test",
+      subject: "Builder listing request: Example Building Ltd",
+      text: expect.stringContaining("Areas served: Southampton, Eastleigh"),
+    });
+  });
+
+  it("does not report delivery when Resend rejects the email", async () => {
+    vi.stubGlobal("fetch", vi.fn().mockResolvedValue(new Response("bad key", { status: 401 })));
+    await expect(submitBuilderApplication(baseInput, "198.51.100.28", {
+      RESEND_API_KEY: "re_bad",
+      OWNER_EMAIL: "owner@example.test",
+    })).rejects.toMatchObject({ code: "INTERNAL_SERVER_ERROR" });
+  });
 });

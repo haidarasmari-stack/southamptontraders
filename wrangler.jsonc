@@ -1,0 +1,22 @@
+// Cloudflare Workers config: static site from dist/public plus a small Worker
+// (worker/index.ts) for the builder listing form. Build with `pnpm build`.
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "southamptontraders",
+  "main": "worker/index.ts",
+  "compatibility_date": "2025-09-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "assets": {
+    "directory": "dist/public",
+    "binding": "ASSETS",
+    // /contact -> /contact/ like the canonical URLs.
+    "html_handling": "auto-trailing-slash",
+    // Unknown URLs get dist/public/404.html with a real 404 status.
+    "not_found_handling": "404-page",
+    // Only API calls run the Worker; pages and images are served directly.
+    "run_worker_first": ["/api/builder-application", "/api/health"]
+  },
+  "observability": { "enabled": true }
+  // Builder listing requests are emailed via Resend. In the Cloudflare dashboard
+  // add a secret RESEND_API_KEY and a variable OWNER_EMAIL (Settings > Variables).
+}

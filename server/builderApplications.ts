@@ -1,7 +1,7 @@
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 import { locations, services } from "../client/src/data/catalog";
-import { notifyOwner } from "./_core/notification";
+import { deliverToOwner, type DeliveryEnv } from "./ownerDelivery";
 
 const serviceSlugs = services.map((service) => service.slug) as [string, ...string[]];
 const locationSlugs = locations.map((location) => location.slug) as [string, ...string[]];
@@ -45,7 +45,7 @@ function allowSubmission(ip: string, now = Date.now()): boolean {
   return true;
 }
 
-export async function submitBuilderApplication(value: unknown, ip: string) {
+export async function submitBuilderApplication(value: unknown, ip: string, env?: DeliveryEnv) {
   const parsed = builderApplicationInput.safeParse(value);
   if (!parsed.success) {
     throw new TRPCError({ code: "BAD_REQUEST", message: "Check the required fields and try again." });
@@ -80,10 +80,11 @@ export async function submitBuilderApplication(value: unknown, ip: string) {
     "The applicant confirmed they are authorized to submit these details and agree to be contacted about this listing request.",
   ].join("\n");
 
-  const delivered = await notifyOwner({
+  const delivered = await deliverToOwner({
     title: `Builder listing request: ${input.businessName}`,
     content,
-  });
+    replyTo: input.contactEmail,
+  }, env);
   if (!delivered) {
     throw new TRPCError({
       code: "INTERNAL_SERVER_ERROR",
