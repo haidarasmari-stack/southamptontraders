@@ -11,6 +11,7 @@ import Home from "@/pages/Home";
 import HomeExtensionGuide from "@/pages/HomeExtensionGuide";
 import HomeownerGuides from "@/pages/HomeownerGuides";
 import LoftConversionGuide from "@/pages/LoftConversionGuide";
+import CheckingABuilderGuide from "@/pages/CheckingABuilderGuide";
 import ProjectBrief from "@/pages/ProjectBrief";
 import ServiceAreaLanding from "@/pages/ServiceAreaLanding";
 import Shortlist from "@/pages/Shortlist";
@@ -39,6 +40,7 @@ function Router() {
     <Route path="/homeowner-guides/" component={HomeownerGuides} />
     <Route path="/guides/home-extension-planning/" component={HomeExtensionGuide} />
     <Route path="/guides/loft-conversion/" component={LoftConversionGuide} />
+    <Route path="/guides/checking-a-builder/" component={CheckingABuilderGuide} />
     <Route path="/shortlist/" component={Shortlist} />
     <Route path="/builder-area/" component={BuilderArea} />
     <Route path="/admin/" component={Admin} />

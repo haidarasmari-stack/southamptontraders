@@ -9,6 +9,8 @@ import { buildBreadcrumbJsonLd, buildSouthamptonLandingJsonLd, serializeJsonLd }
 import { ownerProjectPhotos } from "@/data/projectPhotos";
 import { metaForPath, SITE_ORIGIN, usePageMeta } from "@/lib/seo";
 import NotFound from "@/pages/NotFound";
+import { CostFactors, FaqSection, HiringChecklist } from "@/components/HomeownerGuidance";
+import { faqsForLocation, faqsForService } from "@/data/serviceGuidance";
 
 const INITIAL_SERVICE_PROFILES = 12;
 const SERVICE_PROFILE_BATCH = 12;
@@ -85,7 +87,11 @@ export default function BrowseLanding({ kind }: { kind: "service" | "location" }
           {kind === "service" && visibleBuilders.length < relatedBuilders.length && <div className="content-page-cta"><button className="button button-outline" type="button" onClick={() => setVisibleServiceProfiles((count) => Math.min(count + SERVICE_PROFILE_BATCH, relatedBuilders.length))}>Show next {Math.min(SERVICE_PROFILE_BATCH, relatedBuilders.length - visibleBuilders.length)} profiles</button></div>}
         </> : <div className="empty-state"><h3>No current profiles match this category</h3><p>The current directory is not exhaustive. Try a related service or launch area.</p><Link className="button" href="/builder-area/">Request to be considered for the directory</Link></div>}
       </section>
+      {kind === "service" && <CostFactors serviceSlug={slug} title={`What affects the price of ${name.toLowerCase()}`} />}
+      <HiringChecklist />
+      <FaqSection faqs={kind === "service" ? faqsForService(slug) : faqsForLocation(slug)} title={kind === "service" ? `${serviceTrade(slug)}: common questions` : `Builders in ${name}: common questions`} pageUrl={`${SITE_ORIGIN}${path}`} />
       <section className="browse-more"><h2>{kind === "service" ? `Find ${serviceTrade(slug).toLowerCase()} by area` : `Building services in ${name}`}</h2><div className="inline-link-list">{crossLinks.map((related) => <Link key={related.slug} href={crossLinkHref(related.slug)}>{crossLinkLabel(related.slug)}<ArrowRight size={14} aria-hidden="true" /></Link>)}</div></section>
+      {kind === "location" && <section className="browse-more"><h2>Builders in nearby areas</h2><div className="inline-link-list">{locations.filter((location) => location.slug !== slug).map((location) => <Link key={location.slug} href={`/locations/${location.slug}/`}><MapPin size={14} aria-hidden="true" />{location.name}<ArrowRight size={14} aria-hidden="true" /></Link>)}</div></section>}
       <p className="results-disclaimer">Business details are compiled from public company or trade sources. Southampton Traders does not endorse listed businesses; details and availability can change.</p>
     </div>
   );

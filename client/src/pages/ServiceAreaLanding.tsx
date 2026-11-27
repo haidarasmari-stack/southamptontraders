@@ -15,6 +15,8 @@ import {
 import { buildBreadcrumbJsonLd, buildCollectionPageJsonLd, serializeJsonLd } from "@/data/jsonld";
 import { metaForPath, SITE_ORIGIN, usePageMeta } from "@/lib/seo";
 import NotFound from "@/pages/NotFound";
+import { CostFactors, FaqSection, HiringChecklist } from "@/components/HomeownerGuidance";
+import { faqsForServiceArea } from "@/data/serviceGuidance";
 
 export default function ServiceAreaLanding() {
   const { slug: serviceSlug, area: locationSlug } = useParams<{ slug: string; area: string }>();
@@ -61,6 +63,10 @@ export default function ServiceAreaLanding() {
         <h2 id="service-area-checks">What to ask {trade.toLowerCase()} in {place.name}</h2>
         <div className="southampton-answer-grid">{checks.map((check) => <article key={check.heading}><h3>{check.heading}</h3><p>{check.body}</p></article>)}</div>
       </section>}
+
+      <CostFactors serviceSlug={service.slug} title={`What affects the price of ${service.name.toLowerCase()} in ${place.name}`} />
+      <HiringChecklist title={`How to check ${trade.toLowerCase()} before you hire`} />
+      <FaqSection faqs={faqsForServiceArea(service.slug, place.slug)} title={`${trade} in ${place.name}: common questions`} pageUrl={pageUrl} />
 
       {otherAreas.length > 0 && <section className="browse-more"><h2>{trade} in nearby areas</h2><div className="inline-link-list">{otherAreas.map((location) => <Link key={location.slug} href={`/services/${service.slug}/${location.slug}/`}><MapPin size={14} aria-hidden="true" />{location.name}<ArrowRight size={14} aria-hidden="true" /></Link>)}</div></section>}
       {otherServices.length > 0 && <section className="browse-more"><h2>Other building services in {place.name}</h2><div className="inline-link-list">{otherServices.map((item) => <Link key={item.slug} href={`/services/${item.slug}/${place.slug}/`}>{serviceTrade(item.slug)}<ArrowRight size={14} aria-hidden="true" /></Link>)}</div></section>}

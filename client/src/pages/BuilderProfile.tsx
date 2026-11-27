@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Link, useParams } from "wouter";
 import { Breadcrumbs } from "@/components/SiteFrame";
 import ShortlistToggle from "@/components/ShortlistToggle";
-import { getBuilder, getLocation, phoneHref, serviceName } from "@/data/catalog";
+import { getBuilder, getBuildersForServiceInLocation, getLocation, hasServiceAreaPage, phoneHref, serviceName, serviceTrade } from "@/data/catalog";
 import { buildBreadcrumbJsonLd, buildBuilderProfileJsonLd, serializeJsonLd } from "@/data/jsonld";
 import { usePageMeta, SITE_ORIGIN } from "@/lib/seo";
 import NotFound from "@/pages/NotFound";
@@ -26,6 +26,12 @@ export default function BuilderProfile() {
   if (!builder) return <NotFound />;
 
   const telLink = phoneHref(builder.Phone_Number);
+  const areaSlug = builder.locationSlugs[0] ?? "";
+  const serviceHref = (item: string) => hasServiceAreaPage(item, areaSlug) ? `/services/${item}/${areaSlug}/` : `/services/${item}/`;
+  const relatedService = builder.primaryServiceSlug || builder.serviceSlugs[0] || "";
+  const relatedProfiles = relatedService && areaSlug
+    ? getBuildersForServiceInLocation(relatedService, areaSlug).filter((item) => item.slug !== builder.slug).slice(0, 6)
+    : [];
   const structuredData = buildBuilderProfileJsonLd(builder, `${SITE_ORIGIN}${profilePath}`);
   const breadcrumbData = buildBreadcrumbJsonLd([
     { name: "Home", url: `${SITE_ORIGIN}/` },
@@ -46,9 +52,10 @@ export default function BuilderProfile() {
     </div></div>
     <div className="profile-grid">
       <section className="profile-main">
-        <section className="content-panel"><p className="eyebrow">Service categories</p><h2>Services listed</h2><ul className="service-chip-list profile-service-list">{builder.serviceSlugs.map((item) => <li className="service-chip" key={item}><Link href={`/services/${item}/`}>{serviceName(item)}</Link></li>)}</ul><p className="profile-primary-service"><strong>Primary service:</strong> {builder.Primary_Service}</p></section>
+        <section className="content-panel"><p className="eyebrow">Service categories</p><h2>Services listed</h2><ul className="service-chip-list profile-service-list">{builder.serviceSlugs.map((item) => <li className="service-chip" key={item}><Link href={serviceHref(item)}>{serviceName(item)}</Link></li>)}</ul><p className="profile-primary-service"><strong>Primary service:</strong> {builder.Primary_Service}</p></section>
         <section className="content-panel"><p className="eyebrow">Directory information</p><h2>Location and address</h2><dl className="profile-fact-list"><div><dt>Primary location</dt><dd>{location ? <Link href={`/locations/${location.slug}/`}>{builder.Primary_Location}</Link> : builder.Primary_Location}</dd></div><div><dt>Address or postcode in source</dt><dd>{builder.Full_Address_Or_Postcode || "Not listed"}</dd></div></dl></section>
-        <section className="content-panel credentials-panel"><ShieldCheck size={20} aria-hidden="true" /><div><h2>About this directory entry</h2><p>Profile details are compiled from public company or trade-source information. Southampton Traders does not endorse the business or display ratings, reviews, accreditations or availability claims. Contact the company to confirm current details.</p></div></section>
+        <section className="content-panel credentials-panel"><ShieldCheck size={20} aria-hidden="true" /><div><h2>About this directory entry</h2><p>Profile details are compiled from public company or trade-source information. Southampton Traders does not endorse the business or display ratings, reviews, accreditations or availability claims. Contact the company to confirm current details, and use our <Link href="/guides/checking-a-builder/">guide to checking a builder</Link> before you hire.</p></div></section>
+        {relatedProfiles.length > 0 && <section className="content-panel"><p className="eyebrow">Compare before you choose</p><h2>Other {serviceTrade(relatedService).toLowerCase()} in {location?.name ?? builder.Primary_Location}</h2><ul className="related-profile-list">{relatedProfiles.map((item) => <li key={item.slug}><Link href={`/builder/${item.slug}/`}>{item.Business_Name}</Link></li>)}</ul>{hasServiceAreaPage(relatedService, areaSlug) && <p><Link className="text-link" href={`/services/${relatedService}/${areaSlug}/`}>See all {serviceTrade(relatedService).toLowerCase()} in {location?.name ?? builder.Primary_Location}</Link></p>}</section>}
       </section>
       <aside className="profile-sidebar">
         <div className="sidebar-card"><p className="eyebrow">Save for comparison</p><ShortlistToggle builderSlug={builder.slug} builderName={builder.Business_Name} /><p className="eyebrow contact-card-heading">Contact the business</p>
