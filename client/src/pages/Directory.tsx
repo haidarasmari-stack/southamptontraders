@@ -4,7 +4,7 @@ import { Link, useLocation as useRouterLocation, useParams } from "wouter";
 import BuilderCard from "@/components/BuilderCard";
 import SearchPanel from "@/components/SearchPanel";
 import { Breadcrumbs } from "@/components/SiteFrame";
-import { builders, getBuildersForLocation, getLocation, getService, locationName, locations, services } from "@/data/catalog";
+import { builders, getBuildersForLocation, getLocation, getSponsoredServiceForSearch, getService, locationName, locations, services } from "@/data/catalog";
 import { usePageMeta } from "@/lib/seo";
 import NotFound from "@/pages/NotFound";
 
@@ -17,6 +17,7 @@ export default function Directory() {
   const [service, setService] = useState("");
   const [sortBy, setSortBy] = useState("relevance");
   const [filtersOpen, setFiltersOpen] = useState(false);
+  const sponsoredService = service || getSponsoredServiceForSearch(query);
   const locationBuilders = useMemo(() => getBuildersForLocation(locationSlug), [locationSlug]);
 
   useEffect(() => {
@@ -49,10 +50,15 @@ export default function Directory() {
       }
       return true;
     });
-    return sortBy === "name"
-      ? [...results].sort((left, right) => left.Business_Name.localeCompare(right.Business_Name, "en-GB", { sensitivity: "base" }))
-      : results;
-  }, [locationBuilders, query, service, sortBy]);
+    return [...results].sort((left, right) => {
+      const leftSponsored = sponsoredService && left.sponsoredServiceSlugs.includes(sponsoredService) ? 0 : 1;
+      const rightSponsored = sponsoredService && right.sponsoredServiceSlugs.includes(sponsoredService) ? 0 : 1;
+      if (leftSponsored !== rightSponsored) return leftSponsored - rightSponsored;
+      return sortBy === "name"
+        ? left.Business_Name.localeCompare(right.Business_Name, "en-GB", { sensitivity: "base" })
+        : 0;
+    });
+  }, [locationBuilders, query, service, sortBy, sponsoredService]);
 
   if (!place) return <NotFound />;
 
@@ -90,7 +96,7 @@ export default function Directory() {
       {filtersOpen && <button className="filter-backdrop" type="button" onClick={() => setFiltersOpen(false)} aria-label="Close filter panel" />}
       <section className="results-column" aria-live="polite">
         <div className="results-toolbar"><p><strong>{filtered.length}</strong> {filtered.length === 1 ? "business" : "businesses"} listed in {place.name}</p><button className="filter-toggle" type="button" onClick={() => setFiltersOpen(true)} aria-expanded={filtersOpen}><Filter size={17} aria-hidden="true" /> Filters</button><label className="sort-label" htmlFor="sort-results">Sort by</label><select id="sort-results" value={sortBy} onChange={(event) => setSortBy(event.target.value)}><option value="relevance">Default</option><option value="name">Business name</option></select></div>
-        {filtered.length > 0 ? <div className="builder-card-list">{filtered.map((builder) => <BuilderCard key={builder.slug} builder={builder} />)}</div> : <div className="empty-state"><span className="empty-icon"><Filter size={21} aria-hidden="true" /></span><h2>No businesses match those filters</h2><p>Try a different service, search term or launch area.</p><button type="button" className="button" onClick={clearFilters}>Show all businesses <ArrowLeft size={16} aria-hidden="true" /></button></div>}
+        {filtered.length > 0 ? <div className="builder-card-list">{filtered.map((builder) => <BuilderCard key={builder.slug} builder={builder} sponsored={Boolean(sponsoredService && builder.sponsoredServiceSlugs.includes(sponsoredService))} />)}</div> : <div className="empty-state"><span className="empty-icon"><Filter size={21} aria-hidden="true" /></span><h2>No businesses match those filters</h2><p>Try a different service, search term or launch area.</p><button type="button" className="button" onClick={clearFilters}>Show all businesses <ArrowLeft size={16} aria-hidden="true" /></button></div>}
         <p className="results-disclaimer">Business details are compiled from public company or trade sources. Southampton Traders does not endorse listed firms or publish ratings/reviews. Details and availability can change; confirm them directly.</p>
       </section>
     </div>

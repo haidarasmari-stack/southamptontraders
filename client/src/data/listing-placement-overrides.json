@@ -1,0 +1,22 @@
+{
+  "solent-pro-builders": {
+    "additionalLocationSlugs": [
+      "eastleigh",
+      "fareham",
+      "new-forest",
+      "winchester",
+      "totton",
+      "hedge-end",
+      "romsey"
+    ],
+    "sponsoredServiceSlugs": [
+      "kitchens-and-bathrooms",
+      "loft-conversions"
+    ]
+  },
+  "bigwood-roofing": {
+    "additionalLocationSlugs": [
+      "eastleigh"
+    ]
+  }
+}

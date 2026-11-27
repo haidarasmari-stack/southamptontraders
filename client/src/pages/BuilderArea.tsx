@@ -1,4 +1,4 @@
-import { ArrowRight, BriefcaseBusiness, CheckCircle2, ClipboardList, Eye, PencilLine, ShieldCheck } from "lucide-react";
+import { ArrowRight, BriefcaseBusiness, CheckCircle2, ClipboardList, Eye, PencilLine, Send, ShieldCheck } from "lucide-react";
 import { FormEvent, useState } from "react";
 import { Link } from "wouter";
 import { Breadcrumbs } from "@/components/SiteFrame";
@@ -24,7 +24,10 @@ export default function BuilderArea() {
   const [activeTab, setActiveTab] = useState<"overview" | "profile" | "enquiries">("overview");
   const [preview, setPreview] = useState<ProfilePreview | null>(null);
   const [notice, setNotice] = useState("");
-  usePageMeta({ title: "For builders · dashboard demo | Southampton Traders", description: "Explore the Southampton Traders builder onboarding, profile editor and enquiries dashboard demonstration. Nothing is sent or saved.", path: "/builder-area/", noindex: true });
+  const [requestSent, setRequestSent] = useState(false);
+  const [requestError, setRequestError] = useState("");
+  const [requestPending, setRequestPending] = useState(false);
+  usePageMeta({ title: "Get your building business listed | Southampton Traders", description: "Builders and companies can send Southampton Traders a request to be considered for the local directory. Requests are reviewed and are not published automatically.", path: "/builder-area/", noindex: true });
 
   const savePreview = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -42,6 +45,55 @@ export default function BuilderArea() {
     setNotice("Profile preview updated in this page only. It was not saved.");
   };
 
+  const submitListingRequest = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setRequestError("");
+    const form = event.currentTarget;
+    const values = new FormData(form);
+    const text = (name: string) => String(values.get(name) ?? "").trim();
+    const serviceSlugs = values.getAll("serviceSlugs").map(String) as (typeof services)[number]["slug"][];
+    const locationSlugs = values.getAll("locationSlugs").map(String) as (typeof locations)[number]["slug"][];
+    if (values.get("consent") !== "on") {
+      setRequestError("Confirm that you are authorized to send these details for review.");
+      return;
+    }
+    if (!serviceSlugs.length || !locationSlugs.length) {
+      setRequestError("Choose at least one service and one area served.");
+      return;
+    }
+    setRequestPending(true);
+    try {
+      const response = await fetch("/api/builder-application", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+        businessName: text("businessName"),
+        contactName: text("contactName"),
+        contactEmail: text("contactEmail"),
+        contactPhone: text("contactPhone") || undefined,
+        websiteUrl: text("websiteUrl") || undefined,
+        description: text("description"),
+        serviceSlugs,
+        locationSlugs,
+        consent: true,
+        honeypot: text("companyFax"),
+        }),
+      });
+      if (!response.ok) {
+        const error = await response.json().catch(() => null) as { message?: string } | null;
+        throw new Error(error?.message || "The request could not be delivered. Please try again later.");
+      }
+      form.reset();
+      setRequestSent(true);
+    } catch (error) {
+      setRequestError(error instanceof Error && error.message.startsWith("Too many requests")
+        ? error.message
+        : "We couldn't deliver your request just now. Your details remain in this form; please try again later.");
+    } finally {
+      setRequestPending(false);
+    }
+  };
+
   const registerPreview = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setNotice("Registration preview complete. No account was created and no verification email was sent.");
@@ -50,8 +102,24 @@ export default function BuilderArea() {
 
   return <div className="page wrap">
     <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "For builders" }]} />
-    <div className="page-heading"><p className="eyebrow">Builder tools · demonstration only</p><h1>Show the work. Keep control.</h1><p className="section-intro">Preview a future builder profile and dashboard. This is not account registration: details stay in this page and clear when you leave.</p></div>
-    <div className="form-warning"><ShieldCheck size={20} aria-hidden="true" /><p><strong>Demo only—please use test information.</strong> No account, verification email, profile or enquiry response is created or saved. Do not enter real contact details or confidential business information.</p></div>
+    <div className="page-heading"><p className="eyebrow">For local builders and companies</p><h1>Request to be listed.</h1><p className="section-intro">Share your business details for Southampton Traders to review. A request is not an account, endorsement or automatic directory listing.</p></div>
+    <div className="form-warning" role="note"><ShieldCheck size={20} aria-hidden="true" /><p><strong>Your request goes to the site owner for manual review.</strong> Your contact details are not displayed publicly or sent to listed builders. Do not submit passwords, identity documents, customer details or confidential information.</p></div>
+    <section className="listing-request-section" id="listing-request" aria-labelledby="listing-request-title">
+      <div className="section-heading"><div><p className="eyebrow">Business listing request</p><h2 id="listing-request-title">Tell us about your company.</h2></div><span className="demo-pill">Reviewed before any listing</span></div>
+      {requestSent ? <div className="confirmation-card" role="status"><span className="confirmation-icon"><CheckCircle2 size={24} aria-hidden="true" /></span><div><p className="eyebrow">Request submitted</p><h3>Your details were accepted for review.</h3><p>The platform notification service accepted your request for the site owner. This does not confirm it has been read. It has not been added to the directory, and no account or confirmation email has been created. We do not provide an automated review status.</p><button className="button button-outline" type="button" onClick={() => setRequestSent(false)}>Send another request</button></div></div> : <form className="form-card listing-request-form" onSubmit={submitListingRequest}>
+        <div className="form-row"><label className="form-field"><span>Business or company name <b>*</b></span><input name="businessName" required minLength={2} maxLength={120} autoComplete="organization" /></label><label className="form-field"><span>Your name <b>*</b></span><input name="contactName" required minLength={2} maxLength={100} autoComplete="name" /></label></div>
+        <div className="form-row"><label className="form-field"><span>Contact email <b>*</b></span><input name="contactEmail" type="email" required maxLength={254} autoComplete="email" /><small>Used by the site owner to review and follow up on this request.</small></label><label className="form-field"><span>Contact phone <small>(optional)</small></span><input name="contactPhone" type="tel" maxLength={40} autoComplete="tel" /></label></div>
+        <label className="form-field"><span>Business website <small>(optional)</small></span><input name="websiteUrl" type="url" maxLength={300} placeholder="https://" autoComplete="url" /></label>
+        <fieldset className="listing-choice-group"><legend>Services you provide <b>*</b></legend><p>Select every service you want considered for the directory.</p><div className="listing-choice-grid">{services.map((service) => <label className="check-row" key={service.slug}><input type="checkbox" name="serviceSlugs" value={service.slug} /><span>{service.name}</span></label>)}</div></fieldset>
+        <fieldset className="listing-choice-group"><legend>Areas you serve <b>*</b></legend><p>Select at least one current directory launch area.</p><div className="listing-choice-grid">{locations.map((location) => <label className="check-row" key={location.slug}><input type="checkbox" name="locationSlugs" value={location.slug} /><span>{location.name}</span></label>)}</div></fieldset>
+        <label className="form-field"><span>Brief business description <b>*</b></span><textarea name="description" required minLength={20} maxLength={1000} rows={4} placeholder="Describe the building work your company carries out and its local coverage." /><small>20–1,000 characters. Do not include customer or homeowner information.</small></label>
+        <label className="check-row consent-row"><input type="checkbox" name="consent" required /><span>I confirm I am authorized to submit these details and agree Southampton Traders may send them to the site owner to review this listing request and contact me about it. I understand nothing is published automatically and no account is created.</span></label>
+        <div className="honeypot" aria-hidden="true"><label htmlFor="listing-company-fax">Leave this field blank</label><input id="listing-company-fax" name="companyFax" tabIndex={-1} autoComplete="off" /></div>
+        {requestError && <p className="form-error" role="alert">{requestError}</p>}
+        <button className="button form-submit" type="submit" disabled={requestPending}>{requestPending ? "Sending request…" : "Send listing request"} <Send size={16} aria-hidden="true" /></button>
+        <p className="form-privacy-note">Your request is handled as described in the <Link href="/privacy/">privacy information</Link>. Submitting does not guarantee inclusion.</p>
+      </form>}
+    </section>
     <div className="dashboard-shell">
       <nav className="dashboard-tabs" aria-label="Builder demo sections">
         <button type="button" aria-pressed={activeTab === "overview"} onClick={() => setActiveTab("overview")}><BriefcaseBusiness size={16} /> Overview</button>

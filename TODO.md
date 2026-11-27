@@ -22,7 +22,7 @@
 - [ ] Support business replies, review reporting, moderation and an audit trail in the authorized real-data version.
 - [x] Never create fake reviews, ratings, accreditations or verification badges; show an honest empty state until eligible real reviews exist.
 - [x] Explain review and moderation rules clearly.
-- [x] Clearly label sponsored placements if introduced later; do not introduce sponsored placements in this MVP.
+- [x] Clearly label sponsored placements as promotional and distinct from standard listings; no paid placement checkout or payment processing is available.
 
 ## Admin tools
 - [ ] Provide admin tools for managing customers, builder accounts, profiles, services, locations, enquiries, reviews and reports in the authorized real-data version.
@@ -116,3 +116,60 @@
 - [ ] Align route metadata with visible page content, include concise unique descriptions, and preserve canonical/noindex behavior for filtered results and demo pages.
 - [ ] Keep Q&A as useful visible text; do not add FAQ rich-result schema based on obsolete Google eligibility; do not add special AI markup or crawler rules that contradict user intent.
 - [ ] Validate output with typecheck, tests, production build/prerender, generated metadata/visible-answer checks, route/canonical/schema/robots checks, and status handling. Confirm publication outcome only from the checkpoint/publish receipt.
+
+## Solent Pro Builders directory placement — 24 November 2026
+- [x] Make Solent Pro Builders appear in each of the seven launch areas (Southampton, Eastleigh, Fareham, Winchester, Totton, Hedge End and Romsey) when visitors browse Kitchens & bathrooms or Loft conversions; place it before other matching profiles.
+- [x] Identify this owner-selected priority placement transparently in matching results; retain the existing profile, contact details and single profile route without creating duplicates.
+- [x] Record source/provenance for the added category and area placement; the user explicitly confirmed loft conversions after the official website was found not to mention that service.
+
+## Search-wide Solent priority clarification — 24 November 2026
+- [x] When anyone searches for kitchen, bathroom or loft work, put Solent Pro Builders before other matching companies—not only on a city page after choosing a service filter, but also on the matching service browse pages and free-text directory searches.
+- [x] Show the “Sponsored” label wherever this search placement applies; keep the profile factual and singular.
+
+## Sponsored search placements — 24 November 2026
+- [x] Label Solent Pro Builders as “Sponsored” and rank it first for matching kitchen/bathroom and loft service browsing and free-text searches across all seven launch areas.
+- [x] Keep sponsored placements configurable per business and service so additional sponsors can be added without code changes to ranking logic.
+- [x] Explain that sponsored placements are promotional, not endorsements or verification; do not represent paid placement as purchasable and do not collect payments until a separate payment flow is built and authorized.
+
+## Competitor-inspired homeowner shortlist — 24 November 2026
+- [x] Let visitors save/unsave builder profiles from search cards and profiles, and show the saved count and a shortlist link in navigation.
+- [x] Provide a `/shortlist/` page with saved profile cards, direct supported company contact links, a clear-all control and an empty state.
+- [x] Store only known public builder slugs in local browser storage; explain that saved profiles stay in this browser and that no account, visitor contact data, quote submission, review, verification or payment is added.
+- [x] Mark `/shortlist/` noindex and include the route in the route manifest without adding personalized content to the sitemap.
+- [x] Preserve the existing responsive editorial style; typecheck, test and production-build the route and shortlist logic.
+
+## Browser-only project brief — 24 November 2026
+- [x] Provide a `/project-brief/` page that lets a visitor select a listed service and launch area, describe the work, optionally add material preferences and timing, then produce a copy-ready project brief.
+- [x] Keep inputs in page memory only; do not ask for names, phone/email, exact addresses or other personal details; do not submit or persist entries. Copy and print must be user-initiated.
+- [x] Disclose these limits beside the form and in privacy information; do not represent the brief as a quote request or say it is sent to builders.
+- [x] Add useful links from the homepage, site navigation, How it works and shortlist; make the route `noindex`, prerender it and keep it out of the sitemap.
+
+## SEO crawl and snippet cleanup — 24 November 2026
+- [x] Keep public directory pages crawlable and preserve the sitemap declaration while adding `Disallow: /api/` for non-content API endpoints.
+- [x] Update the How it works meta description to reflect the actual browser-only project brief feature without calling it a live quote or enquiry service.
+- [x] Preserve the existing unique route metadata, noindex/private route behavior, sitemap parity and genuine 404 responses; do not add unsupported reviews, ratings, addresses or ranking claims.
+- [x] Add useful homeowner content for the requested builder-selection, home-project and quote-comparison search questions; link to it from the homepage and make its public route available in the crawler route list, sitemap and prerendered HTML. Keep its title concise and its description specific to the page; avoid keyword stuffing, unverified cost figures, and claims that directory listings are verified recommendations.
+
+## Owner-supplied project photos — 25 November 2026
+- [ ] Replace the homepage's stock-style illustrative hero with the owner-supplied roof-work photo and use an appropriate real project image for social previews.
+- [ ] Add the supplied roof tile, roof-framing/rafter, and interior-progress photos to relevant Roofing, Loft conversions and Renovations pages; use all five photos across the homepage and matching service sections.
+- [ ] Add descriptive alt text and a visible note that photos were supplied by the site owner and are not attributed to a particular listed business; do not claim an unverified location, contractor or completed project.
+- [ ] Remove the old stock-style hero from page and social metadata; do not publish the unrelated Hostinger File Manager screenshots.
+
+
+## Targeted home-extension and loft-conversion guide schema — 25 November 2026
+- [ ] Provide distinct, indexable `/guides/home-extension-planning/` and `/guides/loft-conversion/` pages with substantive page-specific advice and links from `/homeowner-guides/`; keep the existing builder-selection and quote-comparison guidance available.
+- [ ] Add schema.org `Article` JSON-LD to each guide, and only describe information visible on that page, including the visible headline, Southampton Traders authorship, publication/update date and canonical page URL.
+- [ ] Ensure each JSON-LD block and meaningful guide body content are present in the initial statically prerendered HTML; add distinct route title/description/canonical metadata and synchronize Wouter routes, prerender allowlist, crawler route manifest and sitemap.
+- [ ] Avoid unsupported price estimates, universal permission/suitability claims, invented authorship or guarantees of Google rich results or ranking gains.
+- [ ] Run the project check, tests and production build; inspect both generated HTML documents and live routes, then save the changes to canonical `main` and confirm the auto-published version.
+
+## Builder listing requests — 25 November 2026
+- [ ] Let builders and companies request to be added by submitting their business and contact details; deliver the request to the site owner for manual review; do not automatically create an account or publish a business profile.
+- [ ] Explain before submission what information is sent and who receives it, require authorization/consent for review contact, validate selected services and service areas, and keep submitted contact information out of the public directory.
+- [ ] Keep the existing sample dashboard, profile preview and sample enquiries clearly identified as demonstrations, separate from real listing requests.
+- [ ] Update the privacy notice and builder entry links to distinguish actual listing requests from the site's other non-submitting demo forms; never claim a request is a verification or inclusion guarantee.
+- [ ] Run the typecheck, tests and production build; verify the request route and deployment without submitting a real builder application.
+
+## Local builder directory expansion — 25 November 2026
+- [x] Add non-duplicate builder and roofing company profiles with sourced business details for Southampton, Eastleigh, Fareham, Winchester, Hedge End and Romsey; keep the existing seven-area directory structure and accurately distinguish a company's base from the towns it serves.

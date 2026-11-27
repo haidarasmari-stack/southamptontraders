@@ -1,4 +1,5 @@
 import importedBuilders from "./builders.json";
+import placementOverrides from "./listing-placement-overrides.json";
 
 export type Service = {
   slug: string;
@@ -33,6 +34,7 @@ export type BuilderProfile = BuilderCsvRow & {
   summary: string;
   serviceSlugs: string[];
   locationSlugs: string[];
+  sponsoredServiceSlugs: string[];
   primaryServiceSlug: string;
 };
 
@@ -52,6 +54,7 @@ export const locations: Location[] = [
   { slug: "southampton", name: "Southampton", description: "Builder profiles assigned to the Southampton launch area. Current directory coverage is not exhaustive.", postcodeCoverage: "SO14–SO19" },
   { slug: "eastleigh", name: "Eastleigh", description: "Builder profiles assigned to the Eastleigh launch area. Current directory coverage is not exhaustive.", postcodeCoverage: "SO50, SO53" },
   { slug: "fareham", name: "Fareham", description: "Builder profiles assigned to the Fareham launch area. Current directory coverage is not exhaustive.", postcodeCoverage: "PO14–PO17" },
+  { slug: "new-forest", name: "New Forest", description: "Builder profiles based in or serving the New Forest and nearby Fordingbridge area. Current directory coverage is not exhaustive.", postcodeCoverage: "New Forest District & nearby SP6" },
   { slug: "winchester", name: "Winchester", description: "Builder profiles assigned to the Winchester launch area. Current directory coverage is not exhaustive.", postcodeCoverage: "SO21–SO23" },
   { slug: "totton", name: "Totton", description: "Builder profiles assigned to the Totton launch area. Current directory coverage is not exhaustive.", postcodeCoverage: "SO40" },
   { slug: "hedge-end", name: "Hedge End", description: "Builder profiles assigned to the Hedge End launch area. Current directory coverage is not exhaustive.", postcodeCoverage: "SO30" },
@@ -74,18 +77,23 @@ const locationSlugByName: Record<string, string> = Object.fromEntries(
   locations.map((location) => [location.name, location.slug]),
 );
 
+type PlacementOverride = { additionalLocationSlugs?: string[]; sponsoredServiceSlugs?: string[] };
+const placementByBuilder = placementOverrides as Record<string, PlacementOverride>;
+
 export const builders: BuilderProfile[] = (importedBuilders as BuilderCsvRow[]).map((row) => {
   const serviceNames = [...new Set([row.Primary_Service, ...row.Secondary_Services.split(",")]
     .map((service) => service.trim())
     .filter(Boolean))];
   const locationSlug = locationSlugByName[row.Primary_Location];
+  const placement = placementByBuilder[row.slug];
   return {
     ...row,
     name: row.Business_Name,
     summary: row.Unique_Profile_Summary,
     primaryServiceSlug: serviceSlugByName[row.Primary_Service],
     serviceSlugs: serviceNames.map((service) => serviceSlugByName[service]).filter(Boolean),
-    locationSlugs: locationSlug ? [locationSlug] : [],
+    locationSlugs: [...new Set([locationSlug, ...(placement?.additionalLocationSlugs ?? [])].filter((slug): slug is string => Boolean(slug)))],
+    sponsoredServiceSlugs: placement?.sponsoredServiceSlugs ?? [],
   };
 });
 
@@ -106,7 +114,16 @@ export function getBuildersForLocation(slug: string) {
 }
 
 export function getBuildersForService(slug: string) {
-  return builders.filter((builder) => builder.serviceSlugs.includes(slug));
+  return builders
+    .filter((builder) => builder.serviceSlugs.includes(slug))
+    .sort((left, right) => Number(right.sponsoredServiceSlugs.includes(slug)) - Number(left.sponsoredServiceSlugs.includes(slug)));
+}
+
+export function getSponsoredServiceForSearch(query: string) {
+  const text = query.toLocaleLowerCase("en-GB");
+  if (/\b(loft|lofts|attic|attics)\b/.test(text)) return "loft-conversions";
+  if (/\b(kitchen|kitchens|bath|baths|bathroom|bathrooms)\b/.test(text)) return "kitchens-and-bathrooms";
+  return "";
 }
 
 export function serviceName(slug: string) {

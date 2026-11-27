@@ -2,6 +2,7 @@ import { ArrowLeft, ArrowUpRight, BadgeInfo, Flag, Globe2, MapPin, Phone, Shield
 import { useState } from "react";
 import { Link, useParams } from "wouter";
 import { Breadcrumbs } from "@/components/SiteFrame";
+import ShortlistToggle from "@/components/ShortlistToggle";
 import { getBuilder, getLocation, phoneHref, serviceName } from "@/data/catalog";
 import { buildBreadcrumbJsonLd, buildBuilderProfileJsonLd, serializeJsonLd } from "@/data/jsonld";
 import { usePageMeta, SITE_ORIGIN } from "@/lib/seo";
@@ -51,7 +52,7 @@ export default function BuilderProfile() {
         <section className="content-panel credentials-panel"><ShieldCheck size={20} aria-hidden="true" /><div><h2>About this directory entry</h2><p>Profile details are compiled from public company or trade-source information. Southampton Traders does not endorse the business or display ratings, reviews, accreditations or availability claims. Contact the company to confirm current details.</p></div></section>
       </section>
       <aside className="profile-sidebar">
-        <div className="sidebar-card"><p className="eyebrow">Contact the business</p>
+        <div className="sidebar-card"><p className="eyebrow">Save for comparison</p><ShortlistToggle builderSlug={builder.slug} builderName={builder.Business_Name} /><p className="eyebrow contact-card-heading">Contact the business</p>
           {builder.Phone_Number && <a className="button button-full" href={telLink}><Phone size={17} aria-hidden="true" />Call {builder.Phone_Number}</a>}
           {builder.Website_URL && <a className="button button-outline button-full contact-secondary" href={builder.Website_URL} target="_blank" rel="noreferrer"><Globe2 size={17} aria-hidden="true" />Visit company website <ArrowUpRight size={15} aria-hidden="true" /></a>}
           {!builder.Phone_Number && !builder.Website_URL && <p>No verified phone number or direct company website is available in this directory entry.</p>}

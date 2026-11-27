@@ -8,6 +8,12 @@ import BusinessListing from "@/pages/BusinessListing";
 import ContentPages from "@/pages/ContentPages";
 import Directory from "@/pages/Directory";
 import Home from "@/pages/Home";
+import HomeExtensionGuide from "@/pages/HomeExtensionGuide";
+import HomeownerGuides from "@/pages/HomeownerGuides";
+import LoftConversionGuide from "@/pages/LoftConversionGuide";
+import ProjectBrief from "@/pages/ProjectBrief";
+import Shortlist from "@/pages/Shortlist";
+import { ShortlistProvider } from "@/contexts/ShortlistContext";
 import NotFound from "@/pages/NotFound";
 import QuoteRequest from "@/pages/QuoteRequest";
 import { Route, Switch } from "wouter";
@@ -27,6 +33,11 @@ function Router() {
     <Route path="/services/:slug/" component={ServiceLanding} />
     <Route path="/locations/:slug/" component={LocationLanding} />
     <Route path="/request-quote/" component={QuoteRequest} />
+    <Route path="/project-brief/" component={ProjectBrief} />
+    <Route path="/homeowner-guides/" component={HomeownerGuides} />
+    <Route path="/guides/home-extension-planning/" component={HomeExtensionGuide} />
+    <Route path="/guides/loft-conversion/" component={LoftConversionGuide} />
+    <Route path="/shortlist/" component={Shortlist} />
     <Route path="/builder-area/" component={BuilderArea} />
     <Route path="/admin/" component={Admin} />
     <Route path="/404" component={NotFound} />
@@ -36,5 +47,5 @@ function Router() {
 }
 
 export default function App() {
-  return <ErrorBoundary><ThemeProvider defaultTheme="light"><TooltipProvider><Toaster /><SiteFrame><Router /></SiteFrame></TooltipProvider></ThemeProvider></ErrorBoundary>;
+  return <ErrorBoundary><ThemeProvider defaultTheme="light"><TooltipProvider><Toaster /><ShortlistProvider><SiteFrame><Router /></SiteFrame></ShortlistProvider></TooltipProvider></ThemeProvider></ErrorBoundary>;
 }

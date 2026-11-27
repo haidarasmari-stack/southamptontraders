@@ -9,8 +9,8 @@ import { createServer } from "vite";
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const output = path.join(root, "dist", "public");
 const fixedRoutes = [
-  "/", "/builder/reds-builders-limited/", "/request-quote/", "/builder-area/", "/admin/",
-  "/how-it-works/", "/reviews/", "/privacy/", "/cookies/", "/contact/", "/404",
+  "/", "/builder/reds-builders-limited/", "/request-quote/", "/project-brief/", "/builder-area/", "/admin/",
+  "/how-it-works/", "/homeowner-guides/", "/guides/home-extension-planning/", "/guides/loft-conversion/", "/reviews/", "/privacy/", "/cookies/", "/contact/", "/shortlist/", "/404",
 ];
 
 const escapeHtml = (value) => value.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;").replaceAll("'", "&#39;");
@@ -54,6 +54,7 @@ try {
     html = html.replace(/<meta name="description"[^>]*>/, `<meta name="description" content="${description}" />`);
     html = html.replace(/<meta name="robots"[^>]*>/, `<meta name="robots" content="${robots}" />`);
     html = html.replace(/<link rel="canonical"[^>]*>/, `<link rel="canonical" href="${escapeHtml(canonical)}" />`);
+    html = html.replace(/<meta property="og:type"[^>]*>/, `<meta property="og:type" content="${escapeHtml(meta.ogType ?? "website")}" />`);
     html = html.replace(/<meta property="og:title"[^>]*>/, `<meta property="og:title" content="${title}" />`);
     html = html.replace(/<meta property="og:description"[^>]*>/, `<meta property="og:description" content="${description}" />`);
     html = html.replace(/<meta property="og:url"[^>]*>/, `<meta property="og:url" content="${escapeHtml(canonical)}" />`);

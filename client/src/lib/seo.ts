@@ -2,18 +2,23 @@ import { useEffect } from "react";
 import { builders, getBuilder, getBuildersForLocation, getBuildersForService, getLocation, getService } from "@/data/catalog";
 
 export const SITE_ORIGIN = "https://southamptontraders.co.uk";
-export const SHARE_IMAGE = `${SITE_ORIGIN}/manus-storage/hero-renovation_853be6f1.webp`;
+export const SHARE_IMAGE = `${SITE_ORIGIN}/manus-storage/IMG_6247_597a3dba.webp`;
 
-export type PageMeta = { title: string; description: string; path: string; noindex?: boolean };
+export type PageMeta = { title: string; description: string; path: string; noindex?: boolean; ogType?: "website" | "article" };
 
 const informationPages: Record<string, PageMeta> = {
-  "/how-it-works": { title: "How Southampton Traders works | Southampton Traders", description: "A guide to choosing a building service, browsing Hampshire locations, comparing builder information and understanding non-persistent quote forms.", path: "/how-it-works/" },
+  "/homeowner-guides": { title: "Homeowner Guides: Extensions & Lofts | Southampton Traders", description: "Practical guides to planning home extensions and loft conversions, choosing builders and comparing quotes in Southampton. Coverage is not exhaustive.", path: "/homeowner-guides/" },
+  "/guides/home-extension-planning": { title: "Home Extension Planning Guide | Southampton Traders", description: "Plan a house extension with a clear brief, feasibility checks, approval questions and comparable builder quotes. Practical advice for Southampton homeowners.", path: "/guides/home-extension-planning/", ogType: "article" },
+  "/guides/loft-conversion": { title: "Loft Conversion Guide | Southampton Traders", description: "Learn what a loft conversion involves, what to check before work starts and which questions to ask about design, approvals and builder quotes.", path: "/guides/loft-conversion/", ogType: "article" },
+  "/how-it-works": { title: "How Southampton Traders works | Southampton Traders", description: "A guide to browsing Hampshire builder profiles, saving a browser-local shortlist, preparing a project brief, and understanding demo enquiries.", path: "/how-it-works/" },
   "/reviews": { title: "Review rules | Southampton Traders", description: "Learn how a future Southampton Traders service would handle genuine project reviews, business replies, reports and moderation. No reviews appear in the directory.", path: "/reviews/", noindex: true },
-  "/privacy": { title: "Privacy information | Southampton Traders", description: "Directory contact links lead directly to companies; demo form entries are not sent or stored. Learn what not to enter and what must be in place before enquiries are enabled.", path: "/privacy/", noindex: true },
+  "/privacy": { title: "Privacy information | Southampton Traders", description: "Learn how business listing requests are delivered to the site owner for review and how the site's non-submitting demo forms work.", path: "/privacy/", noindex: true },
   "/cookies": { title: "Cookie information | Southampton Traders", description: "Read about platform analytics, hosting and privacy considerations. Southampton Traders does not configure advertising pixels or send demo form values to analytics.", path: "/cookies/", noindex: true },
   "/contact": { title: "Contact and feedback | Southampton Traders", description: "Preview a feedback form for Southampton Traders. Messages are not delivered or saved; do not include personal or sensitive details.", path: "/contact/", noindex: true },
   "/request-quote": { title: "Request a quote · demo | Southampton Traders", description: "Try the Southampton Traders project enquiry form in demonstration mode. No personal details are sent or stored.", path: "/request-quote/", noindex: true },
-  "/builder-area": { title: "For builders · dashboard demo | Southampton Traders", description: "Explore the Southampton Traders builder onboarding, profile editor and enquiries dashboard demonstration. Nothing is sent or saved.", path: "/builder-area/", noindex: true },
+  "/shortlist": { title: "Your builder shortlist | Southampton Traders", description: "Review builder profiles you saved in this browser and compare their listed services and contact details.", path: "/shortlist/", noindex: true },
+  "/project-brief": { title: "Prepare a builder project brief | Southampton Traders", description: "Create a copy-ready project outline to discuss with builders. It stays in page memory and is not sent or saved by Southampton Traders.", path: "/project-brief/", noindex: true },
+  "/builder-area": { title: "Get your building business listed | Southampton Traders", description: "Builders and companies can send Southampton Traders a request to be considered for the local directory. Requests are reviewed and are not published automatically.", path: "/builder-area/", noindex: true },
   "/admin": { title: "Admin tools · demo | Southampton Traders", description: "A public demonstration of directory administration and moderation concepts. It is not a secure admin system and saves no actions.", path: "/admin/", noindex: true },
   "/404": { title: "Page not found | Southampton Traders", description: "That Southampton Traders page could not be found. Browse the local builder directory instead.", path: "/404", noindex: true },
 };
@@ -21,7 +26,7 @@ const informationPages: Record<string, PageMeta> = {
 export function metaForPath(pathname: string): PageMeta {
   const path = pathname.split("?")[0].replace(/\/$/, "") || "/";
   const canonicalPath = path === "/" || path === "/404" ? path : `${path}/`;
-  if (path === "/") return { title: "Find local builders in Southampton | Southampton Traders", description: `Browse ${getBuildersForLocation("southampton").length} builder profiles in Southampton. Filter by service, find contact details, and explore six nearby Hampshire areas. Coverage is not exhaustive.`, path: "/" };
+  if (path === "/") return { title: "Find local builders in Southampton | Southampton Traders", description: `Browse ${getBuildersForLocation("southampton").length} builder profiles in Southampton. Filter by service, find contact details, and explore seven nearby directory areas. Coverage is not exhaustive.`, path: "/" };
   if (informationPages[path]) return { ...informationPages[path], path: canonicalPath };
 
   const profileMatch = path.match(/^\/builder\/([^/]+)$/);
@@ -72,7 +77,7 @@ function setMeta(selector: string, attribute: "name" | "property", key: string, 
   element.content = content;
 }
 
-export function applyPageMeta({ title, description, path, noindex = false }: PageMeta) {
+export function applyPageMeta({ title, description, path, noindex = false, ogType = "website" }: PageMeta) {
   document.title = title;
   setMeta('meta[name="description"]', "name", "description", description);
   setMeta('meta[name="robots"]', "name", "robots", noindex ? "noindex,follow" : "index,follow");
@@ -80,7 +85,7 @@ export function applyPageMeta({ title, description, path, noindex = false }: Pag
   let canonical = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]');
   if (!canonical) { canonical = document.createElement("link"); canonical.rel = "canonical"; document.head.appendChild(canonical); }
   canonical.href = url;
-  setMeta('meta[property="og:type"]', "property", "og:type", "website");
+  setMeta('meta[property="og:type"]', "property", "og:type", ogType);
   setMeta('meta[property="og:title"]', "property", "og:title", title);
   setMeta('meta[property="og:description"]', "property", "og:description", description);
   setMeta('meta[property="og:url"]', "property", "og:url", url);
@@ -93,5 +98,5 @@ export function applyPageMeta({ title, description, path, noindex = false }: Pag
 }
 
 export function usePageMeta(meta: PageMeta) {
-  useEffect(() => { applyPageMeta(meta); }, [meta.title, meta.description, meta.path, meta.noindex]);
+  useEffect(() => { applyPageMeta(meta); }, [meta.title, meta.description, meta.path, meta.noindex, meta.ogType]);
 }
