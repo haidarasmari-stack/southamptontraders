@@ -23,6 +23,8 @@ export default function HomeownerGuides() {
         <Link className="button button-outline" href="/guides/home-extension-planning/">House extension planning guide <ArrowRight size={16} aria-hidden="true" /></Link>
         <Link className="button button-outline" href="/guides/loft-conversion/">What is a loft conversion? <ArrowRight size={16} aria-hidden="true" /></Link>
         <Link className="button button-outline" href="/guides/checking-a-builder/">How to check a builder <ArrowRight size={16} aria-hidden="true" /></Link>
+        <Link className="button button-outline" href="/guides/planning-permission/">Do I need planning permission? <ArrowRight size={16} aria-hidden="true" /></Link>
+        <Link className="button button-outline" href="/guides/party-wall-agreements/">Party wall agreements <ArrowRight size={16} aria-hidden="true" /></Link>
       </div>
     </div>
 

@@ -18,7 +18,7 @@ export default function HomeExtensionGuide() {
 
     <section aria-labelledby="extension-approvals">
       <h2 id="extension-approvals">Confirm planning and building-control requirements</h2>
-      <p>Do not assume that every extension needs the same permissions, or that none are needed. Requirements depend on the property and proposal. Ask the relevant local authority and your project professionals which planning, building-control or other approvals may apply, who will prepare the information, and who is responsible for submitting applications and arranging the required checks. Agree responsibilities in writing before work begins.</p>
+      <p>Do not assume that every extension needs the same permissions, or that none are needed. Requirements depend on the property and proposal. Ask the relevant local authority and your project professionals which planning, building-control or other approvals may apply, who will prepare the information, and who is responsible for submitting applications and arranging the required checks. Agree responsibilities in writing before work begins. Our guides to <Link href="/guides/planning-permission/">planning permission</Link> and <Link href="/guides/party-wall-agreements/">party wall notices</Link> explain the main rules.</p>
     </section>
 
     <section aria-labelledby="extension-brief">

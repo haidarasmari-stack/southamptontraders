@@ -5,12 +5,13 @@ import React from "react";
 import { renderToString } from "react-dom/server";
 import { Router } from "wouter";
 import { createServer } from "vite";
+import { createLastModLookup } from "./sitemap-lastmod.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const output = path.join(root, "dist", "public");
 const fixedRoutes = [
   "/", "/builder/reds-builders-limited/", "/request-quote/", "/project-brief/", "/builder-area/", "/admin/",
-  "/how-it-works/", "/homeowner-guides/", "/guides/home-extension-planning/", "/guides/loft-conversion/", "/guides/checking-a-builder/", "/reviews/", "/privacy/", "/cookies/", "/contact/", "/shortlist/", "/404",
+  "/how-it-works/", "/homeowner-guides/", "/guides/home-extension-planning/", "/guides/loft-conversion/", "/guides/checking-a-builder/", "/guides/planning-permission/", "/guides/party-wall-agreements/", "/reviews/", "/privacy/", "/cookies/", "/contact/", "/shortlist/", "/404",
 ];
 
 const escapeHtml = (value) => value.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;").replaceAll("'", "&#39;");
@@ -68,8 +69,12 @@ try {
     await fs.mkdir(path.dirname(destination), { recursive: true });
     await fs.writeFile(destination, html, "utf8");
   }
+  const lastModFor = createLastModLookup(root);
   const sitemapPaths = [...new Set(routes.map((rawRoute) => metaForPath(normalize(rawRoute))).filter((meta) => !meta.noindex).map((meta) => meta.path))];
-  const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${sitemapPaths.map((sitemapPath) => `  <url><loc>${escapeHtml(new URL(sitemapPath, SITE_ORIGIN).toString())}</loc></url>`).join("\n")}\n</urlset>\n`;
+  const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${sitemapPaths.map((sitemapPath) => {
+    const lastmod = lastModFor(sitemapPath);
+    return `  <url><loc>${escapeHtml(new URL(sitemapPath, SITE_ORIGIN).toString())}</loc>${lastmod ? `<lastmod>${lastmod}</lastmod>` : ""}</url>`;
+  }).join("\n")}\n</urlset>\n`;
   await fs.writeFile(path.join(output, "sitemap.xml"), sitemap, "utf8");
   console.log(`Prerendered ${routes.length} route documents into dist/public.`);
   console.log(`Wrote sitemap.xml with ${sitemapPaths.length} indexable URLs.`);

@@ -12,6 +12,8 @@ import HomeExtensionGuide from "@/pages/HomeExtensionGuide";
 import HomeownerGuides from "@/pages/HomeownerGuides";
 import LoftConversionGuide from "@/pages/LoftConversionGuide";
 import CheckingABuilderGuide from "@/pages/CheckingABuilderGuide";
+import PartyWallGuide from "@/pages/PartyWallGuide";
+import PlanningPermissionGuide from "@/pages/PlanningPermissionGuide";
 import ProjectBrief from "@/pages/ProjectBrief";
 import ServiceAreaLanding from "@/pages/ServiceAreaLanding";
 import Shortlist from "@/pages/Shortlist";
@@ -41,6 +43,8 @@ function Router() {
     <Route path="/guides/home-extension-planning/" component={HomeExtensionGuide} />
     <Route path="/guides/loft-conversion/" component={LoftConversionGuide} />
     <Route path="/guides/checking-a-builder/" component={CheckingABuilderGuide} />
+    <Route path="/guides/planning-permission/" component={PlanningPermissionGuide} />
+    <Route path="/guides/party-wall-agreements/" component={PartyWallGuide} />
     <Route path="/shortlist/" component={Shortlist} />
     <Route path="/builder-area/" component={BuilderArea} />
     <Route path="/admin/" component={Admin} />
