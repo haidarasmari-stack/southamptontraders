@@ -12,6 +12,7 @@ import HomeExtensionGuide from "@/pages/HomeExtensionGuide";
 import HomeownerGuides from "@/pages/HomeownerGuides";
 import LoftConversionGuide from "@/pages/LoftConversionGuide";
 import ProjectBrief from "@/pages/ProjectBrief";
+import ServiceAreaLanding from "@/pages/ServiceAreaLanding";
 import Shortlist from "@/pages/Shortlist";
 import { ShortlistProvider } from "@/contexts/ShortlistContext";
 import NotFound from "@/pages/NotFound";
@@ -30,6 +31,7 @@ function Router() {
     <Route path="/builders/:location/" component={Directory} />
     <Route path="/builder/reds-builders-limited/" component={BusinessListing} />
     <Route path="/builder/:slug/" component={BuilderProfile} />
+    <Route path="/services/:slug/:area/" component={ServiceAreaLanding} />
     <Route path="/services/:slug/" component={ServiceLanding} />
     <Route path="/locations/:slug/" component={LocationLanding} />
     <Route path="/request-quote/" component={QuoteRequest} />

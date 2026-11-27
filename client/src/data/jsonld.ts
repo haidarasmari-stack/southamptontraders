@@ -180,3 +180,30 @@ export function serializeJsonLd(value: unknown) {
     .replace(/\u2028/g, "\\u2028")
     .replace(/\u2029/g, "\\u2029");
 }
+
+export function buildCollectionPageJsonLd(
+  siteOrigin: string,
+  pageUrl: string,
+  page: { name: string; description: string },
+  profiles: Array<Pick<BuilderProfile, "Business_Name" | "slug">>,
+) {
+  const origin = siteOrigin.replace(/\/$/, "");
+  return {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "@id": `${pageUrl}#webpage`,
+    url: pageUrl,
+    name: page.name,
+    description: page.description,
+    isPartOf: { "@id": `${origin}/#website` },
+    publisher: { "@id": `${origin}/#organization` },
+    mainEntity: {
+      "@type": "ItemList",
+      numberOfItems: profiles.length,
+      itemListElement: profiles.map((profile, index) => {
+        const profileUrl = `${origin}/builder/${encodeURIComponent(profile.slug)}/`;
+        return { "@type": "ListItem", position: index + 1, item: { "@type": "WebPage", "@id": profileUrl, url: profileUrl, name: profile.Business_Name } };
+      }),
+    },
+  };
+}

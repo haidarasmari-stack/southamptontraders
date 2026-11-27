@@ -144,3 +144,107 @@ export function phoneHref(phone: string) {
   if (digits.startsWith("44")) return `tel:+${digits}`;
   return `tel:${digits}`;
 }
+
+export type ServiceSearchCopy = {
+  /** The trade name people type into search, e.g. "Roofers". */
+  trade: string;
+  /** Short advice specific to this kind of work, shown on service-in-area pages. */
+  checks: Array<{ heading: string; body: string }>;
+};
+
+export const serviceSearchCopy: Record<string, ServiceSearchCopy> = {
+  extensions: {
+    trade: "Extension builders",
+    checks: [
+      { heading: "Planning or permitted development", body: "Many single-storey rear extensions fall under permitted development, but limits apply to size, height and conservation areas. Check with the council's planning service before you commit to a design." },
+      { heading: "Building Regulations sign-off", body: "Extensions need Building Regulations approval for structure, insulation, drainage and fire safety. Ask the builder who will submit to building control and who arranges inspections." },
+      { heading: "What the quote includes", body: "Ask whether drawings, structural calculations, foundations, steelwork and the finished kitchen or flooring are included, or priced separately." },
+    ],
+  },
+  renovations: {
+    trade: "Renovation builders",
+    checks: [
+      { heading: "Survey before you start", body: "Older homes can hide damp, rot or outdated wiring. A survey or opening-up work before pricing reduces surprises once walls and floors are exposed." },
+      { heading: "Order of trades", body: "Ask who coordinates electricians, plumbers, plasterers and decorators, and how the work will be sequenced if you are living in the property." },
+      { heading: "Contingency", body: "Agree in writing how unforeseen work will be priced and approved, so changes do not appear only on the final invoice." },
+    ],
+  },
+  "loft-conversions": {
+    trade: "Loft conversion specialists",
+    checks: [
+      { heading: "Head height and roof type", body: "Measure the tallest point of the loft. Roof shape, trusses and head height decide whether a rooflight, dormer, hip-to-gable or mansard conversion is realistic." },
+      { heading: "Approvals and neighbours", body: "Most loft conversions need Building Regulations approval, including fire-safe escape routes. Work on a shared wall may need a Party Wall Act notice to neighbours." },
+      { heading: "Stairs and services", body: "Ask where the new staircase will land, and whether heating, electrics and insulation upgrades are part of the price." },
+    ],
+  },
+  "new-builds": {
+    trade: "New build builders",
+    checks: [
+      { heading: "Planning permission first", body: "A new dwelling needs full planning permission. Ask builders whether they price from approved drawings or can work with your architect before approval." },
+      { heading: "Structural warranty", body: "Mortgage lenders usually expect a structural warranty or professional consultant's certificate on a new home. Ask how the builder handles this." },
+      { heading: "Programme and stage payments", body: "Agree a build programme and tie payments to completed stages such as foundations, wall plate, roof and first fix." },
+    ],
+  },
+  brickwork: {
+    trade: "Bricklayers",
+    checks: [
+      { heading: "Matching existing bricks", body: "For extensions and repairs, ask how the bricklayer will source a close brick and mortar match, and whether a sample panel is included." },
+      { heading: "Walls, piers and repointing", body: "Garden walls, chimney work and repointing need different skills. Check that the profile lists the type of brickwork you need." },
+      { heading: "Scaffolding and waste", body: "Confirm whether scaffolding, skip hire and clearing away are included in the price." },
+    ],
+  },
+  roofing: {
+    trade: "Roofers",
+    checks: [
+      { heading: "Repair or replace", body: "Ask the roofer to explain whether a leak needs a local repair or a wider re-roof, and to show photos of the problem areas." },
+      { heading: "Materials and guarantees", body: "Check the tile, slate or flat-roof system being quoted, and what written guarantee covers materials and workmanship." },
+      { heading: "Access and scaffolding", body: "Confirm whether scaffolding is included, how long it will stay up, and whether any neighbour access is needed." },
+    ],
+  },
+  plastering: {
+    trade: "Plasterers",
+    checks: [
+      { heading: "Skim, re-plaster or boarding", body: "Ask whether walls will be skimmed, fully re-plastered or plasterboarded, as each suits a different wall condition." },
+      { heading: "Drying time", body: "New plaster needs time to dry before painting. Ask for drying guidance so decorating is not booked too early." },
+      { heading: "Preparation and protection", body: "Confirm who removes old plaster, protects floors and fixtures, and clears up afterwards." },
+    ],
+  },
+  groundworks: {
+    trade: "Groundworkers",
+    checks: [
+      { heading: "Utilities and drainage", body: "Before digging, ask how underground services will be traced and whether drainage connections need building control or water company approval." },
+      { heading: "Spoil removal", body: "Excavation creates a lot of spoil. Check whether muck-away, grab lorries and skips are included." },
+      { heading: "Foundations and inspections", body: "For extensions and new builds, ask who books the building control foundation inspection and what happens if ground conditions change the design." },
+    ],
+  },
+  "kitchens-and-bathrooms": {
+    trade: "Kitchen & bathroom fitters",
+    checks: [
+      { heading: "Supply or fit only", body: "Ask whether the quote covers supplying units, worktops and sanitaryware, or fitting only items you buy yourself." },
+      { heading: "Gas and electrics", body: "Gas work must be done by a Gas Safe registered engineer, and new electrical circuits in kitchens and bathrooms usually need certification. Ask who carries this out." },
+      { heading: "Waterproofing and tiling", body: "For showers and wet rooms, ask how walls and floors will be tanked or waterproofed before tiling." },
+    ],
+  },
+};
+
+/** Minimum listings before a service-in-area page is published, so no page is thin. */
+export const MIN_SERVICE_AREA_PROFILES = 3;
+
+export function serviceTrade(slug: string) {
+  return serviceSearchCopy[slug]?.trade ?? `${serviceName(slug)} builders`;
+}
+
+export function getBuildersForServiceInLocation(serviceSlug: string, locationSlug: string) {
+  return getBuildersForService(serviceSlug).filter((builder) => builder.locationSlugs.includes(locationSlug));
+}
+
+export function hasServiceAreaPage(serviceSlug: string, locationSlug: string) {
+  return Boolean(getService(serviceSlug) && getLocation(locationSlug))
+    && getBuildersForServiceInLocation(serviceSlug, locationSlug).length >= MIN_SERVICE_AREA_PROFILES;
+}
+
+export function getServiceAreaPages() {
+  return services.flatMap((service) => locations
+    .filter((location) => hasServiceAreaPage(service.slug, location.slug))
+    .map((location) => ({ service, location, path: `/services/${service.slug}/${location.slug}/` })));
+}
