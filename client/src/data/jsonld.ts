@@ -207,3 +207,18 @@ export function buildCollectionPageJsonLd(
     },
   };
 }
+
+/** FAQPage markup. Only use for questions and answers that are visible on the same page. */
+export function buildFaqPageJsonLd(pageUrl: string, faqs: Array<{ question: string; answer: string }>) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "@id": `${pageUrl}#faq`,
+    url: pageUrl,
+    mainEntity: faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: { "@type": "Answer", text: faq.answer },
+    })),
+  };
+}

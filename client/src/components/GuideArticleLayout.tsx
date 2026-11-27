@@ -12,17 +12,20 @@ type GuideArticleLayoutProps = {
   headline: string;
   section: string;
   children: ReactNode;
+  /** ISO date the guide was published, when it differs from the original guides. */
+  publishedDate?: string;
 };
 
-export default function GuideArticleLayout({ path, headline, section, children }: GuideArticleLayoutProps) {
+export default function GuideArticleLayout({ path, headline, section, children, publishedDate = PUBLISHED_DATE }: GuideArticleLayoutProps) {
+  const displayDate = publishedDate === PUBLISHED_DATE ? DISPLAY_DATE : new Date(`${publishedDate}T12:00:00Z`).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" });
   const meta = metaForPath(path);
   const canonicalUrl = new URL(meta.path, SITE_ORIGIN).toString();
   const jsonLd = buildArticleJsonLd(SITE_ORIGIN, canonicalUrl, {
     headline,
     description: meta.description,
     section,
-    datePublished: PUBLISHED_DATE,
-    dateModified: PUBLISHED_DATE,
+    datePublished: publishedDate,
+    dateModified: publishedDate,
   });
 
   usePageMeta(meta);
@@ -39,7 +42,7 @@ export default function GuideArticleLayout({ path, headline, section, children }
         <p className="eyebrow">{section}</p>
         <h1>{headline}</h1>
         <p className="section-intro">{meta.description}</p>
-        <p className="guide-byline">By Southampton Traders · First published and last updated <time dateTime={PUBLISHED_DATE}>{DISPLAY_DATE}</time></p>
+        <p className="guide-byline">By Southampton Traders · First published and last updated <time dateTime={publishedDate}>{displayDate}</time></p>
       </div>
       {children}
     </article>

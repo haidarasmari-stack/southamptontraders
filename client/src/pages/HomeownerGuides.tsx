@@ -22,6 +22,7 @@ export default function HomeownerGuides() {
       <div className="content-page-cta" aria-label="Detailed project guides">
         <Link className="button button-outline" href="/guides/home-extension-planning/">House extension planning guide <ArrowRight size={16} aria-hidden="true" /></Link>
         <Link className="button button-outline" href="/guides/loft-conversion/">What is a loft conversion? <ArrowRight size={16} aria-hidden="true" /></Link>
+        <Link className="button button-outline" href="/guides/checking-a-builder/">How to check a builder <ArrowRight size={16} aria-hidden="true" /></Link>
       </div>
     </div>
 

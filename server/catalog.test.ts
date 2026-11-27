@@ -183,3 +183,39 @@ describe("researched builder catalog", () => {
     expect(metaForPath("/services/roofing/nowhere/").noindex).toBe(true);
   });
 });
+
+describe("homeowner guidance and FAQ markup", async () => {
+  const { costFactors, faqsForLocation, faqsForService, faqsForServiceArea, localCouncils } = await import("../client/src/data/serviceGuidance");
+  const { buildFaqPageJsonLd } = await import("../client/src/data/jsonld");
+
+  it("has cost factors for every service and a council for every area", () => {
+    for (const service of services) expect(costFactors[service.slug]?.length).toBeGreaterThan(0);
+    for (const location of locations) expect(localCouncils[location.slug]).toBeDefined();
+  });
+
+  it("builds FAQs for every service-in-area page from the listed counts", () => {
+    for (const page of getServiceAreaPages()) {
+      const faqs = faqsForServiceArea(page.service.slug, page.location.slug);
+      expect(faqs.length).toBeGreaterThanOrEqual(4);
+      const count = getBuildersForServiceInLocation(page.service.slug, page.location.slug).length;
+      expect(faqs[0].answer).toContain(`lists ${count} businesses`);
+    }
+    for (const service of services) expect(faqsForService(service.slug).length).toBeGreaterThan(0);
+    for (const location of locations) expect(faqsForLocation(location.slug).length).toBeGreaterThan(0);
+  });
+
+  it("never claims ratings, reviews or vetting in FAQ markup", () => {
+    const faqs = faqsForServiceArea("roofing", "eastleigh");
+    const schema = buildFaqPageJsonLd("https://southamptontraders.co.uk/services/roofing/eastleigh/", faqs);
+    expect(schema["@type"]).toBe("FAQPage");
+    expect(schema.mainEntity).toHaveLength(faqs.length);
+    expect(JSON.stringify(schema)).not.toMatch(/aggregateRating|ratingValue|"Review"/);
+  });
+
+  it("indexes the new checking-a-builder guide", () => {
+    const meta = metaForPath("/guides/checking-a-builder/");
+    expect(meta.noindex).toBeFalsy();
+    expect(meta.title.length).toBeLessThanOrEqual(60);
+    expect(meta.description.length).toBeLessThanOrEqual(160);
+  });
+});
