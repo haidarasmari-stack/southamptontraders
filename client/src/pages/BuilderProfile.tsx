@@ -37,7 +37,7 @@ export default function BuilderProfile() {
     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(structuredData) }} />
     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(breadcrumbData) }} />
     <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: `Builders in ${builder.Primary_Location}`, href: `/locations/${builder.locationSlugs[0]}/` }, { label: builder.Business_Name }]} />
-    <Link className="back-link" href={`/builders/${builder.locationSlugs[0]}/`}><ArrowLeft size={15} aria-hidden="true" /> Back to {builder.Primary_Location} builders</Link>
+    <Link className="back-link" href={`/locations/${builder.locationSlugs[0]}/`}><ArrowLeft size={15} aria-hidden="true" /> Back to {builder.Primary_Location} builders</Link>
     <div className="profile-heading"><div>
       <p className="eyebrow">Builder profile · {builder.Primary_Location}</p>
       <h1>{builder.Business_Name}</h1>
@@ -46,9 +46,8 @@ export default function BuilderProfile() {
     </div></div>
     <div className="profile-grid">
       <section className="profile-main">
-        <section className="content-panel"><p className="eyebrow">Profile summary</p><h2>Business information</h2><p>{builder.Unique_Profile_Summary}</p></section>
-        <section className="content-panel"><p className="eyebrow">Service categories</p><h2>Services listed</h2><ul className="service-chip-list profile-service-list">{builder.serviceSlugs.map((item) => <li className="service-chip" key={item}>{serviceName(item)}</li>)}</ul><p className="profile-primary-service"><strong>Primary service:</strong> {builder.Primary_Service}</p></section>
-        <section className="content-panel"><p className="eyebrow">Directory information</p><h2>Location and address</h2><dl className="profile-fact-list"><div><dt>Primary location</dt><dd>{builder.Primary_Location}</dd></div><div><dt>Address or postcode in source</dt><dd>{builder.Full_Address_Or_Postcode || "Not listed"}</dd></div></dl></section>
+        <section className="content-panel"><p className="eyebrow">Service categories</p><h2>Services listed</h2><ul className="service-chip-list profile-service-list">{builder.serviceSlugs.map((item) => <li className="service-chip" key={item}><Link href={`/services/${item}/`}>{serviceName(item)}</Link></li>)}</ul><p className="profile-primary-service"><strong>Primary service:</strong> {builder.Primary_Service}</p></section>
+        <section className="content-panel"><p className="eyebrow">Directory information</p><h2>Location and address</h2><dl className="profile-fact-list"><div><dt>Primary location</dt><dd>{location ? <Link href={`/locations/${location.slug}/`}>{builder.Primary_Location}</Link> : builder.Primary_Location}</dd></div><div><dt>Address or postcode in source</dt><dd>{builder.Full_Address_Or_Postcode || "Not listed"}</dd></div></dl></section>
         <section className="content-panel credentials-panel"><ShieldCheck size={20} aria-hidden="true" /><div><h2>About this directory entry</h2><p>Profile details are compiled from public company or trade-source information. Southampton Traders does not endorse the business or display ratings, reviews, accreditations or availability claims. Contact the company to confirm current details.</p></div></section>
       </section>
       <aside className="profile-sidebar">

@@ -76,7 +76,7 @@ export default function Directory() {
   };
 
   return <div className="page wrap">
-    <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Builders", href: "/builders/southampton/" }, { label: place.name }]} />
+    <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Builders", href: "/locations/southampton/" }, { label: place.name }]} />
     <div className="page-heading directory-heading">
       <div><p className="eyebrow">Southampton & Hampshire · Builder directory</p><h1>Builders in {place.name}</h1><p className="section-intro">{locationBuilders.length} businesses are currently listed for this launch area ({place.postcodeCoverage}). This is a researched, non-exhaustive directory; confirm current details directly with each company.</p></div>
       <Link className="text-link" href="/how-it-works/">How listings work <ArrowRight size={16} aria-hidden="true" /></Link>

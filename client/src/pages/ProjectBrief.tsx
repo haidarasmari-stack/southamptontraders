@@ -124,7 +124,7 @@ export default function ProjectBrief() {
       </section>}
 
       <nav className="project-brief-related" aria-label="Next steps">
-        <Link className="text-link" href="/builders/southampton/">Browse Southampton builders <ArrowRight size={16} aria-hidden="true" /></Link>
+        <Link className="text-link" href="/locations/southampton/">Browse Southampton builders <ArrowRight size={16} aria-hidden="true" /></Link>
         <Link className="text-link" href="/shortlist/">Compare saved profiles <ArrowRight size={16} aria-hidden="true" /></Link>
       </nav>
     </div>

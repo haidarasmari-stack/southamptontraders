@@ -67,7 +67,11 @@ try {
     await fs.mkdir(path.dirname(destination), { recursive: true });
     await fs.writeFile(destination, html, "utf8");
   }
+  const sitemapPaths = [...new Set(routes.map((rawRoute) => metaForPath(normalize(rawRoute))).filter((meta) => !meta.noindex).map((meta) => meta.path))];
+  const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${sitemapPaths.map((sitemapPath) => `  <url><loc>${escapeHtml(new URL(sitemapPath, SITE_ORIGIN).toString())}</loc></url>`).join("\n")}\n</urlset>\n`;
+  await fs.writeFile(path.join(output, "sitemap.xml"), sitemap, "utf8");
   console.log(`Prerendered ${routes.length} route documents into dist/public.`);
+  console.log(`Wrote sitemap.xml with ${sitemapPaths.length} indexable URLs.`);
 } finally {
   await vite.close();
 }

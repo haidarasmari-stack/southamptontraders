@@ -145,6 +145,7 @@ def build_sitemap(rows: list[dict[str, str]]) -> str:
     paths.extend(f"/services/{slugify(service)}/" for service in SERVICES)
     paths.extend(f"/builder/{row['slug']}/" for row in rows)
     paths.extend(["/builder/reds-builders-limited/", "/how-it-works/"])
+    paths.extend(["/homeowner-guides/", "/guides/home-extension-planning/", "/guides/loft-conversion/"])
     locations = "\n".join(
         f"  <url><loc>{xml_utils.escape(SITE_ORIGIN + path)}</loc></url>" for path in paths
     )
