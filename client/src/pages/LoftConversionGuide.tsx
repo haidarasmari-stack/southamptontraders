@@ -18,7 +18,7 @@ export default function LoftConversionGuide() {
 
     <section aria-labelledby="loft-design-approvals">
       <h2 id="loft-design-approvals">Agree who will handle design and approvals</h2>
-      <p>Before appointing a builder, ask who will develop the design and technical information, assess any structural changes, and coordinate specialist work. Confirm with the relevant local authority and your project professionals which planning, building-control or other requirements apply to your proposal. Ask who is responsible for applications, inspections and records; do not assume that every loft project follows the same approval route.</p>
+      <p>Before appointing a builder, ask who will develop the design and technical information, assess any structural changes, and coordinate specialist work. Confirm with the relevant local authority and your project professionals which planning, building-control or other requirements apply to your proposal. Ask who is responsible for applications, inspections and records; do not assume that every loft project follows the same approval route. Read <Link href="/guides/planning-permission/">do I need planning permission?</Link> and the <Link href="/guides/party-wall-agreements/">party wall guide</Link>, since loft work in a terraced or semi-detached house often affects a shared wall.</p>
     </section>
 
     <section aria-labelledby="loft-builder-questions">

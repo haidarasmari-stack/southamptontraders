@@ -7,6 +7,8 @@ export const GUIDE_PAGES = {
   "/guides/home-extension-planning": "client/src/pages/HomeExtensionGuide.tsx",
   "/guides/loft-conversion": "client/src/pages/LoftConversionGuide.tsx",
   "/guides/checking-a-builder": "client/src/pages/CheckingABuilderGuide.tsx",
+  "/guides/planning-permission": "client/src/pages/PlanningPermissionGuide.tsx",
+  "/guides/party-wall-agreements": "client/src/pages/PartyWallGuide.tsx",
 };
 
 /** Source files whose changes alter the main content of a sitemap path. Shared header/footer files are left out on purpose. */
