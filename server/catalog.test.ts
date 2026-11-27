@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { builders, getBuilder, getBuildersForLocation, getBuildersForService, getSponsoredServiceForSearch, locations, phoneHref, services } from "../client/src/data/catalog";
+import { builders, getBuilder, getBuildersForLocation, getBuildersForService, getBuildersForServiceInLocation, getServiceAreaPages, getSponsoredServiceForSearch, hasServiceAreaPage, locations, MIN_SERVICE_AREA_PROFILES, phoneHref, services } from "../client/src/data/catalog";
 import { buildBreadcrumbJsonLd, buildBuilderProfileJsonLd, buildSiteJsonLd, buildSouthamptonLandingJsonLd } from "../client/src/data/jsonld";
 import { metaForPath } from "../client/src/lib/seo";
 
@@ -151,6 +151,7 @@ describe("researched builder catalog", () => {
       ...locations.map((location) => `/locations/${location.slug}/`),
       ...services.map((service) => `/services/${service.slug}/`),
       ...builders.map((builder) => `/builder/${builder.slug}/`),
+      ...getServiceAreaPages().map((page) => page.path),
     ];
 
     for (const path of paths) {
@@ -163,8 +164,22 @@ describe("researched builder catalog", () => {
 
     for (const service of services) {
       const meta = metaForPath(`/services/${service.slug}/`);
-      expect(meta.title).toContain("in Hampshire");
+      expect(meta.title).toContain("Southampton");
       expect(meta.description).toContain("builder profiles");
     }
+  });
+
+  it("publishes service-in-area pages only where enough listings exist", () => {
+    const pages = getServiceAreaPages();
+    expect(pages.length).toBeGreaterThan(0);
+    for (const page of pages) {
+      expect(getBuildersForServiceInLocation(page.service.slug, page.location.slug).length).toBeGreaterThanOrEqual(MIN_SERVICE_AREA_PROFILES);
+      expect(metaForPath(page.path).path).toBe(page.path);
+    }
+    expect(hasServiceAreaPage("roofing", "southampton")).toBe(true);
+    expect(metaForPath("/services/roofing/southampton/").title).toBe("Roofers in Southampton | Southampton Traders");
+    expect(hasServiceAreaPage("plastering", "new-forest")).toBe(false);
+    expect(metaForPath("/services/plastering/new-forest/").noindex).toBe(true);
+    expect(metaForPath("/services/roofing/nowhere/").noindex).toBe(true);
   });
 });

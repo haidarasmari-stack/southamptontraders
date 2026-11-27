@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { builders, getBuilder, getBuildersForLocation, getBuildersForService, getLocation, getService } from "@/data/catalog";
+import { builders, getBuilder, getBuildersForLocation, getBuildersForService, getBuildersForServiceInLocation, getLocation, getService, hasServiceAreaPage, serviceTrade } from "@/data/catalog";
 
 export const SITE_ORIGIN = "https://southamptontraders.co.uk";
 export const SHARE_IMAGE = `${SITE_ORIGIN}/manus-storage/IMG_6247_597a3dba.webp`;
@@ -23,6 +23,19 @@ const informationPages: Record<string, PageMeta> = {
   "/404": { title: "Page not found | Southampton Traders", description: "That Southampton Traders page could not be found. Browse the local builder directory instead.", path: "/404", noindex: true },
 };
 
+const TITLE_SUFFIX = " | Southampton Traders";
+
+/** Keep titles within 60 characters: add the brand when it fits, otherwise fall back to a shorter phrasing. */
+function fitTitle(...options: string[]) {
+  for (const option of options) if (`${option}${TITLE_SUFFIX}`.length <= 60) return `${option}${TITLE_SUFFIX}`;
+  for (const option of options) if (option.length <= 60) return option;
+  return options[options.length - 1].slice(0, 60);
+}
+
+function fitDescription(options: string[]) {
+  return options.find((option) => option.length <= 160) ?? options[options.length - 1];
+}
+
 export function metaForPath(pathname: string): PageMeta {
   const path = pathname.split("?")[0].replace(/\/$/, "") || "/";
   const canonicalPath = path === "/" || path === "/404" ? path : `${path}/`;
@@ -44,12 +57,30 @@ export function metaForPath(pathname: string): PageMeta {
       : { title: "Builder profile not found | Southampton Traders", description: "This business profile could not be found in the Southampton Traders directory.", path: "/404", noindex: true };
   }
 
+  const serviceAreaMatch = path.match(/^\/services\/([^/]+)\/([^/]+)$/);
+  if (serviceAreaMatch) {
+    const [, serviceSlug, locationSlug] = serviceAreaMatch;
+    const place = getLocation(locationSlug);
+    if (!place || !hasServiceAreaPage(serviceSlug, locationSlug)) return { title: "Page not found | Southampton Traders", description: informationPages["/404"].description, path: "/404", noindex: true };
+    const trade = serviceTrade(serviceSlug);
+    const count = getBuildersForServiceInLocation(serviceSlug, locationSlug).length;
+    return {
+      title: fitTitle(`${trade} in ${place.name}`, `${trade} ${place.name}`),
+      description: fitDescription([
+        `Compare ${count} ${trade.toLowerCase()} listed in ${place.name} (${place.postcodeCoverage}). See services, phone numbers and websites, then contact firms directly.`,
+        `Compare ${count} ${trade.toLowerCase()} listed in ${place.name}. See services, phone numbers and websites, then contact firms directly.`,
+        `Compare ${count} ${trade.toLowerCase()} in ${place.name}, with services, phone numbers and websites.`,
+      ]),
+      path: canonicalPath,
+    };
+  }
+
   const serviceMatch = path.match(/^\/services\/([^/]+)$/);
   if (serviceMatch) {
     const service = getService(serviceMatch[1]);
     const count = getBuildersForService(serviceMatch[1]).length;
     return {
-      title: service ? `${service.name} in Hampshire | Southampton Traders` : "Building services | Southampton Traders",
+      title: service ? fitTitle(`${serviceTrade(service.slug)} in Southampton & Hampshire`, `${serviceTrade(service.slug)} in Southampton`) : "Building services | Southampton Traders",
       description: service
         ? `Browse ${count} builder profiles for ${service.name.toLowerCase()} across Southampton and Hampshire. Public-source information; coverage is not exhaustive.`
         : "Browse building services in the Southampton Traders directory.",

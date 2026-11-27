@@ -29,7 +29,7 @@ const vite = await createServer({
 });
 
 try {
-  const [{ default: App }, { metaForPath, SITE_ORIGIN, SHARE_IMAGE }, { builders, locations, services }] = await Promise.all([
+  const [{ default: App }, { metaForPath, SITE_ORIGIN, SHARE_IMAGE }, { builders, locations, services, getServiceAreaPages }] = await Promise.all([
     vite.ssrLoadModule("/src/App.tsx"),
     vite.ssrLoadModule("/src/lib/seo.ts"),
     vite.ssrLoadModule("/src/data/catalog.ts"),
@@ -38,6 +38,7 @@ try {
     ...fixedRoutes,
     ...locations.flatMap((location) => [`/builders/${location.slug}/`, `/locations/${location.slug}/`]),
     ...services.map((service) => `/services/${service.slug}/`),
+    ...getServiceAreaPages().map((page) => page.path),
     ...builders.map((builder) => `/builder/${builder.slug}/`),
   ];
   const template = await fs.readFile(path.join(output, "index.html"), "utf8");
