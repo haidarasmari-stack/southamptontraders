@@ -43,7 +43,14 @@ export function metaForPath(pathname: string): PageMeta {
   if (serviceMatch) {
     const service = getService(serviceMatch[1]);
     const count = getBuildersForService(serviceMatch[1]).length;
-    return { title: `${service?.name ?? "Building services"} builders | Southampton Traders`, description: service ? `Browse ${count} business profiles listing ${service.name.toLowerCase()} across Hampshire launch areas. Public-source details; coverage is not exhaustive.` : "Browse building services in the Southampton Traders directory.", path: canonicalPath, noindex: !service };
+    return {
+      title: service ? `${service.name} in Hampshire | Southampton Traders` : "Building services | Southampton Traders",
+      description: service
+        ? `Browse ${count} builder profiles for ${service.name.toLowerCase()} across Southampton and Hampshire. Public-source information; coverage is not exhaustive.`
+        : "Browse building services in the Southampton Traders directory.",
+      path: canonicalPath,
+      noindex: !service,
+    };
   }
 
   const locationMatch = path.match(/^\/(?:locations|builders)\/([^/]+)$/);

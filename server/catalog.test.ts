@@ -116,4 +116,26 @@ describe("researched builder catalog", () => {
     expect(southampton.noindex).toBe(false);
     expect(filteredResults.noindex).toBe(true);
   });
+
+  it("keeps indexable location, service, and profile metadata concise", () => {
+    const paths = [
+      ...locations.map((location) => `/locations/${location.slug}/`),
+      ...services.map((service) => `/services/${service.slug}/`),
+      ...builders.map((builder) => `/builder/${builder.slug}/`),
+    ];
+
+    for (const path of paths) {
+      const meta = metaForPath(path);
+      expect(meta.noindex ?? false, path).toBe(false);
+      expect(meta.title.length, path).toBeLessThanOrEqual(60);
+      expect(meta.description.length, path).toBeLessThanOrEqual(160);
+      expect(meta.description.length, path).toBeGreaterThanOrEqual(50);
+    }
+
+    for (const service of services) {
+      const meta = metaForPath(`/services/${service.slug}/`);
+      expect(meta.title).toContain("in Hampshire");
+      expect(meta.description).toContain("builder profiles");
+    }
+  });
 });

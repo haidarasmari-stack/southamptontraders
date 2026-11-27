@@ -106,3 +106,13 @@
 - [x] Regenerate the source-derived builder data, route manifest and sitemap. The directory now has 134 total profiles and 61 Southampton profiles; 39 more verified Southampton businesses are needed to reach 100.
 - [x] Run TypeScript check, all 10 tests, production build/prerender, and verify that all 134 profiles have route-manifest and sitemap entries, prerendered pages, and `HomeAndConstructionBusiness` JSON-LD.
 - [ ] Fetch current `origin/main`, integrate if needed, and checkpoint the validated files to canonical `main`. Do not publish without an explicit owner request and do not change DNS.
+
+
+## Local SEO, competitor research and answer-engine visibility — 22 November 2026
+- [ ] Create and validate a reusable local SEO, competitor-gap and AI-answerability skill using the skill-creator workflow; include the evidence rules and report template.
+- [ ] Produce a cited, practical local SEO and ethical backlink strategy for Southampton builders, separating directory SEO from individual builders' Google Business Profiles.
+- [ ] Compare a dated sample of current Southampton/Hampshire competitor websites and map their observed query/service topics to evidence-backed content opportunities; do not claim exact ranks, search volumes or traffic without data.
+- [ ] Improve visible homepage and service/location landing-page copy for natural-language builder discovery; retain factual scope, all nine service categories, seven launch areas, and non-exhaustive/non-endorsement disclosures.
+- [ ] Align route metadata with visible page content, include concise unique descriptions, and preserve canonical/noindex behavior for filtered results and demo pages.
+- [ ] Keep Q&A as useful visible text; do not add FAQ rich-result schema based on obsolete Google eligibility; do not add special AI markup or crawler rules that contradict user intent.
+- [ ] Validate output with typecheck, tests, production build/prerender, generated metadata/visible-answer checks, route/canonical/schema/robots checks, and status handling. Confirm publication outcome only from the checkpoint/publish receipt.
